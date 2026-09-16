@@ -36,7 +36,7 @@ import {
 // ================================
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAysQGKQEM0VpwcvBxQAzf6fgVUNsAYR9I",
+  apiKey: "AIzaSyAysQGKQEM0VpwcvBxQAzf6fgUVNSAYR9I",
   authDomain: "studyshare-web.firebaseapp.com",
   projectId: "studyshare-web",
   storageBucket: "studyshare-web.firebasestorage.app",
@@ -76,13 +76,11 @@ export {
   auth,
   db,
 
-  // Authentication
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
 
-  // Firestore
   collection,
   addDoc,
   getDocs,
