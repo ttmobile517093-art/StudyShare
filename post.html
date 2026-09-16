@@ -76,10 +76,6 @@
 <main>
 
 
-<!-- =================================
-     CREATE / EDIT POST
-================================= -->
-
 <section
   id="formSection"
   class="post-section">
@@ -108,8 +104,6 @@
       <form id="postForm">
 
 
-        <!-- รูป -->
-
         <div class="form-group">
 
           <label>
@@ -134,19 +128,9 @@
 
           </div>
 
-
-          <small class="upload-hint">
-
-            ถ้าไม่เลือกรูปใหม่
-            ระบบจะใช้รูปเดิม
-
-          </small>
-
         </div>
 
 
-
-        <!-- ประเภท -->
 
         <div class="form-group">
 
@@ -172,8 +156,6 @@
 
 
 
-        <!-- ชื่อ -->
-
         <div class="form-group">
 
           <label>
@@ -189,8 +171,6 @@
         </div>
 
 
-
-        <!-- วิชา -->
 
         <div class="form-group">
 
@@ -240,8 +220,6 @@
 
 
 
-        <!-- สภาพ -->
-
         <div
           class="form-group"
           id="conditionGroup">
@@ -269,8 +247,6 @@
         </div>
 
 
-
-        <!-- วิธีแบ่งปัน -->
 
         <div class="form-group">
 
@@ -300,8 +276,6 @@
 
 
 
-        <!-- ราคา -->
-
         <div
           class="form-group"
           id="priceGroup"
@@ -321,8 +295,6 @@
 
 
 
-        <!-- รายละเอียด -->
-
         <div class="form-group">
 
           <label>
@@ -338,8 +310,6 @@
         </div>
 
 
-
-        <!-- ติดต่อ -->
 
         <div class="form-group">
 
@@ -383,10 +353,6 @@
 
 
 
-
-<!-- =================================
-     DETAIL PAGE
-================================= -->
 
 <section
   id="detailSection"
@@ -453,15 +419,15 @@ import {
 
   collection,
 
+  query,
+  where,
+  getDocs,
+
   serverTimestamp
 
 } from "./firebase.js";
 
 
-
-/* =================================
-   ELEMENTS
-================================= */
 
 const formSection =
   document.querySelector("#formSection");
@@ -503,11 +469,6 @@ const conditionGroup =
   document.querySelector("#conditionGroup");
 
 
-
-/* =================================
-   STATE
-================================= */
-
 let currentUser = null;
 
 let currentUserData = null;
@@ -516,11 +477,6 @@ let imageData = "";
 
 let editingPost = null;
 
-
-
-/* =================================
-   URL ID
-================================= */
 
 const urlParams =
   new URLSearchParams(
@@ -532,9 +488,9 @@ const postId =
 
 
 
-/* =================================
+/* =========================
    AUTH
-================================= */
+========================= */
 
 onAuthStateChanged(
   auth,
@@ -547,16 +503,14 @@ onAuthStateChanged(
 
       try {
 
-        const userRef =
-          doc(
-            db,
-            "users",
-            user.uid
-          );
-
-
         const userSnap =
-          await getDoc(userRef);
+          await getDoc(
+            doc(
+              db,
+              "users",
+              user.uid
+            )
+          );
 
 
         if (userSnap.exists()) {
@@ -575,11 +529,6 @@ onAuthStateChanged(
     }
 
 
-    /*
-      ถ้ามี ?id=
-      = เปิดรายละเอียด
-    */
-
     if (postId) {
 
       loadPostDetail();
@@ -591,9 +540,9 @@ onAuthStateChanged(
 
 
 
-/* =================================
-   IMAGE COMPRESSION
-================================= */
+/* =========================
+   IMAGE
+========================= */
 
 function compressImage(file) {
 
@@ -655,11 +604,8 @@ function compressImage(file) {
                 );
 
 
-              canvas.width =
-                width;
-
-              canvas.height =
-                height;
+              canvas.width = width;
+              canvas.height = height;
 
 
               const ctx =
@@ -677,14 +623,12 @@ function compressImage(file) {
               );
 
 
-              const result =
+              resolve(
                 canvas.toDataURL(
                   "image/jpeg",
                   0.65
-                );
-
-
-              resolve(result);
+                )
+              );
 
             };
 
@@ -711,11 +655,6 @@ function compressImage(file) {
 }
 
 
-
-/* =================================
-   IMAGE SELECT
-================================= */
-
 imageInput.addEventListener(
   "change",
   async () => {
@@ -725,27 +664,6 @@ imageInput.addEventListener(
 
 
     if (!file) return;
-
-
-    if (
-      !file.type.startsWith(
-        "image/"
-      )
-    ) {
-
-      alert(
-        "กรุณาเลือกไฟล์รูปภาพ"
-      );
-
-      imageInput.value = "";
-
-      return;
-
-    }
-
-
-    imagePreview.innerHTML =
-      "<p>กำลังเตรียมรูป...</p>";
 
 
     try {
@@ -764,19 +682,9 @@ imageInput.addEventListener(
 
     } catch (error) {
 
-      console.error(error);
-
-      imageData = "";
-
-      imagePreview.innerHTML = `
-
-        <span>❌</span>
-
-        <p>
-          ไม่สามารถโหลดรูปได้
-        </p>
-
-      `;
+      alert(
+        "ไม่สามารถโหลดรูปได้"
+      );
 
     }
 
@@ -785,9 +693,9 @@ imageInput.addEventListener(
 
 
 
-/* =================================
-   SHARE TYPE
-================================= */
+/* =========================
+   SELECTS
+========================= */
 
 shareType.addEventListener(
   "change",
@@ -801,11 +709,6 @@ shareType.addEventListener(
   }
 );
 
-
-
-/* =================================
-   POST TYPE
-================================= */
 
 postType.addEventListener(
   "change",
@@ -821,15 +724,14 @@ postType.addEventListener(
 
 
 
-/* =================================
+/* =========================
    LOAD DETAIL
-================================= */
+========================= */
 
 async function loadPostDetail() {
 
   formSection.style.display =
     "none";
-
 
   detailSection.style.display =
     "block";
@@ -837,38 +739,22 @@ async function loadPostDetail() {
 
   try {
 
-    const postRef =
-      doc(
-        db,
-        "posts",
-        postId
-      );
-
-
     const postSnap =
-      await getDoc(postRef);
+      await getDoc(
+        doc(
+          db,
+          "posts",
+          postId
+        )
+      );
 
 
     if (!postSnap.exists()) {
 
       detailBox.innerHTML = `
-
         <div class="loading-card">
-
           ❌ ไม่พบโพสต์นี้
-
-          <br><br>
-
-          <a
-            href="books.html"
-            class="btn btn-primary">
-
-            กลับไปหน้าหนังสือ
-
-          </a>
-
         </div>
-
       `;
 
       return;
@@ -877,11 +763,8 @@ async function loadPostDetail() {
 
 
     editingPost = {
-
       id: postSnap.id,
-
       ...postSnap.data()
-
     };
 
 
@@ -894,15 +777,10 @@ async function loadPostDetail() {
 
     console.error(error);
 
-
     detailBox.innerHTML = `
-
       <div class="loading-card">
-
         ❌ เกิดข้อผิดพลาด
-
       </div>
-
     `;
 
   }
@@ -911,9 +789,9 @@ async function loadPostDetail() {
 
 
 
-/* =================================
-   RENDER DETAIL
-================================= */
+/* =========================
+   DETAIL
+========================= */
 
 function renderDetail(post) {
 
@@ -941,7 +819,7 @@ function renderDetail(post) {
         <img
           src="${post.image}"
           class="detail-image"
-          alt="${post.title || "หนังสือ"}">
+          alt="รูปหนังสือ">
       `
       : `
         <div class="detail-image-empty">
@@ -954,21 +832,15 @@ function renderDetail(post) {
 
     <div class="detail-layout">
 
-
       <div class="detail-photo">
-
         ${imageHTML}
-
       </div>
 
 
       <div class="detail-info">
 
-
         <span class="book-subject">
-
           ${post.subject || "ไม่ระบุวิชา"}
-
         </span>
 
 
@@ -978,9 +850,7 @@ function renderDetail(post) {
 
 
         <div class="detail-price">
-
           ${shareText}
-
         </div>
 
 
@@ -988,10 +858,7 @@ function renderDetail(post) {
           post.type === "book"
             ? `
               <p>
-                <strong>
-                  สภาพ:
-                </strong>
-
+                <strong>สภาพ:</strong>
                 ${post.condition || "-"}
               </p>
             `
@@ -1080,9 +947,14 @@ function renderDetail(post) {
 
               <div class="buyer-actions">
 
+                <h3>
+                  สนใจหนังสือเล่มนี้?
+                </h3>
+
+
                 <button
-                  class="btn btn-primary"
-                  disabled>
+                  id="buyButton"
+                  class="btn btn-primary">
 
                   🛒 ขอซื้อ
 
@@ -1090,8 +962,8 @@ function renderDetail(post) {
 
 
                 <button
-                  class="btn btn-secondary"
-                  disabled>
+                  id="freeButton"
+                  class="btn btn-secondary">
 
                   🎁 ขอรับ
 
@@ -1099,27 +971,17 @@ function renderDetail(post) {
 
 
                 <button
-                  class="btn btn-secondary"
-                  disabled>
+                  id="exchangeButton"
+                  class="btn btn-secondary">
 
                   🔄 ขอแลก
 
                 </button>
 
-                <p class="coming-soon">
-
-                  ระบบจองและขอซื้อ
-                  กำลังจะเพิ่มเร็ว ๆ นี้ 💜
-
-                </p>
-
               </div>
 
             `
         }
-
-
-      </div>
 
     </div>
 
@@ -1139,21 +1001,13 @@ function renderDetail(post) {
   `;
 
 
-  /* =========================
-     OWNER BUTTONS
-  ========================= */
-
   if (isOwner) {
 
     document
       .querySelector("#editButton")
       .addEventListener(
         "click",
-        () => {
-
-          openEditForm(post);
-
-        }
+        () => openEditForm(post)
       );
 
 
@@ -1161,11 +1015,41 @@ function renderDetail(post) {
       .querySelector("#deleteButton")
       .addEventListener(
         "click",
-        () => {
+        () => deletePost(post)
+      );
 
-          deletePost(post);
+  } else {
 
-        }
+    document
+      .querySelector("#buyButton")
+      .addEventListener(
+        "click",
+        () => createRequest(
+          post,
+          "buy"
+        )
+      );
+
+
+    document
+      .querySelector("#freeButton")
+      .addEventListener(
+        "click",
+        () => createRequest(
+          post,
+          "free"
+        )
+      );
+
+
+    document
+      .querySelector("#exchangeButton")
+      .addEventListener(
+        "click",
+        () => createRequest(
+          post,
+          "exchange"
+        )
       );
 
   }
@@ -1174,15 +1058,200 @@ function renderDetail(post) {
 
 
 
-/* =================================
-   OPEN EDIT FORM
-================================= */
+/* =========================
+   CREATE REQUEST
+========================= */
+
+async function createRequest(
+  post,
+  requestType
+) {
+
+  if (!currentUser) {
+
+    alert(
+      "กรุณาเข้าสู่ระบบก่อนครับ"
+    );
+
+    window.location.href =
+      "login.html";
+
+    return;
+
+  }
+
+
+  if (
+    currentUser.uid ===
+    post.ownerId
+  ) {
+
+    alert(
+      "เจ้าของโพสต์ไม่สามารถขอรายการของตัวเองได้"
+    );
+
+    return;
+
+  }
+
+
+  let typeText = "";
+
+  if (requestType === "buy") {
+    typeText = "🛒 ขอซื้อ";
+  }
+
+  if (requestType === "free") {
+    typeText = "🎁 ขอรับ";
+  }
+
+  if (requestType === "exchange") {
+    typeText = "🔄 ขอแลก";
+  }
+
+
+  const messageText =
+    prompt(
+      `คุณเลือก "${typeText}"\n\nฝากข้อความถึงเจ้าของโพสต์ได้เลยครับ`,
+      ""
+    );
+
+
+  if (messageText === null) {
+
+    return;
+
+  }
+
+
+  try {
+
+    /*
+      ป้องกันการส่งคำขอซ้ำ
+    */
+
+    const existingQuery =
+      query(
+        collection(
+          db,
+          "requests"
+        ),
+        where(
+          "postId",
+          "==",
+          post.id
+        ),
+        where(
+          "requesterId",
+          "==",
+          currentUser.uid
+        ),
+        where(
+          "status",
+          "==",
+          "pending"
+        )
+      );
+
+
+    const existing =
+      await getDocs(
+        existingQuery
+      );
+
+
+    if (!existing.empty) {
+
+      alert(
+        "คุณมีคำขอสำหรับโพสต์นี้อยู่แล้วครับ"
+      );
+
+      return;
+
+    }
+
+
+    await addDoc(
+      collection(
+        db,
+        "requests"
+      ),
+      {
+
+        postId:
+          post.id,
+
+        postTitle:
+          post.title || "",
+
+        ownerId:
+          post.ownerId,
+
+        ownerName:
+          post.ownerName || "",
+
+        requesterId:
+          currentUser.uid,
+
+        requesterName:
+          currentUserData?.name ||
+          "นักเรียน",
+
+        requesterStudentId:
+          currentUserData?.studentId ||
+          "",
+
+        requesterClass:
+          currentUserData?.className ||
+          "",
+
+        type:
+          requestType,
+
+        typeText:
+          typeText,
+
+        message:
+          messageText,
+
+        status:
+          "pending",
+
+        createdAt:
+          serverTimestamp()
+
+      }
+    );
+
+
+    alert(
+      "✅ ส่งคำขอเรียบร้อยแล้วครับ\nเจ้าของโพสต์จะเห็นคำขอของคุณในโปรไฟล์"
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "❌ ไม่สามารถส่งคำขอได้\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+
+/* =========================
+   EDIT
+========================= */
 
 function openEditForm(post) {
 
   detailSection.style.display =
     "none";
-
 
   formSection.style.display =
     "block";
@@ -1254,18 +1323,6 @@ function openEditForm(post) {
 
     `;
 
-  } else {
-
-    imagePreview.innerHTML = `
-
-      <span>📚</span>
-
-      <p>
-        ยังไม่มีรูป
-      </p>
-
-    `;
-
   }
 
 
@@ -1278,9 +1335,9 @@ function openEditForm(post) {
 
 
 
-/* =================================
+/* =========================
    SUBMIT
-================================= */
+========================= */
 
 form.addEventListener(
   "submit",
@@ -1291,8 +1348,9 @@ form.addEventListener(
 
     if (!currentUser) {
 
-      message.textContent =
-        "กรุณาเข้าสู่ระบบก่อน";
+      alert(
+        "กรุณาเข้าสู่ระบบก่อนครับ"
+      );
 
       return;
 
@@ -1302,35 +1360,28 @@ form.addEventListener(
     const type =
       postType.value;
 
-
     const title =
       document.querySelector("#title")
         .value.trim();
-
 
     const subject =
       document.querySelector("#subject")
         .value;
 
-
     const condition =
       document.querySelector("#condition")
         .value;
 
-
     const share =
       shareType.value;
-
 
     const price =
       document.querySelector("#price")
         .value;
 
-
     const description =
       document.querySelector("#description")
         .value.trim();
-
 
     const contact =
       document.querySelector("#contact")
@@ -1347,47 +1398,38 @@ form.addEventListener(
         "กำลังบันทึก...";
 
 
-      /* =====================
-         EDIT
-      ===================== */
-
       if (postId && editingPost) {
 
-        const postRef =
+        await updateDoc(
           doc(
             db,
             "posts",
             postId
-          );
-
-
-        await updateDoc(
-          postRef,
+          ),
           {
 
-            type: type,
+            type,
 
-            title: title,
+            title,
 
-            subject: subject,
+            subject,
 
             condition:
               type === "book"
                 ? condition
                 : "",
 
-            shareType: share,
+            shareType:
+              share,
 
             price:
               share === "sell"
                 ? Number(price || 0)
                 : 0,
 
-            description:
-              description,
+            description,
 
-            contact:
-              contact,
+            contact,
 
             image:
               imageData || "",
@@ -1400,7 +1442,7 @@ form.addEventListener(
 
 
         alert(
-          "✅ แก้ไขโพสต์เรียบร้อยแล้ว"
+          "✅ แก้ไขโพสต์เรียบร้อยแล้วครับ"
         );
 
 
@@ -1411,11 +1453,6 @@ form.addEventListener(
       }
 
 
-
-      /* =====================
-         CREATE
-      ===================== */
-
       await addDoc(
         collection(
           db,
@@ -1423,29 +1460,28 @@ form.addEventListener(
         ),
         {
 
-          type: type,
+          type,
 
-          title: title,
+          title,
 
-          subject: subject,
+          subject,
 
           condition:
             type === "book"
               ? condition
               : "",
 
-          shareType: share,
+          shareType:
+            share,
 
           price:
             share === "sell"
               ? Number(price || 0)
               : 0,
 
-          description:
-            description,
+          description,
 
-          contact:
-            contact,
+          contact,
 
           image:
             imageData || "",
@@ -1473,7 +1509,7 @@ form.addEventListener(
 
 
       alert(
-        "✅ ลงประกาศสำเร็จ!"
+        "✅ ลงประกาศสำเร็จครับ"
       );
 
 
@@ -1487,20 +1523,13 @@ form.addEventListener(
 
       console.error(error);
 
-
       message.textContent =
-        "❌ ไม่สามารถบันทึกได้: " +
+        "❌ " +
         error.message;
 
 
       submitButton.disabled =
         false;
-
-
-      submitButton.textContent =
-        postId
-          ? "💾 บันทึกการแก้ไข"
-          : "📢 ลงประกาศ";
 
     }
 
@@ -1509,21 +1538,13 @@ form.addEventListener(
 
 
 
-/* =================================
+/* =========================
    DELETE
-================================= */
+========================= */
 
 async function deletePost(post) {
 
-  if (!currentUser) {
-
-    alert(
-      "กรุณาเข้าสู่ระบบ"
-    );
-
-    return;
-
-  }
+  if (!currentUser) return;
 
 
   if (
@@ -1532,7 +1553,7 @@ async function deletePost(post) {
   ) {
 
     alert(
-      "คุณไม่มีสิทธิ์ลบโพสต์นี้"
+      "คุณไม่มีสิทธิ์ลบโพสต์นี้ครับ"
     );
 
     return;
@@ -1540,17 +1561,13 @@ async function deletePost(post) {
   }
 
 
-  const confirmDelete =
+  const confirmed =
     confirm(
-      `ต้องการลบโพสต์ "${post.title}" ใช่หรือไม่?`
+      `ต้องการลบ "${post.title}" ใช่หรือไม่?`
     );
 
 
-  if (!confirmDelete) {
-
-    return;
-
-  }
+  if (!confirmed) return;
 
 
   try {
@@ -1565,7 +1582,7 @@ async function deletePost(post) {
 
 
     alert(
-      "🗑️ ลบโพสต์เรียบร้อยแล้ว"
+      "🗑️ ลบโพสต์เรียบร้อยแล้วครับ"
     );
 
 
@@ -1577,9 +1594,8 @@ async function deletePost(post) {
 
     console.error(error);
 
-
     alert(
-      "❌ ไม่สามารถลบโพสต์ได้: " +
+      "❌ ลบไม่ได้: " +
       error.message
     );
 
