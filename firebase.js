@@ -24,7 +24,6 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyAysQGKQEM0VpwcvBxQAzf6fgVUNsAYR9I",
   authDomain: "studyshare-web.firebaseapp.com",
@@ -35,13 +34,10 @@ const firebaseConfig = {
   measurementId: "G-48LKQMQ9E6"
 };
 
-
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
-
 const db = getFirestore(app);
-
 
 export {
   app,
@@ -49,7 +45,6 @@ export {
   db,
 
   onAuthStateChanged,
-
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
@@ -62,10 +57,8 @@ export {
   updateDoc,
   deleteDoc,
   doc,
-
   query,
   orderBy,
   where,
-
   serverTimestamp
 };
