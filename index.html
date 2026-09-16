@@ -1,1295 +1,312 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <title>StudyShare | แลกเปลี่ยนหนังสือและชีทเรียน</title>
 
-  <title>StudyShare | Student Book & Note Sharing</title>
-
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
-
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
-
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
+  <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-<!-- =========================================
-     NAVBAR
-========================================= -->
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="logo">
+      <span>📚</span>
+      StudyShare
+    </div>
 
-<header class="navbar">
-
-  <div class="nav-inner">
-
-    <a href="index.html" class="logo">
-
-      <span class="logo-icon">
-        📚
-      </span>
-
-      <span>
-        <strong>StudyShare</strong>
-        <small>Student Sharing Space</small>
-      </span>
-
-    </a>
-
-
-    <nav class="nav-links">
-
-      <a
-        href="index.html"
-        class="active"
-      >
-        หน้าแรก
-      </a>
-
-      <a href="books.html">
-        หนังสือ
-      </a>
-
-      <a href="notes.html">
-        ชีทสรุป
-      </a>
-
-      <a href="announcements.html">
-        ประกาศ
-      </a>
-
+    <nav>
+      <a href="index.html" class="active">หน้าหลัก</a>
+      <a href="books.html">หนังสือ</a>
+      <a href="notes.html">ชีทสรุป</a>
+      <a href="announcements.html">ประกาศ</a>
+      <a href="about.html">เกี่ยวกับระบบ</a>
     </nav>
 
-
-    <div class="nav-actions">
-
-      <button
-        class="notification-btn"
-        onclick="showNotification()"
-      >
-        🔔
-      </button>
-
-      <button
-        class="login-btn"
-        id="loginButton"
-        onclick="openLogin()"
-      >
-        เข้าสู่ระบบ
-      </button>
-
-    </div>
-
-  </div>
-
-</header>
-
-
-
-<!-- =========================================
-     HERO
-========================================= -->
-
-<main>
-
-<section class="hero">
-
-  <div class="hero-content">
-
-    <div class="hero-text">
-
-      <span class="hero-badge">
-        💜 พื้นที่แบ่งปันของนักเรียน
-      </span>
-
-
-      <h1>
-        แบ่งปันหนังสือ
-        <br>
-        <span>ส่งต่อความรู้</span>
-      </h1>
-
-
-      <p>
-        แหล่งรวมหนังสือเรียน หนังสือเตรียมสอบ
-        และชีทสรุปจากนักเรียนในโรงเรียน
-        เพื่อให้ทุกคนเข้าถึงสื่อการเรียนได้ง่ายขึ้น
-      </p>
-
-
-      <div class="hero-buttons">
-
-        <a
-          href="books.html"
-          class="btn btn-primary"
-        >
-          📚 ดูหนังสือ
-        </a>
-
-        <a
-          href="notes.html"
-          class="btn btn-outline"
-        >
-          📄 ดูชีทสรุป
-        </a>
-
-      </div>
-
-    </div>
-
-
-    <div class="hero-visual">
-
-      <div class="hero-card hero-card-main">
-
-        <div class="book-emoji">
-          📚
-        </div>
-
-        <h3>
-          หนังสือของพี่
-        </h3>
-
-        <p>
-          อาจเป็นสิ่งที่น้องกำลังหาอยู่
-        </p>
-
-        <div class="mini-user">
-
-          <span class="avatar">
-            👩🏻
-          </span>
-
-          <span>
-            <strong>รุ่นพี่</strong>
-            <small>พร้อมส่งต่อ</small>
-          </span>
-
-        </div>
-
-      </div>
-
-
-      <div class="floating-card floating-one">
-        💜 แบ่งปัน
-      </div>
-
-      <div class="floating-card floating-two">
-        📖 เรียนรู้
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================
-     SEARCH
-========================================= -->
-
-<section class="search-section">
-
-  <div class="search-box">
-
-    <span class="search-icon">
-      🔍
-    </span>
-
-
-    <input
-      type="text"
-      id="homeSearch"
-      placeholder="ค้นหาหนังสือ ชีทสรุป หรือวิชา..."
-      onkeydown="
-        if(event.key === 'Enter'){
-          homeSearch();
-        }
-      "
-    >
-
-
-    <select id="searchType">
-
-      <option value="all">
-        ทั้งหมด
-      </option>
-
-      <option value="book">
-        หนังสือ
-      </option>
-
-      <option value="note">
-        ชีทสรุป
-      </option>
-
-      <option value="math">
-        คณิตศาสตร์
-      </option>
-
-      <option value="science">
-        วิทยาศาสตร์
-      </option>
-
-      <option value="english">
-        ภาษาอังกฤษ
-      </option>
-
-    </select>
-
-
-    <button
-      onclick="homeSearch()"
-      class="search-btn"
-    >
-      ค้นหา
-    </button>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================
-     STATS
-========================================= -->
-
-<section class="section">
-
-  <div class="stats-grid">
-
-    <div class="stat-card">
-
-      <div class="stat-icon">
-        📚
-      </div>
-
-      <div>
-        <strong>128+</strong>
-        <span>หนังสือ</span>
-      </div>
-
-    </div>
-
-
-    <div class="stat-card">
-
-      <div class="stat-icon">
-        📄
-      </div>
-
-      <div>
-        <strong>86+</strong>
-        <span>ชีทสรุป</span>
-      </div>
-
-    </div>
-
-
-    <div class="stat-card">
-
-      <div class="stat-icon">
-        👩‍🎓
-      </div>
-
-      <div>
-        <strong>240+</strong>
-        <span>นักเรียน</span>
-      </div>
-
-    </div>
-
-
-    <div class="stat-card">
-
-      <div class="stat-icon">
-        💜
-      </div>
-
-      <div>
-        <strong>320+</strong>
-        <span>การแบ่งปัน</span>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================
-     CATEGORIES
-========================================= -->
-
-<section class="section">
-
-  <div class="section-heading">
-
-    <div>
-
-      <span class="section-label">
-        CATEGORY
-      </span>
-
-      <h2>
-        เลือกตามหมวดหมู่
-      </h2>
-
-      <p>
-        ค้นหาสื่อการเรียนที่ตรงกับสิ่งที่คุณกำลังเรียน
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <div class="category-grid">
-
-    <a
-      href="search.html"
-      class="category-card"
-      onclick="goSearch('คณิตศาสตร์')"
-    >
-
-      <div class="category-icon">
-        ➗
-      </div>
-
-      <h3>
-        คณิตศาสตร์
-      </h3>
-
-      <span>
-        หนังสือและชีท
-      </span>
-
-    </a>
-
-
-    <a
-      href="search.html"
-      class="category-card"
-      onclick="goSearch('วิทยาศาสตร์')"
-    >
-
-      <div class="category-icon">
-        🔬
-      </div>
-
-      <h3>
-        วิทยาศาสตร์
-      </h3>
-
-      <span>
-        หนังสือและชีท
-      </span>
-
-    </a>
-
-
-    <a
-      href="search.html"
-      class="category-card"
-      onclick="goSearch('ภาษาอังกฤษ')"
-    >
-
-      <div class="category-icon">
-        🇬🇧
-      </div>
-
-      <h3>
-        ภาษาอังกฤษ
-      </h3>
-
-      <span>
-        หนังสือและชีท
-      </span>
-
-    </a>
-
-
-    <a
-      href="search.html"
-      class="category-card"
-      onclick="goSearch('ภาษาไทย')"
-    >
-
-      <div class="category-icon">
-        📖
-      </div>
-
-      <h3>
-        ภาษาไทย
-      </h3>
-
-      <span>
-        หนังสือและชีท
-      </span>
-
-    </a>
-
-
-    <a
-      href="search.html"
-      class="category-card"
-      onclick="goSearch('สังคมศึกษา')"
-    >
-
-      <div class="category-icon">
-        🌏
-      </div>
-
-      <h3>
-        สังคมศึกษา
-      </h3>
-
-      <span>
-        หนังสือและชีท
-      </span>
-
-    </a>
-
-
-    <a
-      href="search.html"
-      class="category-card"
-      onclick="goSearch('เตรียมสอบ')"
-    >
-
-      <div class="category-icon">
-        🎯
-      </div>
-
-      <h3>
-        เตรียมสอบ
-      </h3>
-
-      <span>
-        หนังสือและชีท
-      </span>
-
-    </a>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================
-     LATEST BOOKS
-========================================= -->
-
-<section class="section">
-
-  <div class="section-heading section-heading-row">
-
-    <div>
-
-      <span class="section-label">
-        LATEST
-      </span>
-
-      <h2>
-        หนังสือที่เพิ่มล่าสุด
-      </h2>
-
-      <p>
-        หนังสือที่นักเรียนเพิ่งนำมาแบ่งปัน
-      </p>
-
-    </div>
-
-
-    <a
-      href="books.html"
-      class="view-all"
-    >
-      ดูทั้งหมด →
-    </a>
-
-  </div>
-
-
-  <div class="items-grid">
-
-
-    <article class="item-card">
-
-      <div class="item-image book-purple">
-        📘
-      </div>
-
-      <div class="item-body">
-
-        <div class="item-tags">
-
-          <span class="tag">
-            คณิตศาสตร์
-          </span>
-
-          <span class="tag green">
-            ฟรี
-          </span>
-
-        </div>
-
-        <h3>
-          หนังสือเตรียมสอบคณิต ม.ปลาย
-        </h3>
-
-        <p class="item-description">
-          สภาพดี มีรอยใช้งานเล็กน้อย
-        </p>
-
-        <div class="item-footer">
-
-          <div class="mini-user">
-
-            <span class="avatar">
-              👦🏻
-            </span>
-
-            <span>
-              <strong>
-                นักเรียน ม.5
-              </strong>
-
-              <small>
-                เมื่อ 2 ชั่วโมงที่แล้ว
-              </small>
-            </span>
-
-          </div>
-
-
-          <button
-            class="save-btn"
-            onclick="toggleSave(this)"
-          >
-            ♡
-          </button>
-
-        </div>
-
-      </div>
-
-    </article>
-
-
-
-    <article class="item-card">
-
-      <div class="item-image book-pink">
-        📕
-      </div>
-
-      <div class="item-body">
-
-        <div class="item-tags">
-
-          <span class="tag">
-            ภาษาอังกฤษ
-          </span>
-
-          <span class="tag yellow">
-            แลกเปลี่ยน
-          </span>
-
-        </div>
-
-        <h3>
-          English Grammar สำหรับสอบ
-        </h3>
-
-        <p class="item-description">
-          ต้องการแลกกับหนังสือภาษาอังกฤษเล่มอื่น
-        </p>
-
-        <div class="item-footer">
-
-          <div class="mini-user">
-
-            <span class="avatar">
-              👩🏻
-            </span>
-
-            <span>
-              <strong>
-                นักเรียน ม.6
-              </strong>
-
-              <small>
-                เมื่อ 5 ชั่วโมงที่แล้ว
-              </small>
-            </span>
-
-          </div>
-
-
-          <button
-            class="save-btn"
-            onclick="toggleSave(this)"
-          >
-            ♡
-          </button>
-
-        </div>
-
-      </div>
-
-    </article>
-
-
-
-    <article class="item-card">
-
-      <div class="item-image book-blue">
-        📗
-      </div>
-
-      <div class="item-body">
-
-        <div class="item-tags">
-
-          <span class="tag">
-            วิทยาศาสตร์
-          </span>
-
-          <span class="tag red">
-            ขาย
-          </span>
-
-        </div>
-
-        <h3>
-          สรุปชีววิทยา ม.ปลาย
-        </h3>
-
-        <p class="item-description">
-          สรุปเนื้อหาสำคัญ เหมาะสำหรับเตรียมสอบ
-        </p>
-
-        <div class="item-footer">
-
-          <div class="mini-user">
-
-            <span class="avatar">
-              👨🏻
-            </span>
-
-            <span>
-              <strong>
-                นักเรียน ม.6
-              </strong>
-
-              <small>
-                เมื่อวาน
-              </small>
-            </span>
-
-          </div>
-
-
-          <button
-            class="save-btn"
-            onclick="toggleSave(this)"
-          >
-            ♡
-          </button>
-
-        </div>
-
-      </div>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================
-     ANNOUNCEMENTS
-========================================= -->
-
-<section class="section">
-
-  <div class="section-heading section-heading-row">
-
-    <div>
-
-      <span class="section-label">
-        ANNOUNCEMENT
-      </span>
-
-      <h2>
-        ประกาศล่าสุด
-      </h2>
-
-    </div>
-
-
-    <a
-      href="announcements.html"
-      class="view-all"
-    >
-      ดูประกาศทั้งหมด →
-    </a>
-
-  </div>
-
-
-  <div class="announcement-list">
-
-    <a
-      href="announcements.html"
-      class="announcement-card"
-    >
-
-      <div class="announcement-icon">
-        📢
-      </div>
-
-      <div>
-
-        <span class="announcement-date">
-          16 กันยายน 2026
-        </span>
-
-        <h3>
-          เปิดรับหนังสือและชีทสรุปสำหรับภาคเรียนใหม่
-        </h3>
-
-        <p>
-          นักเรียนสามารถนำหนังสือที่ไม่ได้ใช้แล้ว
-          มาแบ่งปันให้เพื่อน ๆ ได้
-        </p>
-
-      </div>
-
-      <span class="arrow">
-        →
-      </span>
-
-    </a>
-
-
-    <a
-      href="announcements.html"
-      class="announcement-card"
-    >
-
-      <div class="announcement-icon">
-        💜
-      </div>
-
-      <div>
-
-        <span class="announcement-date">
-          12 กันยายน 2026
-        </span>
-
-        <h3>
-          วิธีใช้งานระบบ StudyShare
-        </h3>
-
-        <p>
-          อ่านรายละเอียดการโพสต์หนังสือ
-          และการดาวน์โหลดชีทสรุป
-        </p>
-
-      </div>
-
-      <span class="arrow">
-        →
-      </span>
-
-    </a>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================
-     HOW IT WORKS
-========================================= -->
-
-<section class="section">
-
-  <div class="section-heading centered">
-
-    <span class="section-label">
-      HOW IT WORKS
-    </span>
-
-    <h2>
-      ใช้งานง่ายใน 3 ขั้นตอน
-    </h2>
-
-    <p>
-      แบ่งปันสื่อการเรียนกับเพื่อนในโรงเรียนได้ง่าย ๆ
-    </p>
-
-  </div>
-
-
-  <div class="steps-grid">
-
-    <div class="step-card">
-
-      <div class="step-number">
-        01
-      </div>
-
-      <div class="step-icon">
-        🔐
-      </div>
-
-      <h3>
-        เข้าสู่ระบบ
-      </h3>
-
-      <p>
-        ใช้ชื่อ รหัสนักเรียน และห้องเรียน
-        เพื่อเข้าสู่ระบบ
-      </p>
-
-    </div>
-
-
-    <div class="step-card">
-
-      <div class="step-number">
-        02
-      </div>
-
-      <div class="step-icon">
-        📚
-      </div>
-
-      <h3>
-        เลือกหรือโพสต์
-      </h3>
-
-      <p>
-        ค้นหาหนังสือที่ต้องการ
-        หรือโพสต์สิ่งที่ต้องการแบ่งปัน
-      </p>
-
-    </div>
-
-
-    <div class="step-card">
-
-      <div class="step-number">
-        03
-      </div>
-
-      <div class="step-icon">
-        🤝
-      </div>
-
-      <h3>
-        แบ่งปันความรู้
-      </h3>
-
-      <p>
-        ติดต่อเจ้าของและส่งต่อหนังสือ
-        หรือสื่อการเรียนให้เพื่อน
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================
-     CTA
-========================================= -->
-
-<section class="cta-section">
-
-  <div>
-
-    <span class="section-label">
-      SHARE KNOWLEDGE
-    </span>
-
-    <h2>
-      มีหนังสือที่ไม่ได้ใช้แล้วไหม?
-    </h2>
-
-    <p>
-      ส่งต่อให้เพื่อน ๆ ได้ใช้ประโยชน์
-      และช่วยกันสร้างสังคมแห่งการแบ่งปัน
-    </p>
-
-  </div>
-
-
-  <a
-    href="post.html"
-    class="btn btn-white"
-  >
-    ＋ โพสต์หนังสือ
-  </a>
-
-</section>
-
-</main>
-
-
-
-<!-- =========================================
-     LOGIN MODAL
-========================================= -->
-
-<div
-  id="loginModal"
-  class="modal"
-  style="display:none;"
->
-
-
-  <div
-    class="modal-overlay"
-    onclick="closeLogin()"
-  ></div>
-
-
-  <div class="modal-box">
-
-
-    <button
-      class="modal-close"
-      onclick="closeLogin()"
-      type="button"
-    >
-      ×
-    </button>
-
-
-    <div class="modal-icon">
-      🔐
-    </div>
-
-
-    <h2>
-      เข้าสู่ระบบ StudyShare
-    </h2>
-
-
-    <p class="modal-subtitle">
-      กรอกข้อมูลนักเรียนเพื่อเข้าใช้งานระบบ
-    </p>
-
-
-
-    <!-- ชื่อ -->
-
-    <div class="form-group">
-
-      <label for="studentName">
-        ชื่อ-นามสกุล
-      </label>
-
-      <input
-        type="text"
-        id="studentName"
-        placeholder="เช่น เด็กหญิงสมใจ ใจดี"
-        autocomplete="name"
-      >
-
-    </div>
-
-
-
-    <!-- รหัส -->
-
-    <div class="form-group">
-
-      <label for="studentId">
-        รหัสนักเรียน
-      </label>
-
-      <input
-        type="text"
-        id="studentId"
-        placeholder="เช่น 12345"
-        inputmode="numeric"
-      >
-
-    </div>
-
-
-
-    <!-- ห้องเรียน -->
-
-    <div class="form-group">
-
-      <label for="studentClass">
-        ห้องเรียน
-      </label>
-
-
-      <select id="studentClass">
-
-        <option value="">
-          เลือกห้องเรียน
-        </option>
-
-
-        <!-- ม.1 -->
-
-        <optgroup label="มัธยมศึกษาปีที่ 1">
-
-          <option value="ม.1/1">ม.1/1</option>
-          <option value="ม.1/2">ม.1/2</option>
-          <option value="ม.1/3">ม.1/3</option>
-          <option value="ม.1/4">ม.1/4</option>
-          <option value="ม.1/5">ม.1/5</option>
-          <option value="ม.1/6">ม.1/6</option>
-          <option value="ม.1/7">ม.1/7</option>
-          <option value="ม.1/8">ม.1/8</option>
-          <option value="ม.1/9">ม.1/9</option>
-          <option value="ม.1/10">ม.1/10</option>
-          <option value="ม.1/11">ม.1/11</option>
-          <option value="ม.1/12">ม.1/12</option>
-
-        </optgroup>
-
-
-        <!-- ม.2 -->
-
-        <optgroup label="มัธยมศึกษาปีที่ 2">
-
-          <option value="ม.2/1">ม.2/1</option>
-          <option value="ม.2/2">ม.2/2</option>
-          <option value="ม.2/3">ม.2/3</option>
-          <option value="ม.2/4">ม.2/4</option>
-          <option value="ม.2/5">ม.2/5</option>
-          <option value="ม.2/6">ม.2/6</option>
-          <option value="ม.2/7">ม.2/7</option>
-          <option value="ม.2/8">ม.2/8</option>
-          <option value="ม.2/9">ม.2/9</option>
-          <option value="ม.2/10">ม.2/10</option>
-          <option value="ม.2/11">ม.2/11</option>
-          <option value="ม.2/12">ม.2/12</option>
-
-        </optgroup>
-
-
-        <!-- ม.3 -->
-
-        <optgroup label="มัธยมศึกษาปีที่ 3">
-
-          <option value="ม.3/1">ม.3/1</option>
-          <option value="ม.3/2">ม.3/2</option>
-          <option value="ม.3/3">ม.3/3</option>
-          <option value="ม.3/4">ม.3/4</option>
-          <option value="ม.3/5">ม.3/5</option>
-          <option value="ม.3/6">ม.3/6</option>
-          <option value="ม.3/7">ม.3/7</option>
-          <option value="ม.3/8">ม.3/8</option>
-          <option value="ม.3/9">ม.3/9</option>
-          <option value="ม.3/10">ม.3/10</option>
-          <option value="ม.3/11">ม.3/11</option>
-
-        </optgroup>
-
-
-        <!-- ม.4 -->
-
-        <optgroup label="มัธยมศึกษาปีที่ 4">
-
-          <option value="ม.4/1">ม.4/1</option>
-          <option value="ม.4/2">ม.4/2</option>
-          <option value="ม.4/3">ม.4/3</option>
-          <option value="ม.4/4">ม.4/4</option>
-          <option value="ม.4/5">ม.4/5</option>
-          <option value="ม.4/6">ม.4/6</option>
-          <option value="ม.4/7">ม.4/7</option>
-          <option value="ม.4/8">ม.4/8</option>
-          <option value="ม.4/9">ม.4/9</option>
-
-        </optgroup>
-
-
-        <!-- ม.5 -->
-
-        <optgroup label="มัธยมศึกษาปีที่ 5">
-
-          <option value="ม.5/1">ม.5/1</option>
-          <option value="ม.5/2">ม.5/2</option>
-          <option value="ม.5/3">ม.5/3</option>
-          <option value="ม.5/4">ม.5/4</option>
-          <option value="ม.5/5">ม.5/5</option>
-          <option value="ม.5/6">ม.5/6</option>
-          <option value="ม.5/7">ม.5/7</option>
-          <option value="ม.5/8">ม.5/8</option>
-          <option value="ม.5/9">ม.5/9</option>
-
-        </optgroup>
-
-
-        <!-- ม.6 -->
-
-        <optgroup label="มัธยมศึกษาปีที่ 6">
-
-          <option value="ม.6/1">ม.6/1</option>
-          <option value="ม.6/2">ม.6/2</option>
-          <option value="ม.6/3">ม.6/3</option>
-          <option value="ม.6/4">ม.6/4</option>
-          <option value="ม.6/5">ม.6/5</option>
-          <option value="ม.6/6">ม.6/6</option>
-          <option value="ม.6/7">ม.6/7</option>
-          <option value="ม.6/8">ม.6/8</option>
-
-        </optgroup>
-
-      </select>
-
-    </div>
-
-
-
-    <!-- ปุ่ม -->
-
-    <button
-      type="button"
-      class="btn btn-primary modal-login-btn"
-      onclick="loginStudent()"
-    >
+    <a href="login.html" class="login-btn">
       เข้าสู่ระบบ
-    </button>
+    </a>
+  </header>
 
 
-    <p class="login-note">
-      🔒 ข้อมูลใช้สำหรับระบุตัวตนนักเรียนในระบบ
-    </p>
+  <!-- Hero -->
+  <main>
 
-  </div>
+    <section class="hero">
 
-</div>
+      <div class="hero-content">
 
+        <div class="badge">
+          🎓 ระบบแลกเปลี่ยนสื่อการเรียนภายในโรงเรียน
+        </div>
 
+        <h1>
+          แบ่งปันสิ่งที่มี<br>
+          <span>ส่งต่อโอกาสในการเรียนรู้</span>
+        </h1>
 
-<!-- =========================================
-     TOAST
-========================================= -->
+        <p>
+          ศูนย์กลางสำหรับแลกเปลี่ยนหนังสือเรียน
+          หนังสือเตรียมสอบ และชีทสรุประหว่างนักเรียน
+          ช่วยลดค่าใช้จ่ายและทำให้เข้าถึงสื่อการเรียนได้ง่ายขึ้น
+        </p>
 
-<div
-  id="toast"
-  class="toast"
-></div>
+        <div class="hero-buttons">
+          <a href="books.html" class="primary-btn">
+            📚 ดูหนังสือ
+          </a>
 
-
-
-<!-- =========================================
-     FOOTER
-========================================= -->
-
-<footer class="footer">
-
-  <div class="footer-inner">
-
-    <div>
-
-      <div class="logo footer-logo">
-
-        <span class="logo-icon">
-          📚
-        </span>
-
-        <span>
-          <strong>StudyShare</strong>
-          <small>Student Sharing Space</small>
-        </span>
+          <a href="notes.html" class="secondary-btn">
+            📄 ดูชีทสรุป
+          </a>
+        </div>
 
       </div>
 
 
-      <p>
-        พื้นที่แลกเปลี่ยนหนังสือและสื่อการเรียน
-        สำหรับนักเรียนในโรงเรียน
-      </p>
+      <div class="hero-card">
 
+        <div class="book-icon">
+          📚
+        </div>
+
+        <h3>
+          StudyShare
+        </h3>
+
+        <p>
+          Student Book & Note Sharing
+        </p>
+
+        <div class="mini-stats">
+
+          <div>
+            <strong>0</strong>
+            <span>หนังสือ</span>
+          </div>
+
+          <div>
+            <strong>0</strong>
+            <span>ชีทสรุป</span>
+          </div>
+
+          <div>
+            <strong>0</strong>
+            <span>สมาชิก</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Problem -->
+    <section class="section">
+
+      <div class="section-title">
+
+        <span class="small-title">
+          WHY STUDYSHARE?
+        </span>
+
+        <h2>
+          เพราะการเรียนที่ดี<br>
+          ไม่ควรถูกจำกัดด้วยราคา
+        </h2>
+
+        <p>
+          หนังสือและเอกสารการเรียนบางส่วนยังอยู่ในสภาพดี
+          แม้เจ้าของจะไม่ได้ใช้แล้ว แต่สามารถส่งต่อให้เพื่อนนักเรียนคนอื่นได้
+        </p>
+
+      </div>
+
+
+      <div class="feature-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+
+          <h3>
+            หนังสือมือสอง
+          </h3>
+
+          <p>
+            ค้นหาและส่งต่อหนังสือเรียน
+            หนังสือเตรียมสอบ หรือหนังสือที่ไม่ได้ใช้แล้ว
+          </p>
+        </div>
+
+
+        <div class="feature-card">
+          <div class="feature-icon">📄</div>
+
+          <h3>
+            ชีทสรุป
+          </h3>
+
+          <p>
+            แบ่งปันชีทสรุปและเอกสารประกอบการเรียน
+            ให้เพื่อนสามารถเข้าถึงได้ง่าย
+          </p>
+        </div>
+
+
+        <div class="feature-card">
+          <div class="feature-icon">🤝</div>
+
+          <h3>
+            ส่งต่อระหว่างรุ่น
+          </h3>
+
+          <p>
+            นักเรียนรุ่นพี่สามารถส่งต่อสื่อการเรียน
+            ให้รุ่นน้องที่กำลังต้องการ
+          </p>
+        </div>
+
+
+        <div class="feature-card">
+          <div class="feature-icon">💰</div>
+
+          <h3>
+            ลดค่าใช้จ่าย
+          </h3>
+
+          <p>
+            ช่วยลดค่าใช้จ่ายในการซื้อหนังสือ
+            และเพิ่มโอกาสในการเข้าถึงสื่อการเรียน
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- How it works -->
+    <section class="how-section">
+
+      <div class="section-title">
+
+        <span class="small-title">
+          HOW IT WORKS
+        </span>
+
+        <h2>
+          ใช้งานง่ายใน 3 ขั้นตอน
+        </h2>
+
+      </div>
+
+
+      <div class="steps">
+
+        <div class="step">
+
+          <div class="step-number">
+            01
+          </div>
+
+          <h3>
+            ค้นหา
+          </h3>
+
+          <p>
+            ค้นหาหนังสือหรือชีทที่ต้องการ
+          </p>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-number">
+            02
+          </div>
+
+          <h3>
+            ติดต่อ
+          </h3>
+
+          <p>
+            ส่งคำขอซื้อ ขอรับ หรือขอแลกกับเจ้าของ
+          </p>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-number">
+            03
+          </div>
+
+          <h3>
+            ส่งต่อ
+          </h3>
+
+          <p>
+            นัดหมายและรับสื่อการเรียนจากเจ้าของ
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CTA -->
+    <section class="cta">
+
+      <div>
+
+        <h2>
+          มีหนังสือที่ไม่ได้ใช้แล้ว?
+        </h2>
+
+        <p>
+          ส่งต่อให้เพื่อนนักเรียนคนอื่นได้ใช้ประโยชน์ต่อ
+        </p>
+
+      </div>
+
+      <a href="post.html" class="primary-btn">
+        ＋ ลงประกาศ
+      </a>
+
+    </section>
+
+  </main>
+
+
+  <!-- Footer -->
+  <footer>
+
+    <div class="footer-logo">
+      📚 StudyShare
     </div>
 
+    <p>
+      Student Book & Note Sharing System
+    </p>
 
-    <div class="footer-links">
+    <div class="footer-line"></div>
 
-      <a href="books.html">
-        หนังสือ
-      </a>
+    <small>
+      © 2026 StudyShare — ระบบแลกเปลี่ยนสื่อการเรียน
+    </small>
 
-      <a href="notes.html">
-        ชีทสรุป
-      </a>
-
-      <a href="post.html">
-        โพสต์รายการ
-      </a>
-
-      <a href="profile.html">
-        โปรไฟล์
-      </a>
-
-    </div>
-
-  </div>
+  </footer>
 
 
-  <div class="footer-bottom">
-    © 2026 StudyShare — Student Book & Note Sharing
-  </div>
-
-</footer>
-
-
-
-<!-- =========================================
-     JAVASCRIPT
-========================================= -->
-
-<script
-  type="module"
-  src="script.js"
-></script>
-
+  <script type="module" src="script.js"></script>
 
 </body>
-  </html>
+</html>
