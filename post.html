@@ -1,42 +1,88 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ลงประกาศ | StudyShare</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="style.css">
+  <title>StudyShare</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css">
+
 </head>
+
 
 <body>
 
+
 <header class="navbar">
+
   <div class="container nav-inner">
 
-    <a href="index.html" class="logo">
+    <a
+      href="index.html"
+      class="logo">
+
       📚 StudyShare
+
     </a>
 
+
     <nav class="nav-links">
-      <a href="index.html">หน้าแรก</a>
-      <a href="books.html">หนังสือ</a>
-      <a href="notes.html">ชีทสรุป</a>
-      <a href="announcements.html">ประกาศ</a>
-      <a href="about.html">เกี่ยวกับระบบ</a>
+
+      <a href="index.html">
+        หน้าแรก
+      </a>
+
+      <a href="books.html">
+        หนังสือ
+      </a>
+
+      <a href="notes.html">
+        ชีทสรุป
+      </a>
+
+      <a href="announcements.html">
+        ประกาศ
+      </a>
+
+      <a href="about.html">
+        เกี่ยวกับระบบ
+      </a>
+
     </nav>
 
-    <a href="profile.html" class="login-btn">
+
+    <a
+      href="profile.html"
+      class="login-btn">
+
       โปรไฟล์
+
     </a>
 
   </div>
+
 </header>
+
 
 
 <main>
 
-<section class="post-section">
+
+<!-- =================================
+     CREATE / EDIT POST
+================================= -->
+
+<section
+  id="formSection"
+  class="post-section">
 
   <div class="container">
 
@@ -46,10 +92,12 @@
         ✨ CREATE POST
       </span>
 
-      <h1>ลงประกาศ</h1>
+      <h1 id="formTitle">
+        ลงประกาศ
+      </h1>
 
       <p>
-        แบ่งปันหนังสือและสื่อการเรียนให้เพื่อนนักเรียน
+        แบ่งปันหนังสือและสื่อการเรียน
       </p>
 
     </div>
@@ -59,7 +107,8 @@
 
       <form id="postForm">
 
-        <!-- รูปภาพ -->
+
+        <!-- รูป -->
 
         <div class="form-group">
 
@@ -67,35 +116,47 @@
             📷 รูปหนังสือ
           </label>
 
-          <div class="image-upload">
+          <input
+            type="file"
+            id="imageInput"
+            accept="image/*">
 
-            <input
-              type="file"
-              id="imageInput"
-              accept="image/*"
-            >
 
-            <div id="imagePreview" class="image-preview">
-              <span>📚</span>
-              <p>กดเพื่อเลือกรูปหนังสือ</p>
-            </div>
+          <div
+            id="imagePreview"
+            class="image-preview">
+
+            <span>📚</span>
+
+            <p>
+              เลือกรูปหนังสือ
+            </p>
 
           </div>
 
+
           <small class="upload-hint">
-            แนะนำให้ใช้รูปที่ชัดเจน 1 รูป ระบบจะย่อรูปให้อัตโนมัติ
+
+            ถ้าไม่เลือกรูปใหม่
+            ระบบจะใช้รูปเดิม
+
           </small>
 
         </div>
+
 
 
         <!-- ประเภท -->
 
         <div class="form-group">
 
-          <label>ประเภทสื่อ</label>
+          <label>
+            ประเภทสื่อ
+          </label>
 
-          <select id="postType" required>
+          <select
+            id="postType"
+            required>
 
             <option value="book">
               📚 หนังสือ
@@ -110,45 +171,73 @@
         </div>
 
 
+
         <!-- ชื่อ -->
 
         <div class="form-group">
 
-          <label>ชื่อหนังสือ / ชื่อชีท</label>
+          <label>
+            ชื่อหนังสือ / ชื่อชีท
+          </label>
 
           <input
             type="text"
             id="title"
             placeholder="เช่น ตะลุยโจทย์คณิต ม.3"
-            required
-          >
+            required>
 
         </div>
+
 
 
         <!-- วิชา -->
 
         <div class="form-group">
 
-          <label>วิชา</label>
+          <label>
+            วิชา
+          </label>
 
-          <select id="subject" required>
+          <select
+            id="subject"
+            required>
 
             <option value="">
               -- เลือกวิชา --
             </option>
 
-            <option value="คณิตศาสตร์">คณิตศาสตร์</option>
-            <option value="วิทยาศาสตร์">วิทยาศาสตร์</option>
-            <option value="ภาษาอังกฤษ">ภาษาอังกฤษ</option>
-            <option value="ภาษาไทย">ภาษาไทย</option>
-            <option value="สังคมศึกษา">สังคมศึกษา</option>
-            <option value="ภาษาจีน">ภาษาจีน</option>
-            <option value="อื่น ๆ">อื่น ๆ</option>
+            <option value="คณิตศาสตร์">
+              คณิตศาสตร์
+            </option>
+
+            <option value="วิทยาศาสตร์">
+              วิทยาศาสตร์
+            </option>
+
+            <option value="ภาษาอังกฤษ">
+              ภาษาอังกฤษ
+            </option>
+
+            <option value="ภาษาไทย">
+              ภาษาไทย
+            </option>
+
+            <option value="สังคมศึกษา">
+              สังคมศึกษา
+            </option>
+
+            <option value="ภาษาจีน">
+              ภาษาจีน
+            </option>
+
+            <option value="อื่น ๆ">
+              อื่น ๆ
+            </option>
 
           </select>
 
         </div>
+
 
 
         <!-- สภาพ -->
@@ -157,26 +246,41 @@
           class="form-group"
           id="conditionGroup">
 
-          <label>สภาพหนังสือ</label>
+          <label>
+            สภาพหนังสือ
+          </label>
 
           <select id="condition">
 
-            <option value="ดีมาก">⭐ ดีมาก</option>
-            <option value="ดี">👍 ดี</option>
-            <option value="พอใช้">🙂 พอใช้</option>
+            <option value="ดีมาก">
+              ⭐ ดีมาก
+            </option>
+
+            <option value="ดี">
+              👍 ดี
+            </option>
+
+            <option value="พอใช้">
+              🙂 พอใช้
+            </option>
 
           </select>
 
         </div>
 
 
+
         <!-- วิธีแบ่งปัน -->
 
         <div class="form-group">
 
-          <label>ต้องการแบ่งปันแบบไหน?</label>
+          <label>
+            ต้องการแบ่งปันแบบไหน?
+          </label>
 
-          <select id="shareType" required>
+          <select
+            id="shareType"
+            required>
 
             <option value="free">
               🎁 ให้ฟรี
@@ -195,6 +299,7 @@
         </div>
 
 
+
         <!-- ราคา -->
 
         <div
@@ -202,53 +307,60 @@
           id="priceGroup"
           style="display:none;">
 
-          <label>ราคา (บาท)</label>
+          <label>
+            ราคา (บาท)
+          </label>
 
           <input
             type="number"
             id="price"
             min="0"
-            placeholder="เช่น 80"
-          >
+            placeholder="เช่น 80">
 
         </div>
+
 
 
         <!-- รายละเอียด -->
 
         <div class="form-group">
 
-          <label>รายละเอียด</label>
+          <label>
+            รายละเอียด
+          </label>
 
           <textarea
             id="description"
             rows="5"
             placeholder="รายละเอียดหนังสือ..."
-            required
-          ></textarea>
+            required></textarea>
 
         </div>
+
 
 
         <!-- ติดต่อ -->
 
         <div class="form-group">
 
-          <label>ช่องทางติดต่อ</label>
+          <label>
+            ช่องทางติดต่อ
+          </label>
 
           <input
             type="text"
             id="contact"
             placeholder="เช่น Line: study123"
-            required
-          >
+            required>
 
         </div>
 
 
+
         <button
           type="submit"
-          class="btn btn-primary post-submit">
+          class="btn btn-primary post-submit"
+          id="submitButton">
 
           📢 ลงประกาศ
 
@@ -260,6 +372,7 @@
           class="post-message">
         </p>
 
+
       </form>
 
     </div>
@@ -268,7 +381,35 @@
 
 </section>
 
+
+
+
+<!-- =================================
+     DETAIL PAGE
+================================= -->
+
+<section
+  id="detailSection"
+  class="section"
+  style="display:none;">
+
+  <div class="container">
+
+    <div
+      id="detailBox"
+      class="post-card">
+
+      กำลังโหลดข้อมูล...
+
+    </div>
+
+  </div>
+
+</section>
+
+
 </main>
+
 
 
 <footer class="footer">
@@ -286,7 +427,7 @@
     <div class="footer-line"></div>
 
     <small>
-      © 2026 StudyShare — ระบบแลกเปลี่ยนสื่อการเรียน
+      © 2026 StudyShare
     </small>
 
   </div>
@@ -294,22 +435,51 @@
 </footer>
 
 
+
 <script type="module">
 
 import {
+
   auth,
   db,
+
   onAuthStateChanged,
+
   doc,
   getDoc,
-  collection,
   addDoc,
+  updateDoc,
+  deleteDoc,
+
+  collection,
+
   serverTimestamp
+
 } from "./firebase.js";
 
 
+
+/* =================================
+   ELEMENTS
+================================= */
+
+const formSection =
+  document.querySelector("#formSection");
+
+const detailSection =
+  document.querySelector("#detailSection");
+
+const detailBox =
+  document.querySelector("#detailBox");
+
 const form =
   document.querySelector("#postForm");
+
+const formTitle =
+  document.querySelector("#formTitle");
+
+const submitButton =
+  document.querySelector("#submitButton");
 
 const message =
   document.querySelector("#postMessage");
@@ -320,6 +490,9 @@ const imageInput =
 const imagePreview =
   document.querySelector("#imagePreview");
 
+const postType =
+  document.querySelector("#postType");
+
 const shareType =
   document.querySelector("#shareType");
 
@@ -329,159 +502,219 @@ const priceGroup =
 const conditionGroup =
   document.querySelector("#conditionGroup");
 
-const postType =
-  document.querySelector("#postType");
 
+
+/* =================================
+   STATE
+================================= */
 
 let currentUser = null;
+
 let currentUserData = null;
+
 let imageData = "";
 
-
-// ============================
-// ตรวจสอบผู้ใช้
-// ============================
-
-onAuthStateChanged(auth, async (user) => {
-
-  if (!user) {
-
-    window.location.href = "login.html";
-
-    return;
-  }
-
-  currentUser = user;
+let editingPost = null;
 
 
-  try {
 
-    const userRef =
-      doc(db, "users", user.uid);
+/* =================================
+   URL ID
+================================= */
 
-    const userSnap =
-      await getDoc(userRef);
+const urlParams =
+  new URLSearchParams(
+    window.location.search
+  );
 
-
-    if (userSnap.exists()) {
-
-      currentUserData =
-        userSnap.data();
-
-    }
-
-  } catch (error) {
-
-    console.error(error);
-
-  }
-
-});
+const postId =
+  urlParams.get("id");
 
 
-// ============================
-// บีบอัดรูป
-// ============================
 
-function compressImage(file) {
+/* =================================
+   AUTH
+================================= */
 
-  return new Promise((resolve, reject) => {
+onAuthStateChanged(
+  auth,
+  async (user) => {
 
-    const reader = new FileReader();
-
-
-    reader.onload = (event) => {
-
-      const img = new Image();
+    currentUser = user;
 
 
-      img.onload = () => {
+    if (user) {
 
-        const maxSize = 700;
+      try {
 
-        let width = img.width;
-        let height = img.height;
-
-
-        if (width > height) {
-
-          if (width > maxSize) {
-
-            height =
-              height * maxSize / width;
-
-            width = maxSize;
-
-          }
-
-        } else {
-
-          if (height > maxSize) {
-
-            width =
-              width * maxSize / height;
-
-            height = maxSize;
-
-          }
-
-        }
-
-
-        const canvas =
-          document.createElement("canvas");
-
-        canvas.width = width;
-        canvas.height = height;
-
-
-        const ctx =
-          canvas.getContext("2d");
-
-
-        ctx.drawImage(
-          img,
-          0,
-          0,
-          width,
-          height
-        );
-
-
-        const result =
-          canvas.toDataURL(
-            "image/jpeg",
-            0.65
+        const userRef =
+          doc(
+            db,
+            "users",
+            user.uid
           );
 
 
-        resolve(result);
+        const userSnap =
+          await getDoc(userRef);
 
-      };
+
+        if (userSnap.exists()) {
+
+          currentUserData =
+            userSnap.data();
+
+        }
+
+      } catch (error) {
+
+        console.error(error);
+
+      }
+
+    }
 
 
-      img.onerror =
+    /*
+      ถ้ามี ?id=
+      = เปิดรายละเอียด
+    */
+
+    if (postId) {
+
+      loadPostDetail();
+
+    }
+
+  }
+);
+
+
+
+/* =================================
+   IMAGE COMPRESSION
+================================= */
+
+function compressImage(file) {
+
+  return new Promise(
+    (resolve, reject) => {
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        (event) => {
+
+          const img =
+            new Image();
+
+
+          img.onload =
+            () => {
+
+              const maxSize = 700;
+
+              let width =
+                img.width;
+
+              let height =
+                img.height;
+
+
+              if (
+                width > maxSize ||
+                height > maxSize
+              ) {
+
+                const ratio =
+                  Math.min(
+                    maxSize / width,
+                    maxSize / height
+                  );
+
+
+                width =
+                  Math.round(
+                    width * ratio
+                  );
+
+
+                height =
+                  Math.round(
+                    height * ratio
+                  );
+
+              }
+
+
+              const canvas =
+                document.createElement(
+                  "canvas"
+                );
+
+
+              canvas.width =
+                width;
+
+              canvas.height =
+                height;
+
+
+              const ctx =
+                canvas.getContext(
+                  "2d"
+                );
+
+
+              ctx.drawImage(
+                img,
+                0,
+                0,
+                width,
+                height
+              );
+
+
+              const result =
+                canvas.toDataURL(
+                  "image/jpeg",
+                  0.65
+                );
+
+
+              resolve(result);
+
+            };
+
+
+          img.onerror =
+            reject;
+
+
+          img.src =
+            event.target.result;
+
+        };
+
+
+      reader.onerror =
         reject;
 
-      img.src =
-        event.target.result;
 
-    };
+      reader.readAsDataURL(file);
 
-
-    reader.onerror =
-      reject;
-
-    reader.readAsDataURL(file);
-
-  });
+    }
+  );
 
 }
 
 
-// ============================
-// เลือกรูป
-// ============================
+
+/* =================================
+   IMAGE SELECT
+================================= */
 
 imageInput.addEventListener(
   "change",
@@ -491,21 +724,23 @@ imageInput.addEventListener(
       imageInput.files[0];
 
 
-    if (!file) {
-
-      imageData = "";
-
-      return;
-    }
+    if (!file) return;
 
 
-    if (!file.type.startsWith("image/")) {
+    if (
+      !file.type.startsWith(
+        "image/"
+      )
+    ) {
 
-      alert("กรุณาเลือกไฟล์รูปภาพ");
+      alert(
+        "กรุณาเลือกไฟล์รูปภาพ"
+      );
 
       imageInput.value = "";
 
       return;
+
     }
 
 
@@ -520,10 +755,11 @@ imageInput.addEventListener(
 
 
       imagePreview.innerHTML = `
+
         <img
           src="${imageData}"
-          alt="ตัวอย่างรูปหนังสือ"
-        >
+          alt="ตัวอย่างรูป">
+
       `;
 
     } catch (error) {
@@ -533,8 +769,13 @@ imageInput.addEventListener(
       imageData = "";
 
       imagePreview.innerHTML = `
+
         <span>❌</span>
-        <p>ไม่สามารถโหลดรูปได้</p>
+
+        <p>
+          ไม่สามารถโหลดรูปได้
+        </p>
+
       `;
 
     }
@@ -543,9 +784,10 @@ imageInput.addEventListener(
 );
 
 
-// ============================
-// แสดงช่องราคา
-// ============================
+
+/* =================================
+   SHARE TYPE
+================================= */
 
 shareType.addEventListener(
   "change",
@@ -560,9 +802,10 @@ shareType.addEventListener(
 );
 
 
-// ============================
-// หนังสือ / ชีท
-// ============================
+
+/* =================================
+   POST TYPE
+================================= */
 
 postType.addEventListener(
   "change",
@@ -577,9 +820,467 @@ postType.addEventListener(
 );
 
 
-// ============================
-// ลงประกาศ
-// ============================
+
+/* =================================
+   LOAD DETAIL
+================================= */
+
+async function loadPostDetail() {
+
+  formSection.style.display =
+    "none";
+
+
+  detailSection.style.display =
+    "block";
+
+
+  try {
+
+    const postRef =
+      doc(
+        db,
+        "posts",
+        postId
+      );
+
+
+    const postSnap =
+      await getDoc(postRef);
+
+
+    if (!postSnap.exists()) {
+
+      detailBox.innerHTML = `
+
+        <div class="loading-card">
+
+          ❌ ไม่พบโพสต์นี้
+
+          <br><br>
+
+          <a
+            href="books.html"
+            class="btn btn-primary">
+
+            กลับไปหน้าหนังสือ
+
+          </a>
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    editingPost = {
+
+      id: postSnap.id,
+
+      ...postSnap.data()
+
+    };
+
+
+    renderDetail(
+      editingPost
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+
+    detailBox.innerHTML = `
+
+      <div class="loading-card">
+
+        ❌ เกิดข้อผิดพลาด
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+
+/* =================================
+   RENDER DETAIL
+================================= */
+
+function renderDetail(post) {
+
+  const isOwner =
+    currentUser &&
+    currentUser.uid === post.ownerId;
+
+
+  const shareText =
+    post.shareType === "free"
+      ? "🎁 ให้ฟรี"
+      : post.shareType === "exchange"
+      ? "🔄 แลกเปลี่ยน"
+      : "💰 " +
+        (
+          post.price
+            ? post.price + " บาท"
+            : "สอบถามราคา"
+        );
+
+
+  const imageHTML =
+    post.image
+      ? `
+        <img
+          src="${post.image}"
+          class="detail-image"
+          alt="${post.title || "หนังสือ"}">
+      `
+      : `
+        <div class="detail-image-empty">
+          📚
+        </div>
+      `;
+
+
+  detailBox.innerHTML = `
+
+    <div class="detail-layout">
+
+
+      <div class="detail-photo">
+
+        ${imageHTML}
+
+      </div>
+
+
+      <div class="detail-info">
+
+
+        <span class="book-subject">
+
+          ${post.subject || "ไม่ระบุวิชา"}
+
+        </span>
+
+
+        <h1>
+          ${post.title || "ไม่มีชื่อ"}
+        </h1>
+
+
+        <div class="detail-price">
+
+          ${shareText}
+
+        </div>
+
+
+        ${
+          post.type === "book"
+            ? `
+              <p>
+                <strong>
+                  สภาพ:
+                </strong>
+
+                ${post.condition || "-"}
+              </p>
+            `
+            : ""
+        }
+
+
+        <div class="detail-description">
+
+          <h3>
+            📖 รายละเอียด
+          </h3>
+
+          <p>
+            ${post.description || "-"}
+          </p>
+
+        </div>
+
+
+        <div class="owner-box">
+
+          <h3>
+            👤 ผู้ลงประกาศ
+          </h3>
+
+          <p>
+            <strong>
+              ${post.ownerName || "นักเรียน"}
+            </strong>
+          </p>
+
+          <p>
+            รหัสนักเรียน:
+            ${post.ownerStudentId || "-"}
+          </p>
+
+          <p>
+            ชั้น:
+            ${post.ownerClass || "-"}
+          </p>
+
+        </div>
+
+
+        <div class="contact-box">
+
+          <strong>
+            💬 ช่องทางติดต่อ
+          </strong>
+
+          <p>
+            ${post.contact || "-"}
+          </p>
+
+        </div>
+
+
+        ${
+          isOwner
+            ? `
+
+              <div class="owner-actions">
+
+                <button
+                  id="editButton"
+                  class="btn btn-primary">
+
+                  ✏️ แก้ไขโพสต์
+
+                </button>
+
+
+                <button
+                  id="deleteButton"
+                  class="btn btn-danger">
+
+                  🗑️ ลบโพสต์
+
+                </button>
+
+              </div>
+
+            `
+            : `
+
+              <div class="buyer-actions">
+
+                <button
+                  class="btn btn-primary"
+                  disabled>
+
+                  🛒 ขอซื้อ
+
+                </button>
+
+
+                <button
+                  class="btn btn-secondary"
+                  disabled>
+
+                  🎁 ขอรับ
+
+                </button>
+
+
+                <button
+                  class="btn btn-secondary"
+                  disabled>
+
+                  🔄 ขอแลก
+
+                </button>
+
+                <p class="coming-soon">
+
+                  ระบบจองและขอซื้อ
+                  กำลังจะเพิ่มเร็ว ๆ นี้ 💜
+
+                </p>
+
+              </div>
+
+            `
+        }
+
+
+      </div>
+
+    </div>
+
+
+    <div class="back-area">
+
+      <a
+        href="books.html"
+        class="btn btn-secondary">
+
+        ← กลับไปหน้าหนังสือ
+
+      </a>
+
+    </div>
+
+  `;
+
+
+  /* =========================
+     OWNER BUTTONS
+  ========================= */
+
+  if (isOwner) {
+
+    document
+      .querySelector("#editButton")
+      .addEventListener(
+        "click",
+        () => {
+
+          openEditForm(post);
+
+        }
+      );
+
+
+    document
+      .querySelector("#deleteButton")
+      .addEventListener(
+        "click",
+        () => {
+
+          deletePost(post);
+
+        }
+      );
+
+  }
+
+}
+
+
+
+/* =================================
+   OPEN EDIT FORM
+================================= */
+
+function openEditForm(post) {
+
+  detailSection.style.display =
+    "none";
+
+
+  formSection.style.display =
+    "block";
+
+
+  formTitle.textContent =
+    "แก้ไขโพสต์";
+
+
+  submitButton.textContent =
+    "💾 บันทึกการแก้ไข";
+
+
+  imageData =
+    post.image || "";
+
+
+  postType.value =
+    post.type || "book";
+
+
+  document.querySelector("#title").value =
+    post.title || "";
+
+
+  document.querySelector("#subject").value =
+    post.subject || "";
+
+
+  document.querySelector("#condition").value =
+    post.condition || "ดี";
+
+
+  shareType.value =
+    post.shareType || "free";
+
+
+  document.querySelector("#price").value =
+    post.price || "";
+
+
+  document.querySelector("#description").value =
+    post.description || "";
+
+
+  document.querySelector("#contact").value =
+    post.contact || "";
+
+
+  priceGroup.style.display =
+    shareType.value === "sell"
+      ? "block"
+      : "none";
+
+
+  conditionGroup.style.display =
+    post.type === "book"
+      ? "block"
+      : "none";
+
+
+  if (post.image) {
+
+    imagePreview.innerHTML = `
+
+      <img
+        src="${post.image}"
+        alt="รูปเดิม">
+
+    `;
+
+  } else {
+
+    imagePreview.innerHTML = `
+
+      <span>📚</span>
+
+      <p>
+        ยังไม่มีรูป
+      </p>
+
+    `;
+
+  }
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+
+/* =================================
+   SUBMIT
+================================= */
 
 form.addEventListener(
   "submit",
@@ -594,38 +1295,42 @@ form.addEventListener(
         "กรุณาเข้าสู่ระบบก่อน";
 
       return;
+
     }
-
-
-    message.textContent =
-      "กำลังบันทึกประกาศ...";
 
 
     const type =
       postType.value;
 
+
     const title =
       document.querySelector("#title")
         .value.trim();
+
 
     const subject =
       document.querySelector("#subject")
         .value;
 
+
     const condition =
       document.querySelector("#condition")
         .value;
 
+
     const share =
       shareType.value;
+
 
     const price =
       document.querySelector("#price")
         .value;
 
+
     const description =
       document.querySelector("#description")
         .value.trim();
+
 
     const contact =
       document.querySelector("#contact")
@@ -634,8 +1339,88 @@ form.addEventListener(
 
     try {
 
+      submitButton.disabled =
+        true;
+
+
+      submitButton.textContent =
+        "กำลังบันทึก...";
+
+
+      /* =====================
+         EDIT
+      ===================== */
+
+      if (postId && editingPost) {
+
+        const postRef =
+          doc(
+            db,
+            "posts",
+            postId
+          );
+
+
+        await updateDoc(
+          postRef,
+          {
+
+            type: type,
+
+            title: title,
+
+            subject: subject,
+
+            condition:
+              type === "book"
+                ? condition
+                : "",
+
+            shareType: share,
+
+            price:
+              share === "sell"
+                ? Number(price || 0)
+                : 0,
+
+            description:
+              description,
+
+            contact:
+              contact,
+
+            image:
+              imageData || "",
+
+            updatedAt:
+              serverTimestamp()
+
+          }
+        );
+
+
+        alert(
+          "✅ แก้ไขโพสต์เรียบร้อยแล้ว"
+        );
+
+
+        window.location.reload();
+
+        return;
+
+      }
+
+
+
+      /* =====================
+         CREATE
+      ===================== */
+
       await addDoc(
-        collection(db, "posts"),
+        collection(
+          db,
+          "posts"
+        ),
         {
 
           type: type,
@@ -687,34 +1472,124 @@ form.addEventListener(
       );
 
 
-      message.textContent =
-        "✅ ลงประกาศสำเร็จ!";
+      alert(
+        "✅ ลงประกาศสำเร็จ!"
+      );
 
 
-      setTimeout(() => {
-
-        window.location.href =
-          type === "book"
-            ? "books.html"
-            : "notes.html";
-
-      }, 1000);
+      window.location.href =
+        type === "book"
+          ? "books.html"
+          : "notes.html";
 
 
     } catch (error) {
 
       console.error(error);
 
+
       message.textContent =
         "❌ ไม่สามารถบันทึกได้: " +
         error.message;
+
+
+      submitButton.disabled =
+        false;
+
+
+      submitButton.textContent =
+        postId
+          ? "💾 บันทึกการแก้ไข"
+          : "📢 ลงประกาศ";
 
     }
 
   }
 );
 
+
+
+/* =================================
+   DELETE
+================================= */
+
+async function deletePost(post) {
+
+  if (!currentUser) {
+
+    alert(
+      "กรุณาเข้าสู่ระบบ"
+    );
+
+    return;
+
+  }
+
+
+  if (
+    currentUser.uid !==
+    post.ownerId
+  ) {
+
+    alert(
+      "คุณไม่มีสิทธิ์ลบโพสต์นี้"
+    );
+
+    return;
+
+  }
+
+
+  const confirmDelete =
+    confirm(
+      `ต้องการลบโพสต์ "${post.title}" ใช่หรือไม่?`
+    );
+
+
+  if (!confirmDelete) {
+
+    return;
+
+  }
+
+
+  try {
+
+    await deleteDoc(
+      doc(
+        db,
+        "posts",
+        post.id
+      )
+    );
+
+
+    alert(
+      "🗑️ ลบโพสต์เรียบร้อยแล้ว"
+    );
+
+
+    window.location.href =
+      "books.html";
+
+
+  } catch (error) {
+
+    console.error(error);
+
+
+    alert(
+      "❌ ไม่สามารถลบโพสต์ได้: " +
+      error.message
+    );
+
+  }
+
+}
+
 </script>
 
+
 </body>
-</html>
+
+  </html>
