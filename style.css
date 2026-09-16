@@ -1180,3 +1180,807 @@ footer small {
   }
 
   }
+
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>โปรไฟล์ | StudyShare</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+  <div class="container nav-inner">
+
+    <a
+      href="index.html"
+      class="logo">
+
+      📚 StudyShare
+
+    </a>
+
+
+    <nav class="nav-links">
+
+      <a href="index.html">
+        หน้าแรก
+      </a>
+
+      <a href="books.html">
+        หนังสือ
+      </a>
+
+      <a href="notes.html">
+        ชีทสรุป
+      </a>
+
+      <a href="announcements.html">
+        ประกาศ
+      </a>
+
+      <a href="about.html">
+        เกี่ยวกับระบบ
+      </a>
+
+    </nav>
+
+
+    <a
+      href="profile.html"
+      class="login-btn">
+
+      โปรไฟล์
+
+    </a>
+
+  </div>
+
+</header>
+
+
+
+<main>
+
+<section class="section">
+
+  <div class="container">
+
+
+    <div
+      id="profileBox"
+      class="post-card">
+
+      กำลังโหลดข้อมูล...
+
+    </div>
+
+
+    <div
+      id="requestSection"
+      class="profile-requests">
+
+      <h2>
+        🔔 คำขอจากนักเรียน
+      </h2>
+
+
+      <p class="request-subtitle">
+        นักเรียนที่สนใจหนังสือหรือสื่อของคุณ
+      </p>
+
+
+      <div
+        id="requestList">
+
+        กำลังโหลดคำขอ...
+
+      </div>
+
+    </div>
+
+
+    <div class="profile-actions">
+
+      <a
+        href="post.html"
+        class="btn btn-primary">
+
+        ➕ ลงประกาศใหม่
+
+      </a>
+
+
+      <a
+        href="books.html"
+        class="btn btn-secondary">
+
+        📚 ดูหนังสือ
+
+      </a>
+
+
+      <button
+        id="logoutButton"
+        class="btn btn-danger">
+
+        🚪 ออกจากระบบ
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+</main>
+
+
+
+<footer class="footer">
+
+  <div class="container">
+
+    <div class="footer-logo">
+      📚 StudyShare
+    </div>
+
+    <p>
+      Student Book & Note Sharing System
+    </p>
+
+  </div>
+
+</footer>
+
+
+
+<script type="module">
+
+import {
+
+  auth,
+  db,
+
+  onAuthStateChanged,
+
+  doc,
+  getDoc,
+
+  collection,
+  query,
+  where,
+  getDocs,
+
+  updateDoc
+
+} from "./firebase.js";
+
+
+const profileBox =
+  document.querySelector(
+    "#profileBox"
+  );
+
+const requestList =
+  document.querySelector(
+    "#requestList"
+  );
+
+const logoutButton =
+  document.querySelector(
+    "#logoutButton"
+  );
+
+
+let currentUser = null;
+
+
+
+/* =========================
+   AUTH
+========================= */
+
+onAuthStateChanged(
+  auth,
+  async (user) => {
+
+    if (!user) {
+
+      window.location.href =
+        "login.html";
+
+      return;
+
+    }
+
+
+    currentUser = user;
+
+
+    await loadProfile();
+
+    await loadRequests();
+
+  }
+);
+
+
+
+/* =========================
+   PROFILE
+========================= */
+
+async function loadProfile() {
+
+  try {
+
+    const userSnap =
+      await getDoc(
+        doc(
+          db,
+          "users",
+          currentUser.uid
+        )
+      );
+
+
+    if (!userSnap.exists()) {
+
+      profileBox.innerHTML = `
+
+        <h2>
+          ไม่พบข้อมูลนักเรียน
+        </h2>
+
+        <p>
+          กรุณาสมัครบัญชีใหม่
+        </p>
+
+      `;
+
+      return;
+
+    }
+
+
+    const data =
+      userSnap.data();
+
+
+    profileBox.innerHTML = `
+
+      <div class="profile-header">
+
+        <div class="profile-avatar">
+          👤
+        </div>
+
+
+        <div>
+
+          <h1>
+            ${data.name || "นักเรียน"}
+          </h1>
+
+          <p>
+            StudentShare Member
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="profile-info">
+
+        <div class="profile-item">
+
+          <span>
+            🪪 รหัสนักเรียน
+          </span>
+
+          <strong>
+            ${data.studentId || "-"}
+          </strong>
+
+        </div>
+
+
+        <div class="profile-item">
+
+          <span>
+            🏫 ชั้นเรียน
+          </span>
+
+          <strong>
+            ${data.className || "-"}
+          </strong>
+
+        </div>
+
+
+        <div class="profile-item">
+
+          <span>
+            📧 อีเมล
+          </span>
+
+          <strong>
+            ${data.email || currentUser.email || "-"}
+          </strong>
+
+        </div>
+
+      </div>
+
+    `;
+
+  } catch (error) {
+
+    console.error(error);
+
+    profileBox.innerHTML = `
+      ❌ ไม่สามารถโหลดข้อมูลได้
+    `;
+
+  }
+
+}
+
+
+
+/* =========================
+   LOAD REQUESTS
+========================= */
+
+async function loadRequests() {
+
+  try {
+
+    const q =
+      query(
+        collection(
+          db,
+          "requests"
+        ),
+        where(
+          "ownerId",
+          "==",
+          currentUser.uid
+        )
+      );
+
+
+    const snapshot =
+      await getDocs(q);
+
+
+    const requests = [];
+
+
+    snapshot.forEach(
+      (item) => {
+
+        requests.push({
+          id: item.id,
+          ...item.data()
+        });
+
+      }
+    );
+
+
+    /*
+      เรียงคำขอใหม่ไว้ด้านบน
+    */
+
+    requests.sort(
+      (a, b) => {
+
+        const aTime =
+          a.createdAt?.seconds || 0;
+
+        const bTime =
+          b.createdAt?.seconds || 0;
+
+        return bTime - aTime;
+
+      }
+    );
+
+
+    renderRequests(
+      requests
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    requestList.innerHTML = `
+
+      <div class="request-empty">
+
+        ❌ ไม่สามารถโหลดคำขอได้
+
+        <br>
+
+        ${error.message}
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+
+/* =========================
+   RENDER REQUESTS
+========================= */
+
+function renderRequests(
+  requests
+) {
+
+  if (
+    requests.length === 0
+  ) {
+
+    requestList.innerHTML = `
+
+      <div class="request-empty">
+
+        🔔
+
+        <h3>
+          ยังไม่มีคำขอ
+        </h3>
+
+        <p>
+          เมื่อมีนักเรียนสนใจหนังสือ
+          คำขอจะปรากฏตรงนี้ครับ
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  requestList.innerHTML =
+    requests.map(
+      (request) => {
+
+
+        let statusHTML = "";
+
+
+        if (
+          request.status ===
+          "pending"
+        ) {
+
+          statusHTML = `
+
+            <div class="request-actions">
+
+              <button
+                class="btn btn-primary accept-request"
+                data-id="${request.id}">
+
+                ✓ ยอมรับ
+
+              </button>
+
+
+              <button
+                class="btn btn-danger reject-request"
+                data-id="${request.id}">
+
+                ✕ ปฏิเสธ
+
+              </button>
+
+            </div>
+
+          `;
+
+        }
+
+
+        if (
+          request.status ===
+          "accepted"
+        ) {
+
+          statusHTML = `
+
+            <div class="request-status accepted">
+
+              ✅ ยอมรับคำขอแล้ว
+
+            </div>
+
+          `;
+
+        }
+
+
+        if (
+          request.status ===
+          "rejected"
+        ) {
+
+          statusHTML = `
+
+            <div class="request-status rejected">
+
+              ❌ ปฏิเสธคำขอแล้ว
+
+            </div>
+
+          `;
+
+        }
+
+
+        return `
+
+          <div class="request-card">
+
+
+            <div class="request-top">
+
+              <span class="request-type">
+
+                ${request.typeText || "📚 คำขอ"}
+
+              </span>
+
+
+              <span class="request-status-label">
+
+                ${
+                  request.status === "pending"
+                    ? "รอดำเนินการ"
+                    : request.status === "accepted"
+                    ? "ยอมรับแล้ว"
+                    : "ปฏิเสธแล้ว"
+                }
+
+              </span>
+
+            </div>
+
+
+            <h3>
+
+              ${request.postTitle || "ไม่ระบุชื่อ"}
+
+            </h3>
+
+
+            <div class="request-person">
+
+              👤
+
+              <strong>
+                ${request.requesterName || "นักเรียน"}
+              </strong>
+
+            </div>
+
+
+            <p>
+
+              รหัสนักเรียน:
+              ${request.requesterStudentId || "-"}
+
+              <br>
+
+              ชั้น:
+              ${request.requesterClass || "-"}
+
+            </p>
+
+
+            <div class="request-message">
+
+              💬
+
+              ${
+                request.message ||
+                "ไม่ได้ฝากข้อความ"
+              }
+
+            </div>
+
+
+            ${statusHTML}
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
+
+
+  /*
+    ปุ่มยอมรับ
+  */
+
+  document
+    .querySelectorAll(
+      ".accept-request"
+    )
+    .forEach(
+      (button) => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            updateRequest(
+              button.dataset.id,
+              "accepted"
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+  /*
+    ปุ่มปฏิเสธ
+  */
+
+  document
+    .querySelectorAll(
+      ".reject-request"
+    )
+    .forEach(
+      (button) => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            updateRequest(
+              button.dataset.id,
+              "rejected"
+            );
+
+          }
+        );
+
+      }
+    );
+
+}
+
+
+
+/* =========================
+   UPDATE REQUEST
+========================= */
+
+async function updateRequest(
+  requestId,
+  status
+) {
+
+  const text =
+    status === "accepted"
+      ? "ยอมรับคำขอนี้ใช่ไหมครับ?"
+      : "ปฏิเสธคำขอนี้ใช่ไหมครับ?";
+
+
+  if (!confirm(text)) {
+
+    return;
+
+  }
+
+
+  try {
+
+    await updateDoc(
+      doc(
+        db,
+        "requests",
+        requestId
+      ),
+      {
+        status: status
+      }
+    );
+
+
+    alert(
+      status === "accepted"
+        ? "✅ ยอมรับคำขอแล้วครับ"
+        : "❌ ปฏิเสธคำขอแล้วครับ"
+    );
+
+
+    await loadRequests();
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "ไม่สามารถเปลี่ยนสถานะได้: " +
+      error.message
+    );
+
+  }
+
+}
+
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+logoutButton.addEventListener(
+  "click",
+  async () => {
+
+    try {
+
+      await auth.signOut();
+
+      window.location.href =
+        "index.html";
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "ไม่สามารถออกจากระบบได้"
+      );
+
+    }
+
+  }
+);
+
+</script>
+
+
+</body>
+
+</html>
