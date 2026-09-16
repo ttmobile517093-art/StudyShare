@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>โปรไฟล์ | StudyShare</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <header class="navbar">
+
+    <div class="container nav-inner">
+
+      <a href="index.html" class="logo">
+        📚 StudyShare
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">หน้าแรก</a>
+        <a href="books.html">หนังสือ</a>
+        <a href="notes.html">ชีทสรุป</a>
+        <a href="announcements.html">ประกาศ</a>
+        <a href="about.html">เกี่ยวกับระบบ</a>
+      </nav>
+
+      <a href="profile.html" class="login-btn">
+        โปรไฟล์
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- PROFILE -->
+
+  <main>
+
+    <section class="profile-section">
+
+      <div class="container">
+
+        <div class="profile-header">
+
+          <div class="profile-avatar" id="profileAvatar">
+            👤
+          </div>
+
+          <div>
+            <span class="profile-label">
+              MY PROFILE
+            </span>
+
+            <h1 id="profileName">
+              กำลังโหลด...
+            </h1>
+
+            <p id="profileEmail">
+              กำลังโหลดข้อมูล...
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="profile-grid">
+
+          <!-- ข้อมูลส่วนตัว -->
+
+          <div class="profile-card">
+
+            <div class="profile-card-title">
+              <span>👤</span>
+              <h2>ข้อมูลนักเรียน</h2>
+            </div>
+
+
+            <div class="profile-info">
+
+              <div class="info-row">
+                <span>ชื่อ-นามสกุล</span>
+                <strong id="infoName">-</strong>
+              </div>
+
+              <div class="info-row">
+                <span>รหัสนักเรียน</span>
+                <strong id="infoStudentId">-</strong>
+              </div>
+
+              <div class="info-row">
+                <span>ชั้นเรียน</span>
+                <strong id="infoClass">-</strong>
+              </div>
+
+              <div class="info-row">
+                <span>อีเมล</span>
+                <strong id="infoEmail">-</strong>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- เมนู -->
+
+          <div class="profile-card">
+
+            <div class="profile-card-title">
+              <span>📚</span>
+              <h2>เมนูของฉัน</h2>
+            </div>
+
+
+            <div class="profile-menu">
+
+              <a href="post.html" class="profile-menu-item">
+                <span>＋</span>
+                <div>
+                  <strong>ลงประกาศ</strong>
+                  <small>เพิ่มหนังสือหรือชีทสรุป</small>
+                </div>
+              </a>
+
+
+              <a href="books.html" class="profile-menu-item">
+                <span>📚</span>
+                <div>
+                  <strong>หนังสือของฉัน</strong>
+                  <small>ดูรายการหนังสือที่ลงประกาศ</small>
+                </div>
+              </a>
+
+
+              <a href="notes.html" class="profile-menu-item">
+                <span>📝</span>
+                <div>
+                  <strong>ชีทสรุปของฉัน</strong>
+                  <small>ดูชีทสรุปที่แบ่งปัน</small>
+                </div>
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ออกจากระบบ -->
+
+        <div class="logout-area">
+
+          <button id="logoutButton" class="logout-btn">
+            ออกจากระบบ
+          </button>
+
+        </div>
+
+
+        <p id="profileMessage" class="profile-message"></p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <div class="container">
+
+      <div class="footer-logo">
+        📚 StudyShare
+      </div>
+
+      <p>
+        Student Book & Note Sharing System
+      </p>
+
+      <div class="footer-line"></div>
+
+      <small>
+        © 2026 StudyShare — ระบบแลกเปลี่ยนสื่อการเรียน
+      </small>
+
+    </div>
+
+  </footer>
+
+
+  <!-- FIREBASE SCRIPT -->
+
+  <script type="module">
+
+    import {
+      auth,
+      db,
+      onAuthStateChanged,
+      doc,
+      getDoc,
+      signOut
+    } from "./firebase.js";
+
+
+    // ตรวจสอบการเข้าสู่ระบบ
+
+    onAuthStateChanged(auth, async (user) => {
+
+      if (!user) {
+
+        window.location.href = "login.html";
+
+        return;
+      }
+
+
+      try {
+
+        const userRef =
+          doc(db, "users", user.uid);
+
+        const userSnap =
+          await getDoc(userRef);
+
+
+        if (userSnap.exists()) {
+
+          const data =
+            userSnap.data();
+
+
+          // ชื่อ
+
+          document.querySelector("#profileName")
+            .textContent =
+            data.name || "ไม่ระบุชื่อ";
+
+
+          document.querySelector("#infoName")
+            .textContent =
+            data.name || "-";
+
+
+          // รหัสนักเรียน
+
+          document.querySelector("#infoStudentId")
+            .textContent =
+            data.studentId || "-";
+
+
+          // ห้อง
+
+          document.querySelector("#infoClass")
+            .textContent =
+            data.className || "-";
+
+
+          // Email
+
+          document.querySelector("#profileEmail")
+            .textContent =
+            data.email || user.email || "-";
+
+
+          document.querySelector("#infoEmail")
+            .textContent =
+            data.email || user.email || "-";
+
+
+          // ตัวอักษรแรกของชื่อ
+
+          if (data.name) {
+
+            document.querySelector("#profileAvatar")
+              .textContent =
+              data.name.charAt(0);
+
+          }
+
+        } else {
+
+          document.querySelector("#profileName")
+            .textContent =
+            "ไม่พบข้อมูลนักเรียน";
+
+        }
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        document.querySelector("#profileName")
+          .textContent =
+          "เกิดข้อผิดพลาด";
+
+        document.querySelector("#profileMessage")
+          .textContent =
+          "ไม่สามารถโหลดข้อมูลโปรไฟล์ได้";
+
+      }
+
+    });
+
+
+    // ออกจากระบบ
+
+    document.querySelector("#logoutButton")
+      .addEventListener("click", async () => {
+
+        try {
+
+          await signOut(auth);
+
+          window.location.href =
+            "index.html";
+
+        } catch (error) {
+
+          console.error(error);
+
+          alert(
+            "ไม่สามารถออกจากระบบได้"
+          );
+
+        }
+
+      });
+
+  </script>
+
+</body>
+        </html>
