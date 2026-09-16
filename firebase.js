@@ -1,11 +1,18 @@
-import { initializeApp } from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+// ================================
+// StudyShare - Firebase Configuration
+// ================================
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
   getAuth,
-  onAuthStateChanged
-} from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
   getFirestore,
@@ -21,16 +28,15 @@ import {
   orderBy,
   where,
   serverTimestamp
-} from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-/* =========================
-   FIREBASE CONFIG
-========================= */
+// ================================
+// Firebase Configuration
+// ================================
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAysQGKQEM0VpwBxQAzf6fgVUNsAY9R4I",
+  apiKey: "AIzaSyAysQGKQEM0VpwcvBxQAzf6fgVUNsAYR9I",
   authDomain: "studyshare-web.firebaseapp.com",
   projectId: "studyshare-web",
   storageBucket: "studyshare-web.firebasestorage.app",
@@ -40,28 +46,43 @@ const firebaseConfig = {
 };
 
 
-/* =========================
-   INITIALIZE FIREBASE
-========================= */
+// ================================
+// Initialize Firebase
+// ================================
 
 const app = initializeApp(firebaseConfig);
 
+
+// ================================
+// Authentication
+// ================================
+
 const auth = getAuth(app);
+
+
+// ================================
+// Firestore Database
+// ================================
 
 const db = getFirestore(app);
 
 
-/* =========================
-   EXPORT
-========================= */
+// ================================
+// Export
+// ================================
 
 export {
   app,
   auth,
   db,
 
+  // Authentication
   onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
 
+  // Firestore
   collection,
   addDoc,
   getDocs,
@@ -70,7 +91,6 @@ export {
   updateDoc,
   deleteDoc,
   doc,
-
   query,
   orderBy,
   where,
