@@ -4,98 +4,116 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>StudyShare | แลกเปลี่ยนหนังสือและชีทเรียน</title>
+  <title>StudyShare | ระบบแลกเปลี่ยนสื่อการเรียน</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- Navigation -->
+  <!-- ================= NAVBAR ================= -->
+
   <header class="navbar">
-    <div class="logo">
-      <span>📚</span>
-      StudyShare
+
+    <div class="container nav-inner">
+
+      <a href="index.html" class="logo">
+        📚 StudyShare
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">หน้าแรก</a>
+        <a href="books.html">หนังสือ</a>
+        <a href="notes.html">ชีทสรุป</a>
+        <a href="announcements.html">ประกาศ</a>
+        <a href="about.html">เกี่ยวกับระบบ</a>
+      </nav>
+
+      <!-- สำคัญ: script.js จะเปลี่ยนข้อความตรงนี้ -->
+      <a href="login.html" class="login-btn">
+        เข้าสู่ระบบ
+      </a>
+
     </div>
 
-    <nav>
-      <a href="index.html" class="active">หน้าหลัก</a>
-      <a href="books.html">หนังสือ</a>
-      <a href="notes.html">ชีทสรุป</a>
-      <a href="announcements.html">ประกาศ</a>
-      <a href="about.html">เกี่ยวกับระบบ</a>
-    </nav>
-
-    <a href="login.html" class="login-btn">
-      เข้าสู่ระบบ
-    </a>
   </header>
 
 
-  <!-- Hero -->
+  <!-- ================= HERO ================= -->
+
   <main>
 
     <section class="hero">
 
-      <div class="hero-content">
+      <div class="container hero-grid">
 
-        <div class="badge">
-          🎓 ระบบแลกเปลี่ยนสื่อการเรียนภายในโรงเรียน
-        </div>
+        <div class="hero-content">
 
-        <h1>
-          แบ่งปันสิ่งที่มี<br>
-          <span>ส่งต่อโอกาสในการเรียนรู้</span>
-        </h1>
+          <span class="hero-badge">
+            🎓 Student Book & Note Sharing System
+          </span>
 
-        <p>
-          ศูนย์กลางสำหรับแลกเปลี่ยนหนังสือเรียน
-          หนังสือเตรียมสอบ และชีทสรุประหว่างนักเรียน
-          ช่วยลดค่าใช้จ่ายและทำให้เข้าถึงสื่อการเรียนได้ง่ายขึ้น
-        </p>
+          <h1>
+            แบ่งปันสื่อการเรียน
+            <br>
+            <span>ส่งต่อโอกาสทางการศึกษา</span>
+          </h1>
 
-        <div class="hero-buttons">
-          <a href="books.html" class="primary-btn">
-            📚 ดูหนังสือ
-          </a>
+          <p>
+            พื้นที่สำหรับนักเรียนในการแบ่งปัน
+            หนังสือเรียน หนังสือเตรียมสอบ
+            และชีทสรุป เพื่อให้เพื่อนนักเรียน
+            เข้าถึงสื่อการเรียนได้ง่ายขึ้น
+          </p>
 
-          <a href="notes.html" class="secondary-btn">
-            📄 ดูชีทสรุป
-          </a>
-        </div>
+          <div class="hero-buttons">
 
-      </div>
+            <a href="books.html" class="btn btn-primary">
+              📚 ดูหนังสือ
+            </a>
 
+            <a href="notes.html" class="btn btn-outline">
+              📝 ดูชีทสรุป
+            </a>
 
-      <div class="hero-card">
-
-        <div class="book-icon">
-          📚
-        </div>
-
-        <h3>
-          StudyShare
-        </h3>
-
-        <p>
-          Student Book & Note Sharing
-        </p>
-
-        <div class="mini-stats">
-
-          <div>
-            <strong>0</strong>
-            <span>หนังสือ</span>
           </div>
 
-          <div>
-            <strong>0</strong>
-            <span>ชีทสรุป</span>
+        </div>
+
+
+        <div class="hero-card">
+
+          <div class="hero-card-top">
+            <span>StudyShare</span>
+            <span>📚</span>
           </div>
 
-          <div>
-            <strong>0</strong>
-            <span>สมาชิก</span>
+          <h3>
+            สื่อการเรียนที่นักเรียนแบ่งปันกัน
+          </h3>
+
+          <p>
+            ค้นหา แลกเปลี่ยน ขอรับ หรือขอซื้อ
+            หนังสือและชีทสรุปจากเพื่อนนักเรียน
+          </p>
+
+          <div class="hero-stats">
+
+            <div>
+              <strong id="bookCount">0</strong>
+              <span>หนังสือ</span>
+            </div>
+
+            <div>
+              <strong id="noteCount">0</strong>
+              <span>ชีทสรุป</span>
+            </div>
+
+            <div>
+              <strong id="userCount">0</strong>
+              <span>สมาชิก</span>
+            </div>
+
           </div>
 
         </div>
@@ -105,155 +123,104 @@
     </section>
 
 
-    <!-- Problem -->
+    <!-- ================= FEATURES ================= -->
+
     <section class="section">
 
-      <div class="section-title">
+      <div class="container">
 
-        <span class="small-title">
-          WHY STUDYSHARE?
-        </span>
+        <div class="section-title">
 
-        <h2>
-          เพราะการเรียนที่ดี<br>
-          ไม่ควรถูกจำกัดด้วยราคา
-        </h2>
+          <span>FEATURES</span>
 
-        <p>
-          หนังสือและเอกสารการเรียนบางส่วนยังอยู่ในสภาพดี
-          แม้เจ้าของจะไม่ได้ใช้แล้ว แต่สามารถส่งต่อให้เพื่อนนักเรียนคนอื่นได้
-        </p>
-
-      </div>
-
-
-      <div class="feature-grid">
-
-        <div class="feature-card">
-          <div class="feature-icon">📚</div>
-
-          <h3>
-            หนังสือมือสอง
-          </h3>
+          <h2>
+            StudyShare ทำอะไรได้บ้าง?
+          </h2>
 
           <p>
-            ค้นหาและส่งต่อหนังสือเรียน
-            หนังสือเตรียมสอบ หรือหนังสือที่ไม่ได้ใช้แล้ว
+            รวมสื่อการเรียนจากนักเรียน
+            ไว้ในพื้นที่เดียว
           </p>
+
         </div>
 
 
-        <div class="feature-card">
-          <div class="feature-icon">📄</div>
+        <div class="feature-grid">
 
-          <h3>
-            ชีทสรุป
-          </h3>
+          <div class="feature-card">
 
-          <p>
-            แบ่งปันชีทสรุปและเอกสารประกอบการเรียน
-            ให้เพื่อนสามารถเข้าถึงได้ง่าย
-          </p>
-        </div>
+            <div class="feature-icon">
+              📚
+            </div>
 
+            <h3>
+              แลกเปลี่ยนหนังสือ
+            </h3>
 
-        <div class="feature-card">
-          <div class="feature-icon">🤝</div>
+            <p>
+              ลงประกาศหนังสือเรียน
+              หนังสือเตรียมสอบ
+              และหนังสือมือสอง
+            </p>
 
-          <h3>
-            ส่งต่อระหว่างรุ่น
-          </h3>
-
-          <p>
-            นักเรียนรุ่นพี่สามารถส่งต่อสื่อการเรียน
-            ให้รุ่นน้องที่กำลังต้องการ
-          </p>
-        </div>
-
-
-        <div class="feature-card">
-          <div class="feature-icon">💰</div>
-
-          <h3>
-            ลดค่าใช้จ่าย
-          </h3>
-
-          <p>
-            ช่วยลดค่าใช้จ่ายในการซื้อหนังสือ
-            และเพิ่มโอกาสในการเข้าถึงสื่อการเรียน
-          </p>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- How it works -->
-    <section class="how-section">
-
-      <div class="section-title">
-
-        <span class="small-title">
-          HOW IT WORKS
-        </span>
-
-        <h2>
-          ใช้งานง่ายใน 3 ขั้นตอน
-        </h2>
-
-      </div>
-
-
-      <div class="steps">
-
-        <div class="step">
-
-          <div class="step-number">
-            01
           </div>
 
-          <h3>
-            ค้นหา
-          </h3>
 
-          <p>
-            ค้นหาหนังสือหรือชีทที่ต้องการ
-          </p>
+          <div class="feature-card">
 
-        </div>
+            <div class="feature-icon">
+              📝
+            </div>
 
+            <h3>
+              แชร์ชีทสรุป
+            </h3>
 
-        <div class="step">
+            <p>
+              แบ่งปันเอกสารและชีทสรุป
+              เพื่อช่วยให้เพื่อน ๆ
+              อ่านหนังสือได้ง่ายขึ้น
+            </p>
 
-          <div class="step-number">
-            02
           </div>
 
-          <h3>
-            ติดต่อ
-          </h3>
 
-          <p>
-            ส่งคำขอซื้อ ขอรับ หรือขอแลกกับเจ้าของ
-          </p>
+          <div class="feature-card">
 
-        </div>
+            <div class="feature-icon">
+              🤝
+            </div>
 
+            <h3>
+              ติดต่อเจ้าของ
+            </h3>
 
-        <div class="step">
+            <p>
+              ขอซื้อ ขอรับ หรือขอแลก
+              พร้อมติดต่อเจ้าของสื่อ
+              ได้โดยตรง
+            </p>
 
-          <div class="step-number">
-            03
           </div>
 
-          <h3>
-            ส่งต่อ
-          </h3>
 
-          <p>
-            นัดหมายและรับสื่อการเรียนจากเจ้าของ
-          </p>
+          <div class="feature-card">
+
+            <div class="feature-icon">
+              🔎
+            </div>
+
+            <h3>
+              ค้นหาได้ง่าย
+            </h3>
+
+            <p>
+              ค้นหาหนังสือหรือชีทสรุป
+              ตามชื่อวิชา ชื่อเรื่อง
+              หรือคำค้นหา
+            </p>
+
+          </div>
 
         </div>
 
@@ -262,51 +229,144 @@
     </section>
 
 
-    <!-- CTA -->
-    <section class="cta">
+    <!-- ================= HOW IT WORKS ================= -->
 
-      <div>
+    <section class="section section-light">
 
-        <h2>
-          มีหนังสือที่ไม่ได้ใช้แล้ว?
-        </h2>
+      <div class="container">
 
-        <p>
-          ส่งต่อให้เพื่อนนักเรียนคนอื่นได้ใช้ประโยชน์ต่อ
-        </p>
+        <div class="section-title">
+
+          <span>HOW IT WORKS</span>
+
+          <h2>
+            ใช้งานง่าย เพียง 3 ขั้นตอน
+          </h2>
+
+        </div>
+
+
+        <div class="steps-grid">
+
+          <div class="step-card">
+
+            <div class="step-number">
+              01
+            </div>
+
+            <h3>
+              สมัครสมาชิก
+            </h3>
+
+            <p>
+              ใช้ข้อมูลนักเรียนเพื่อสร้างบัญชี
+              และเข้าสู่ระบบ
+            </p>
+
+          </div>
+
+
+          <div class="step-card">
+
+            <div class="step-number">
+              02
+            </div>
+
+            <h3>
+              ค้นหาสื่อการเรียน
+            </h3>
+
+            <p>
+              เลือกดูหนังสือหรือชีทสรุป
+              ที่ต้องการ
+            </p>
+
+          </div>
+
+
+          <div class="step-card">
+
+            <div class="step-number">
+              03
+            </div>
+
+            <h3>
+              ติดต่อและแลกเปลี่ยน
+            </h3>
+
+            <p>
+              ขอซื้อ ขอรับ หรือขอแลก
+              แล้วติดต่อเจ้าของ
+            </p>
+
+          </div>
+
+        </div>
 
       </div>
 
-      <a href="post.html" class="primary-btn">
-        ＋ ลงประกาศ
-      </a>
+    </section>
+
+
+    <!-- ================= CTA ================= -->
+
+    <section class="cta-section">
+
+      <div class="container">
+
+        <div class="cta-box">
+
+          <h2>
+            มีหนังสือหรือชีทที่ไม่ได้ใช้แล้ว?
+          </h2>
+
+          <p>
+            ส่งต่อให้เพื่อนนักเรียน
+            และเปลี่ยนสื่อที่ไม่ได้ใช้
+            ให้เกิดประโยชน์อีกครั้ง
+          </p>
+
+          <a href="post.html" class="btn btn-white">
+            ＋ ลงประกาศ
+          </a>
+
+        </div>
+
+      </div>
 
     </section>
 
   </main>
 
 
-  <!-- Footer -->
-  <footer>
+  <!-- ================= FOOTER ================= -->
 
-    <div class="footer-logo">
-      📚 StudyShare
+  <footer class="footer">
+
+    <div class="container">
+
+      <div class="footer-logo">
+        📚 StudyShare
+      </div>
+
+      <p>
+        Student Book & Note Sharing System
+      </p>
+
+      <div class="footer-line"></div>
+
+      <small>
+        © 2026 StudyShare — ระบบแลกเปลี่ยนสื่อการเรียน
+      </small>
+
     </div>
-
-    <p>
-      Student Book & Note Sharing System
-    </p>
-
-    <div class="footer-line"></div>
-
-    <small>
-      © 2026 StudyShare — ระบบแลกเปลี่ยนสื่อการเรียน
-    </small>
 
   </footer>
 
 
+  <!-- ================= JAVASCRIPT ================= -->
+
   <script type="module" src="script.js"></script>
 
 </body>
-</html>
+  </html>
