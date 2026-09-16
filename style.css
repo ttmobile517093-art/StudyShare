@@ -1984,3 +1984,170 @@ logoutButton.addEventListener(
 </body>
 
 </html>
+
+      /* =========================
+   SEARCH
+========================= */
+
+.search-box {
+  margin: 25px 0;
+}
+
+.search-box input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 18px;
+
+  border: 1px solid #ddd5ef;
+  border-radius: 14px;
+
+  font-size: 16px;
+  outline: none;
+}
+
+.search-box input:focus {
+  border-color: #6c3fc5;
+  box-shadow:
+    0 0 0 3px
+    rgba(108,63,197,.1);
+}
+
+
+/* =========================
+   CATEGORY
+========================= */
+
+.category-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.category-btn {
+  border: 1px solid #d8cceb;
+  background: white;
+  color: #6c3fc5;
+
+  padding: 9px 15px;
+
+  border-radius: 20px;
+
+  cursor: pointer;
+}
+
+.category-btn.active,
+.category-btn:hover {
+  background: #6c3fc5;
+  color: white;
+}
+
+
+.result-count {
+  color: #777;
+  margin-bottom: 15px;
+}
+
+
+/* =========================
+   BOOK GRID
+========================= */
+
+.book-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fill, minmax(250px, 1fr));
+
+  gap: 20px;
+}
+
+.book-card {
+  background: white;
+  border: 1px solid #e5def2;
+  border-radius: 18px;
+  overflow: hidden;
+
+  box-shadow:
+    0 5px 20px
+    rgba(70,30,120,.06);
+}
+
+.book-cover {
+  height: 210px;
+  background: #f2edff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.book-cover-empty {
+  font-size: 70px;
+}
+
+.book-content {
+  padding: 18px;
+}
+
+.book-subject {
+  display: inline-block;
+
+  background: #f2edff;
+  color: #6c3fc5;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+}
+
+.book-content h3 {
+  color: #432080;
+  margin: 12px 0 8px;
+}
+
+.book-content p {
+  color: #777;
+  line-height: 1.6;
+}
+
+.book-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+
+  margin: 15px 0;
+
+  font-size: 13px;
+}
+
+.book-meta strong {
+  color: #6c3fc5;
+}
+
+.book-content .btn {
+  display: block;
+  text-align: center;
+}
+
+.loading-card {
+  padding: 50px;
+  text-align: center;
+
+  background: #faf8ff;
+
+  border-radius: 18px;
+
+  color: #777;
+
+  grid-column: 1 / -1;
+  }
