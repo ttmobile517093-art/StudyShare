@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>เข้าสู่ระบบ | StudyShare</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .auth-page {
+      min-height: calc(100vh - 76px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 20px;
+      background:
+        radial-gradient(circle at 20% 20%, #eee5ff, transparent 30%),
+        linear-gradient(180deg, #ffffff, #faf8ff);
+    }
+
+    .auth-box {
+      width: 100%;
+      max-width: 470px;
+      background: white;
+      border: 1px solid #e8e1f2;
+      border-radius: 24px;
+      padding: 38px;
+      box-shadow: 0 20px 60px rgba(67,32,128,0.10);
+    }
+
+    .auth-logo {
+      text-align: center;
+      font-size: 42px;
+      margin-bottom: 8px;
+    }
+
+    .auth-box h1 {
+      text-align: center;
+      color: #432080;
+      margin-bottom: 5px;
+    }
+
+    .auth-subtitle {
+      text-align: center;
+      color: #77717f;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .auth-form label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #432080;
+    }
+
+    .auth-form input {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #ddd4eb;
+      border-radius: 10px;
+      outline: none;
+      font-size: 14px;
+      background: #fff;
+    }
+
+    .auth-form input:focus {
+      border-color: #6c3fc5;
+      box-shadow: 0 0 0 3px #f2edff;
+    }
+
+    .auth-button {
+      margin-top: 10px;
+      border: none;
+      padding: 14px;
+      border-radius: 11px;
+      background: #6c3fc5;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .auth-button:hover {
+      background: #432080;
+    }
+
+    .switch-auth {
+      text-align: center;
+      margin-top: 22px;
+      font-size: 13px;
+      color: #77717f;
+    }
+
+    .switch-auth button {
+      border: none;
+      background: none;
+      color: #6c3fc5;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .auth-message {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 9px;
+      background: #faf8ff;
+      color: #6c3fc5;
+      font-size: 13px;
+      text-align: center;
+      display: none;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="navbar">
+
+  <a href="index.html" class="logo">
+    📚 StudyShare
+  </a>
+
+  <nav>
+    <a href="index.html">หน้าหลัก</a>
+    <a href="books.html">หนังสือ</a>
+    <a href="notes.html">ชีทสรุป</a>
+    <a href="about.html">เกี่ยวกับระบบ</a>
+  </nav>
+
+</header>
+
+
+<main class="auth-page">
+
+  <div class="auth-box">
+
+    <div class="auth-logo">
+      📚
+    </div>
+
+    <h1 id="authTitle">
+      เข้าสู่ระบบ
+    </h1>
+
+    <p class="auth-subtitle" id="authSubtitle">
+      เข้าสู่ StudyShare เพื่อค้นหาและส่งต่อสื่อการเรียน
+    </p>
+
+
+    <!-- LOGIN -->
+
+    <form id="loginForm" class="auth-form">
+
+      <label>
+        อีเมล
+      </label>
+
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="example@email.com"
+        required
+      >
+
+      <label>
+        รหัสผ่าน
+      </label>
+
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="••••••••"
+        required
+      >
+
+      <button class="auth-button" type="submit">
+        เข้าสู่ระบบ
+      </button>
+
+    </form>
+
+
+    <!-- REGISTER -->
+
+    <form id="registerForm" class="auth-form hidden">
+
+      <label>
+        ชื่อ - นามสกุล
+      </label>
+
+      <input
+        id="registerName"
+        type="text"
+        placeholder="ชื่อของคุณ"
+        required
+      >
+
+      <label>
+        รหัสนักเรียน
+      </label>
+
+      <input
+        id="studentId"
+        type="text"
+        placeholder="เช่น 12345"
+        required
+      >
+
+      <label>
+        ชั้น / ห้อง
+      </label>
+
+      <input
+        id="className"
+        type="text"
+        placeholder="เช่น ม.4/1"
+        required
+      >
+
+      <label>
+        อีเมล
+      </label>
+
+      <input
+        id="registerEmail"
+        type="email"
+        placeholder="example@email.com"
+        required
+      >
+
+      <label>
+        รหัสผ่าน
+      </label>
+
+      <input
+        id="registerPassword"
+        type="password"
+        minlength="6"
+        placeholder="อย่างน้อย 6 ตัวอักษร"
+        required
+      >
+
+      <button class="auth-button" type="submit">
+        สมัครสมาชิก
+      </button>
+
+    </form>
+
+
+    <div id="authMessage" class="auth-message"></div>
+
+
+    <div class="switch-auth">
+
+      <span id="switchText">
+        ยังไม่มีบัญชี?
+      </span>
+
+      <button id="switchButton" type="button">
+        สมัครสมาชิก
+      </button>
+
+    </div>
+
+  </div>
+
+</main>
+
+
+<script type="module">
+
+import {
+  auth,
+  db,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "./firebase.js";
+
+import {
+  doc,
+  setDoc,
+  serverTimestamp
+} from "./firebase.js";
+
+
+const loginForm =
+  document.getElementById("loginForm");
+
+const registerForm =
+  document.getElementById("registerForm");
+
+const switchButton =
+  document.getElementById("switchButton");
+
+const switchText =
+  document.getElementById("switchText");
+
+const authTitle =
+  document.getElementById("authTitle");
+
+const authSubtitle =
+  document.getElementById("authSubtitle");
+
+const message =
+  document.getElementById("authMessage");
+
+
+let registerMode = false;
+
+
+function showMessage(text) {
+
+  message.textContent = text;
+  message.style.display = "block";
+
+}
+
+
+/* =========================
+   SWITCH LOGIN / REGISTER
+========================= */
+
+switchButton.addEventListener("click", () => {
+
+  registerMode = !registerMode;
+
+  message.style.display = "none";
+
+
+  if (registerMode) {
+
+    loginForm.classList.add("hidden");
+    registerForm.classList.remove("hidden");
+
+    authTitle.textContent = "สมัครสมาชิก";
+
+    authSubtitle.textContent =
+      "สร้างบัญชีเพื่อใช้งาน StudyShare";
+
+    switchText.textContent =
+      "มีบัญชีอยู่แล้ว?";
+
+    switchButton.textContent =
+      "เข้าสู่ระบบ";
+
+  } else {
+
+    registerForm.classList.add("hidden");
+    loginForm.classList.remove("hidden");
+
+    authTitle.textContent =
+      "เข้าสู่ระบบ";
+
+    authSubtitle.textContent =
+      "เข้าสู่ StudyShare เพื่อค้นหาและส่งต่อสื่อการเรียน";
+
+    switchText.textContent =
+      "ยังไม่มีบัญชี?";
+
+    switchButton.textContent =
+      "สมัครสมาชิก";
+
+  }
+
+});
+
+
+/* =========================
+   LOGIN
+========================= */
+
+loginForm.addEventListener("submit", async (event) => {
+
+  event.preventDefault();
+
+  const email =
+    document.getElementById("loginEmail").value.trim();
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+
+  try {
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    showMessage("เข้าสู่ระบบสำเร็จ กำลังเข้าสู่หน้าหลัก...");
+
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 800);
+
+  } catch (error) {
+
+    showMessage(
+      "เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบอีเมลและรหัสผ่าน"
+    );
+
+  }
+
+});
+
+
+/* =========================
+   REGISTER
+========================= */
+
+registerForm.addEventListener("submit", async (event) => {
+
+  event.preventDefault();
+
+
+  const name =
+    document.getElementById("registerName").value.trim();
+
+  const studentId =
+    document.getElementById("studentId").value.trim();
+
+  const className =
+    document.getElementById("className").value.trim();
+
+  const email =
+    document.getElementById("registerEmail").value.trim();
+
+  const password =
+    document.getElementById("registerPassword").value;
+
+
+  try {
+
+    const result =
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+
+    await setDoc(
+      doc(db, "users", result.user.uid),
+      {
+        name: name,
+        studentId: studentId,
+        className: className,
+        email: email,
+        createdAt: serverTimestamp()
+      }
+    );
+
+
+    showMessage(
+      "สมัครสมาชิกสำเร็จ กำลังเข้าสู่ระบบ..."
+    );
+
+
+    setTimeout(() => {
+
+      window.location.href =
+        "index.html";
+
+    }, 800);
+
+
+  } catch (error) {
+
+    if (error.code === "auth/email-already-in-use") {
+
+      showMessage(
+        "อีเมลนี้ถูกใช้งานแล้ว"
+      );
+
+    } else if (error.code === "auth/weak-password") {
+
+      showMessage(
+        "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร"
+      );
+
+    } else {
+
+      showMessage(
+        "สมัครสมาชิกไม่สำเร็จ กรุณาตรวจสอบข้อมูลอีกครั้ง"
+      );
+
+    }
+
+  }
+
+});
+
+</script>
+
+</body>
+    </html>
