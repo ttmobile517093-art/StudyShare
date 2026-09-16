@@ -2,370 +2,151 @@
 <html lang="th">
 
 <head>
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+  <title>หนังสือ | StudyShare</title>
 
-  <title>StudyShare</title>
-
-  <link
-    rel="stylesheet"
-    href="style.css">
-
+  <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-
 <header class="navbar">
-
   <div class="container nav-inner">
 
-    <a
-      href="index.html"
-      class="logo">
-
+    <a href="index.html" class="logo">
       📚 StudyShare
-
     </a>
 
-
     <nav class="nav-links">
-
-      <a href="index.html">
-        หน้าแรก
-      </a>
-
-      <a href="books.html">
-        หนังสือ
-      </a>
-
-      <a href="notes.html">
-        ชีทสรุป
-      </a>
-
-      <a href="announcements.html">
-        ประกาศ
-      </a>
-
-      <a href="about.html">
-        เกี่ยวกับระบบ
-      </a>
-
+      <a href="index.html">หน้าแรก</a>
+      <a href="books.html">หนังสือ</a>
+      <a href="notes.html">ชีทสรุป</a>
+      <a href="announcements.html">ประกาศ</a>
+      <a href="about.html">เกี่ยวกับระบบ</a>
     </nav>
 
-
-    <a
-      href="profile.html"
-      class="login-btn">
-
+    <a href="profile.html" class="login-btn">
       โปรไฟล์
-
     </a>
 
   </div>
-
 </header>
-
 
 
 <main>
 
-
-<section
-  id="formSection"
-  class="post-section">
+<section class="section">
 
   <div class="container">
 
     <div class="post-header">
 
       <span class="hero-badge">
-        ✨ CREATE POST
+        📚 BOOK MARKET
       </span>
 
-      <h1 id="formTitle">
-        ลงประกาศ
+      <h1>
+        หนังสือเรียน
       </h1>
 
       <p>
-        แบ่งปันหนังสือและสื่อการเรียน
+        ค้นหา แลกเปลี่ยน ซื้อ หรือรับหนังสือจากเพื่อนนักเรียน
       </p>
 
     </div>
 
 
-    <div class="post-card">
+    <!-- SEARCH -->
 
-      <form id="postForm">
+    <div class="search-box">
 
-
-        <div class="form-group">
-
-          <label>
-            📷 รูปหนังสือ
-          </label>
-
-          <input
-            type="file"
-            id="imageInput"
-            accept="image/*">
-
-
-          <div
-            id="imagePreview"
-            class="image-preview">
-
-            <span>📚</span>
-
-            <p>
-              เลือกรูปหนังสือ
-            </p>
-
-          </div>
-
-        </div>
-
-
-
-        <div class="form-group">
-
-          <label>
-            ประเภทสื่อ
-          </label>
-
-          <select
-            id="postType"
-            required>
-
-            <option value="book">
-              📚 หนังสือ
-            </option>
-
-            <option value="note">
-              📝 ชีทสรุป
-            </option>
-
-          </select>
-
-        </div>
-
-
-
-        <div class="form-group">
-
-          <label>
-            ชื่อหนังสือ / ชื่อชีท
-          </label>
-
-          <input
-            type="text"
-            id="title"
-            placeholder="เช่น ตะลุยโจทย์คณิต ม.3"
-            required>
-
-        </div>
-
-
-
-        <div class="form-group">
-
-          <label>
-            วิชา
-          </label>
-
-          <select
-            id="subject"
-            required>
-
-            <option value="">
-              -- เลือกวิชา --
-            </option>
-
-            <option value="คณิตศาสตร์">
-              คณิตศาสตร์
-            </option>
-
-            <option value="วิทยาศาสตร์">
-              วิทยาศาสตร์
-            </option>
-
-            <option value="ภาษาอังกฤษ">
-              ภาษาอังกฤษ
-            </option>
-
-            <option value="ภาษาไทย">
-              ภาษาไทย
-            </option>
-
-            <option value="สังคมศึกษา">
-              สังคมศึกษา
-            </option>
-
-            <option value="ภาษาจีน">
-              ภาษาจีน
-            </option>
-
-            <option value="อื่น ๆ">
-              อื่น ๆ
-            </option>
-
-          </select>
-
-        </div>
-
-
-
-        <div
-          class="form-group"
-          id="conditionGroup">
-
-          <label>
-            สภาพหนังสือ
-          </label>
-
-          <select id="condition">
-
-            <option value="ดีมาก">
-              ⭐ ดีมาก
-            </option>
-
-            <option value="ดี">
-              👍 ดี
-            </option>
-
-            <option value="พอใช้">
-              🙂 พอใช้
-            </option>
-
-          </select>
-
-        </div>
-
-
-
-        <div class="form-group">
-
-          <label>
-            ต้องการแบ่งปันแบบไหน?
-          </label>
-
-          <select
-            id="shareType"
-            required>
-
-            <option value="free">
-              🎁 ให้ฟรี
-            </option>
-
-            <option value="sell">
-              💰 ขาย
-            </option>
-
-            <option value="exchange">
-              🔄 แลกเปลี่ยน
-            </option>
-
-          </select>
-
-        </div>
-
-
-
-        <div
-          class="form-group"
-          id="priceGroup"
-          style="display:none;">
-
-          <label>
-            ราคา (บาท)
-          </label>
-
-          <input
-            type="number"
-            id="price"
-            min="0"
-            placeholder="เช่น 80">
-
-        </div>
-
-
-
-        <div class="form-group">
-
-          <label>
-            รายละเอียด
-          </label>
-
-          <textarea
-            id="description"
-            rows="5"
-            placeholder="รายละเอียดหนังสือ..."
-            required></textarea>
-
-        </div>
-
-
-
-        <div class="form-group">
-
-          <label>
-            ช่องทางติดต่อ
-          </label>
-
-          <input
-            type="text"
-            id="contact"
-            placeholder="เช่น Line: study123"
-            required>
-
-        </div>
-
-
-
-        <button
-          type="submit"
-          class="btn btn-primary post-submit"
-          id="submitButton">
-
-          📢 ลงประกาศ
-
-        </button>
-
-
-        <p
-          id="postMessage"
-          class="post-message">
-        </p>
-
-
-      </form>
+      <input
+        type="text"
+        id="searchBook"
+        placeholder="🔎 ค้นหาชื่อหนังสือ วิชา หรือผู้ลงประกาศ...">
 
     </div>
 
-  </div>
 
-</section>
+    <!-- CATEGORY -->
 
+    <div class="category-buttons">
 
+      <button
+        class="category-btn active"
+        data-category="ทั้งหมด">
 
+        ทั้งหมด
 
-<section
-  id="detailSection"
-  class="section"
-  style="display:none;">
+      </button>
 
-  <div class="container">
+      <button
+        class="category-btn"
+        data-category="คณิตศาสตร์">
+
+        คณิตศาสตร์
+
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="วิทยาศาสตร์">
+
+        วิทยาศาสตร์
+
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="ภาษาอังกฤษ">
+
+        ภาษาอังกฤษ
+
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="ภาษาไทย">
+
+        ภาษาไทย
+
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="สังคมศึกษา">
+
+        สังคมศึกษา
+
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="ภาษาจีน">
+
+        ภาษาจีน
+
+      </button>
+
+    </div>
+
 
     <div
-      id="detailBox"
-      class="post-card">
+      id="bookCountText"
+      class="result-count">
 
-      กำลังโหลดข้อมูล...
+      กำลังโหลด...
+
+    </div>
+
+
+    <div
+      id="bookGrid"
+      class="book-grid">
+
+      กำลังโหลดหนังสือ...
 
     </div>
 
@@ -373,9 +154,7 @@
 
 </section>
 
-
 </main>
-
 
 
 <footer class="footer">
@@ -390,1222 +169,317 @@
       Student Book & Note Sharing System
     </p>
 
-    <div class="footer-line"></div>
-
-    <small>
-      © 2026 StudyShare
-    </small>
-
   </div>
 
 </footer>
 
 
-
 <script type="module">
 
 import {
-
-  auth,
   db,
-
-  onAuthStateChanged,
-
-  doc,
-  getDoc,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-
   collection,
-
-  query,
-  where,
   getDocs,
-
-  serverTimestamp
-
+  query,
+  orderBy
 } from "./firebase.js";
 
 
+const grid =
+  document.querySelector("#bookGrid");
 
-const formSection =
-  document.querySelector("#formSection");
+const searchInput =
+  document.querySelector("#searchBook");
 
-const detailSection =
-  document.querySelector("#detailSection");
+const countText =
+  document.querySelector("#bookCountText");
 
-const detailBox =
-  document.querySelector("#detailBox");
-
-const form =
-  document.querySelector("#postForm");
-
-const formTitle =
-  document.querySelector("#formTitle");
-
-const submitButton =
-  document.querySelector("#submitButton");
-
-const message =
-  document.querySelector("#postMessage");
-
-const imageInput =
-  document.querySelector("#imageInput");
-
-const imagePreview =
-  document.querySelector("#imagePreview");
-
-const postType =
-  document.querySelector("#postType");
-
-const shareType =
-  document.querySelector("#shareType");
-
-const priceGroup =
-  document.querySelector("#priceGroup");
-
-const conditionGroup =
-  document.querySelector("#conditionGroup");
+const categoryButtons =
+  document.querySelectorAll(".category-btn");
 
 
-let currentUser = null;
+let books = [];
 
-let currentUserData = null;
-
-let imageData = "";
-
-let editingPost = null;
-
-
-const urlParams =
-  new URLSearchParams(
-    window.location.search
-  );
-
-const postId =
-  urlParams.get("id");
-
+let currentCategory = "ทั้งหมด";
 
 
 /* =========================
-   AUTH
+   LOAD
 ========================= */
 
-onAuthStateChanged(
-  auth,
-  async (user) => {
-
-    currentUser = user;
-
-
-    if (user) {
-
-      try {
-
-        const userSnap =
-          await getDoc(
-            doc(
-              db,
-              "users",
-              user.uid
-            )
-          );
-
-
-        if (userSnap.exists()) {
-
-          currentUserData =
-            userSnap.data();
-
-        }
-
-      } catch (error) {
-
-        console.error(error);
-
-      }
-
-    }
-
-
-    if (postId) {
-
-      loadPostDetail();
-
-    }
-
-  }
-);
-
-
-
-/* =========================
-   IMAGE
-========================= */
-
-function compressImage(file) {
-
-  return new Promise(
-    (resolve, reject) => {
-
-      const reader =
-        new FileReader();
-
-
-      reader.onload =
-        (event) => {
-
-          const img =
-            new Image();
-
-
-          img.onload =
-            () => {
-
-              const maxSize = 700;
-
-              let width =
-                img.width;
-
-              let height =
-                img.height;
-
-
-              if (
-                width > maxSize ||
-                height > maxSize
-              ) {
-
-                const ratio =
-                  Math.min(
-                    maxSize / width,
-                    maxSize / height
-                  );
-
-
-                width =
-                  Math.round(
-                    width * ratio
-                  );
-
-
-                height =
-                  Math.round(
-                    height * ratio
-                  );
-
-              }
-
-
-              const canvas =
-                document.createElement(
-                  "canvas"
-                );
-
-
-              canvas.width = width;
-              canvas.height = height;
-
-
-              const ctx =
-                canvas.getContext(
-                  "2d"
-                );
-
-
-              ctx.drawImage(
-                img,
-                0,
-                0,
-                width,
-                height
-              );
-
-
-              resolve(
-                canvas.toDataURL(
-                  "image/jpeg",
-                  0.65
-                )
-              );
-
-            };
-
-
-          img.onerror =
-            reject;
-
-
-          img.src =
-            event.target.result;
-
-        };
-
-
-      reader.onerror =
-        reject;
-
-
-      reader.readAsDataURL(file);
-
-    }
-  );
-
-}
-
-
-imageInput.addEventListener(
-  "change",
-  async () => {
-
-    const file =
-      imageInput.files[0];
-
-
-    if (!file) return;
-
-
-    try {
-
-      imageData =
-        await compressImage(file);
-
-
-      imagePreview.innerHTML = `
-
-        <img
-          src="${imageData}"
-          alt="ตัวอย่างรูป">
-
-      `;
-
-    } catch (error) {
-
-      alert(
-        "ไม่สามารถโหลดรูปได้"
-      );
-
-    }
-
-  }
-);
-
-
-
-/* =========================
-   SELECTS
-========================= */
-
-shareType.addEventListener(
-  "change",
-  () => {
-
-    priceGroup.style.display =
-      shareType.value === "sell"
-        ? "block"
-        : "none";
-
-  }
-);
-
-
-postType.addEventListener(
-  "change",
-  () => {
-
-    conditionGroup.style.display =
-      postType.value === "book"
-        ? "block"
-        : "none";
-
-  }
-);
-
-
-
-/* =========================
-   LOAD DETAIL
-========================= */
-
-async function loadPostDetail() {
-
-  formSection.style.display =
-    "none";
-
-  detailSection.style.display =
-    "block";
-
+async function loadBooks() {
 
   try {
 
-    const postSnap =
-      await getDoc(
-        doc(
-          db,
-          "posts",
-          postId
-        )
-      );
-
-
-    if (!postSnap.exists()) {
-
-      detailBox.innerHTML = `
-        <div class="loading-card">
-          ❌ ไม่พบโพสต์นี้
-        </div>
-      `;
-
-      return;
-
-    }
-
-
-    editingPost = {
-      id: postSnap.id,
-      ...postSnap.data()
-    };
-
-
-    renderDetail(
-      editingPost
-    );
-
-
-  } catch (error) {
-
-    console.error(error);
-
-    detailBox.innerHTML = `
-      <div class="loading-card">
-        ❌ เกิดข้อผิดพลาด
-      </div>
-    `;
-
-  }
-
-}
-
-
-
-/* =========================
-   DETAIL
-========================= */
-
-function renderDetail(post) {
-
-  const isOwner =
-    currentUser &&
-    currentUser.uid === post.ownerId;
-
-
-  const shareText =
-    post.shareType === "free"
-      ? "🎁 ให้ฟรี"
-      : post.shareType === "exchange"
-      ? "🔄 แลกเปลี่ยน"
-      : "💰 " +
-        (
-          post.price
-            ? post.price + " บาท"
-            : "สอบถามราคา"
-        );
-
-
-  const imageHTML =
-    post.image
-      ? `
-        <img
-          src="${post.image}"
-          class="detail-image"
-          alt="รูปหนังสือ">
-      `
-      : `
-        <div class="detail-image-empty">
-          📚
-        </div>
-      `;
-
-
-  detailBox.innerHTML = `
-
-    <div class="detail-layout">
-
-      <div class="detail-photo">
-        ${imageHTML}
-      </div>
-
-
-      <div class="detail-info">
-
-        <span class="book-subject">
-          ${post.subject || "ไม่ระบุวิชา"}
-        </span>
-
-
-        <h1>
-          ${post.title || "ไม่มีชื่อ"}
-        </h1>
-
-
-        <div class="detail-price">
-          ${shareText}
-        </div>
-
-
-        ${
-          post.type === "book"
-            ? `
-              <p>
-                <strong>สภาพ:</strong>
-                ${post.condition || "-"}
-              </p>
-            `
-            : ""
-        }
-
-
-        <div class="detail-description">
-
-          <h3>
-            📖 รายละเอียด
-          </h3>
-
-          <p>
-            ${post.description || "-"}
-          </p>
-
-        </div>
-
-
-        <div class="owner-box">
-
-          <h3>
-            👤 ผู้ลงประกาศ
-          </h3>
-
-          <p>
-            <strong>
-              ${post.ownerName || "นักเรียน"}
-            </strong>
-          </p>
-
-          <p>
-            รหัสนักเรียน:
-            ${post.ownerStudentId || "-"}
-          </p>
-
-          <p>
-            ชั้น:
-            ${post.ownerClass || "-"}
-          </p>
-
-        </div>
-
-
-        <div class="contact-box">
-
-          <strong>
-            💬 ช่องทางติดต่อ
-          </strong>
-
-          <p>
-            ${post.contact || "-"}
-          </p>
-
-        </div>
-
-
-        ${
-          isOwner
-            ? `
-
-              <div class="owner-actions">
-
-                <button
-                  id="editButton"
-                  class="btn btn-primary">
-
-                  ✏️ แก้ไขโพสต์
-
-                </button>
-
-
-                <button
-                  id="deleteButton"
-                  class="btn btn-danger">
-
-                  🗑️ ลบโพสต์
-
-                </button>
-
-              </div>
-
-            `
-            : `
-
-              <div class="buyer-actions">
-
-                <h3>
-                  สนใจหนังสือเล่มนี้?
-                </h3>
-
-
-                <button
-                  id="buyButton"
-                  class="btn btn-primary">
-
-                  🛒 ขอซื้อ
-
-                </button>
-
-
-                <button
-                  id="freeButton"
-                  class="btn btn-secondary">
-
-                  🎁 ขอรับ
-
-                </button>
-
-
-                <button
-                  id="exchangeButton"
-                  class="btn btn-secondary">
-
-                  🔄 ขอแลก
-
-                </button>
-
-              </div>
-
-            `
-        }
-
-    </div>
-
-
-    <div class="back-area">
-
-      <a
-        href="books.html"
-        class="btn btn-secondary">
-
-        ← กลับไปหน้าหนังสือ
-
-      </a>
-
-    </div>
-
-  `;
-
-
-  if (isOwner) {
-
-    document
-      .querySelector("#editButton")
-      .addEventListener(
-        "click",
-        () => openEditForm(post)
-      );
-
-
-    document
-      .querySelector("#deleteButton")
-      .addEventListener(
-        "click",
-        () => deletePost(post)
-      );
-
-  } else {
-
-    document
-      .querySelector("#buyButton")
-      .addEventListener(
-        "click",
-        () => createRequest(
-          post,
-          "buy"
-        )
-      );
-
-
-    document
-      .querySelector("#freeButton")
-      .addEventListener(
-        "click",
-        () => createRequest(
-          post,
-          "free"
-        )
-      );
-
-
-    document
-      .querySelector("#exchangeButton")
-      .addEventListener(
-        "click",
-        () => createRequest(
-          post,
-          "exchange"
-        )
-      );
-
-  }
-
-}
-
-
-
-/* =========================
-   CREATE REQUEST
-========================= */
-
-async function createRequest(
-  post,
-  requestType
-) {
-
-  if (!currentUser) {
-
-    alert(
-      "กรุณาเข้าสู่ระบบก่อนครับ"
-    );
-
-    window.location.href =
-      "login.html";
-
-    return;
-
-  }
-
-
-  if (
-    currentUser.uid ===
-    post.ownerId
-  ) {
-
-    alert(
-      "เจ้าของโพสต์ไม่สามารถขอรายการของตัวเองได้"
-    );
-
-    return;
-
-  }
-
-
-  let typeText = "";
-
-  if (requestType === "buy") {
-    typeText = "🛒 ขอซื้อ";
-  }
-
-  if (requestType === "free") {
-    typeText = "🎁 ขอรับ";
-  }
-
-  if (requestType === "exchange") {
-    typeText = "🔄 ขอแลก";
-  }
-
-
-  const messageText =
-    prompt(
-      `คุณเลือก "${typeText}"\n\nฝากข้อความถึงเจ้าของโพสต์ได้เลยครับ`,
-      ""
-    );
-
-
-  if (messageText === null) {
-
-    return;
-
-  }
-
-
-  try {
-
-    /*
-      ป้องกันการส่งคำขอซ้ำ
-    */
-
-    const existingQuery =
+    const q =
       query(
-        collection(
-          db,
-          "requests"
-        ),
-        where(
-          "postId",
-          "==",
-          post.id
-        ),
-        where(
-          "requesterId",
-          "==",
-          currentUser.uid
-        ),
-        where(
-          "status",
-          "==",
-          "pending"
+        collection(db, "posts"),
+        orderBy(
+          "createdAt",
+          "desc"
         )
       );
 
-
-    const existing =
-      await getDocs(
-        existingQuery
-      );
+    const snapshot =
+      await getDocs(q);
 
 
-    if (!existing.empty) {
+    books = [];
 
-      alert(
-        "คุณมีคำขอสำหรับโพสต์นี้อยู่แล้วครับ"
-      );
+    snapshot.forEach(
+      item => {
 
-      return;
+        const data =
+          item.data();
 
-    }
+        if (
+          data.type === "book"
+        ) {
 
+          books.push({
+            id: item.id,
+            ...data
+          });
 
-    await addDoc(
-      collection(
-        db,
-        "requests"
-      ),
-      {
-
-        postId:
-          post.id,
-
-        postTitle:
-          post.title || "",
-
-        ownerId:
-          post.ownerId,
-
-        ownerName:
-          post.ownerName || "",
-
-        requesterId:
-          currentUser.uid,
-
-        requesterName:
-          currentUserData?.name ||
-          "นักเรียน",
-
-        requesterStudentId:
-          currentUserData?.studentId ||
-          "",
-
-        requesterClass:
-          currentUserData?.className ||
-          "",
-
-        type:
-          requestType,
-
-        typeText:
-          typeText,
-
-        message:
-          messageText,
-
-        status:
-          "pending",
-
-        createdAt:
-          serverTimestamp()
+        }
 
       }
     );
 
 
-    alert(
-      "✅ ส่งคำขอเรียบร้อยแล้วครับ\nเจ้าของโพสต์จะเห็นคำขอของคุณในโปรไฟล์"
-    );
+    renderBooks();
 
 
   } catch (error) {
 
     console.error(error);
 
-    alert(
-      "❌ ไม่สามารถส่งคำขอได้\n" +
-      error.message
-    );
-
-  }
-
-}
-
-
-
-/* =========================
-   EDIT
-========================= */
-
-function openEditForm(post) {
-
-  detailSection.style.display =
-    "none";
-
-  formSection.style.display =
-    "block";
-
-
-  formTitle.textContent =
-    "แก้ไขโพสต์";
-
-
-  submitButton.textContent =
-    "💾 บันทึกการแก้ไข";
-
-
-  imageData =
-    post.image || "";
-
-
-  postType.value =
-    post.type || "book";
-
-
-  document.querySelector("#title").value =
-    post.title || "";
-
-
-  document.querySelector("#subject").value =
-    post.subject || "";
-
-
-  document.querySelector("#condition").value =
-    post.condition || "ดี";
-
-
-  shareType.value =
-    post.shareType || "free";
-
-
-  document.querySelector("#price").value =
-    post.price || "";
-
-
-  document.querySelector("#description").value =
-    post.description || "";
-
-
-  document.querySelector("#contact").value =
-    post.contact || "";
-
-
-  priceGroup.style.display =
-    shareType.value === "sell"
-      ? "block"
-      : "none";
-
-
-  conditionGroup.style.display =
-    post.type === "book"
-      ? "block"
-      : "none";
-
-
-  if (post.image) {
-
-    imagePreview.innerHTML = `
-
-      <img
-        src="${post.image}"
-        alt="รูปเดิม">
-
+    grid.innerHTML = `
+      <div class="loading-card">
+        ❌ โหลดหนังสือไม่ได้
+        <br><br>
+        ${error.message}
+      </div>
     `;
 
   }
 
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
 }
 
 
-
 /* =========================
-   SUBMIT
+   RENDER
 ========================= */
 
-form.addEventListener(
-  "submit",
-  async (event) => {
+function renderBooks() {
 
-    event.preventDefault();
+  const keyword =
+    searchInput.value
+      .trim()
+      .toLowerCase();
 
 
-    if (!currentUser) {
+  const filtered =
+    books.filter(book => {
 
-      alert(
-        "กรุณาเข้าสู่ระบบก่อนครับ"
-      );
+      const categoryOK =
+        currentCategory === "ทั้งหมด" ||
+        book.subject === currentCategory;
 
-      return;
 
-    }
+      const text =
+        `
+        ${book.title || ""}
+        ${book.subject || ""}
+        ${book.ownerName || ""}
+        ${book.description || ""}
+        `
+        .toLowerCase();
 
 
-    const type =
-      postType.value;
+      const searchOK =
+        !keyword ||
+        text.includes(keyword);
 
-    const title =
-      document.querySelector("#title")
-        .value.trim();
 
-    const subject =
-      document.querySelector("#subject")
-        .value;
+      return categoryOK && searchOK;
 
-    const condition =
-      document.querySelector("#condition")
-        .value;
+    });
 
-    const share =
-      shareType.value;
 
-    const price =
-      document.querySelector("#price")
-        .value;
-
-    const description =
-      document.querySelector("#description")
-        .value.trim();
-
-    const contact =
-      document.querySelector("#contact")
-        .value.trim();
-
-
-    try {
-
-      submitButton.disabled =
-        true;
-
-
-      submitButton.textContent =
-        "กำลังบันทึก...";
-
-
-      if (postId && editingPost) {
-
-        await updateDoc(
-          doc(
-            db,
-            "posts",
-            postId
-          ),
-          {
-
-            type,
-
-            title,
-
-            subject,
-
-            condition:
-              type === "book"
-                ? condition
-                : "",
-
-            shareType:
-              share,
-
-            price:
-              share === "sell"
-                ? Number(price || 0)
-                : 0,
-
-            description,
-
-            contact,
-
-            image:
-              imageData || "",
-
-            updatedAt:
-              serverTimestamp()
-
-          }
-        );
-
-
-        alert(
-          "✅ แก้ไขโพสต์เรียบร้อยแล้วครับ"
-        );
-
-
-        window.location.reload();
-
-        return;
-
-      }
-
-
-      await addDoc(
-        collection(
-          db,
-          "posts"
-        ),
-        {
-
-          type,
-
-          title,
-
-          subject,
-
-          condition:
-            type === "book"
-              ? condition
-              : "",
-
-          shareType:
-            share,
-
-          price:
-            share === "sell"
-              ? Number(price || 0)
-              : 0,
-
-          description,
-
-          contact,
-
-          image:
-            imageData || "",
-
-          ownerId:
-            currentUser.uid,
-
-          ownerName:
-            currentUserData?.name ||
-            "นักเรียน",
-
-          ownerStudentId:
-            currentUserData?.studentId ||
-            "",
-
-          ownerClass:
-            currentUserData?.className ||
-            "",
-
-          createdAt:
-            serverTimestamp()
-
-        }
-      );
-
-
-      alert(
-        "✅ ลงประกาศสำเร็จครับ"
-      );
-
-
-      window.location.href =
-        type === "book"
-          ? "books.html"
-          : "notes.html";
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      message.textContent =
-        "❌ " +
-        error.message;
-
-
-      submitButton.disabled =
-        false;
-
-    }
-
-  }
-);
-
-
-
-/* =========================
-   DELETE
-========================= */
-
-async function deletePost(post) {
-
-  if (!currentUser) return;
+  countText.textContent =
+    `พบหนังสือ ${filtered.length} รายการ`;
 
 
   if (
-    currentUser.uid !==
-    post.ownerId
+    filtered.length === 0
   ) {
 
-    alert(
-      "คุณไม่มีสิทธิ์ลบโพสต์นี้ครับ"
-    );
+    grid.innerHTML = `
+
+      <div class="loading-card">
+
+        📭
+
+        <h3>
+          ไม่พบหนังสือ
+        </h3>
+
+        <p>
+          ลองเปลี่ยนคำค้นหาหรือหมวดวิชา
+        </p>
+
+      </div>
+
+    `;
 
     return;
 
   }
 
 
-  const confirmed =
-    confirm(
-      `ต้องการลบ "${post.title}" ใช่หรือไม่?`
-    );
+  grid.innerHTML =
+    filtered.map(book => {
+
+      const image =
+        book.image
+          ? `
+            <img
+              src="${book.image}"
+              alt="รูปหนังสือ">
+          `
+          : `
+            <div class="book-cover-empty">
+              📚
+            </div>
+          `;
 
 
-  if (!confirmed) return;
+      const share =
+        book.shareType === "free"
+          ? "🎁 ให้ฟรี"
+          : book.shareType === "exchange"
+          ? "🔄 แลกเปลี่ยน"
+          : `💰 ${book.price || 0} บาท`;
 
 
-  try {
-
-    await deleteDoc(
-      doc(
-        db,
-        "posts",
-        post.id
-      )
-    );
-
-
-    alert(
-      "🗑️ ลบโพสต์เรียบร้อยแล้วครับ"
-    );
+      const reserved =
+        book.status === "reserved"
+          ? `
+            <div class="reserved-badge">
+              🔒 จองแล้ว
+            </div>
+          `
+          : "";
 
 
-    window.location.href =
-      "books.html";
+      return `
+
+        <article class="book-card">
+
+          <div class="book-cover">
+
+            ${image}
+
+          </div>
+
+          ${reserved}
+
+          <div class="book-content">
+
+            <span class="book-subject">
+              ${book.subject || "ไม่ระบุวิชา"}
+            </span>
+
+            <h3>
+              ${book.title || "ไม่มีชื่อ"}
+            </h3>
+
+            <p>
+              ${book.description || "ไม่มีรายละเอียด"}
+            </p>
+
+            <div class="book-meta">
+
+              <span>
+                👤 ${book.ownerName || "นักเรียน"}
+              </span>
+
+              <strong>
+                ${share}
+              </strong>
+
+            </div>
+
+            <a
+              href="post.html?id=${book.id}"
+              class="btn btn-primary">
+
+              ดูรายละเอียด
+
+            </a>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }).join("");
+
+}
 
 
-  } catch (error) {
+/* =========================
+   SEARCH
+========================= */
 
-    console.error(error);
+searchInput.addEventListener(
+  "input",
+  renderBooks
+);
 
-    alert(
-      "❌ ลบไม่ได้: " +
-      error.message
+
+/* =========================
+   CATEGORY
+========================= */
+
+categoryButtons.forEach(
+  button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        categoryButtons.forEach(
+          item =>
+            item.classList.remove(
+              "active"
+            )
+        );
+
+
+        button.classList.add(
+          "active"
+        );
+
+
+        currentCategory =
+          button.dataset.category;
+
+
+        renderBooks();
+
+      }
     );
 
   }
+);
 
-}
+
+loadBooks();
 
 </script>
 
-
 </body>
-
   </html>
