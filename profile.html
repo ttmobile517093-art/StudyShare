@@ -46,6 +46,8 @@
 
       <div class="container">
 
+        <!-- PROFILE HEADER -->
+
         <div class="profile-header">
 
           <div class="profile-avatar" id="profileAvatar">
@@ -53,6 +55,7 @@
           </div>
 
           <div>
+
             <span class="profile-label">
               MY PROFILE
             </span>
@@ -64,43 +67,83 @@
             <p id="profileEmail">
               กำลังโหลดข้อมูล...
             </p>
+
           </div>
 
         </div>
 
 
+        <!-- PROFILE GRID -->
+
         <div class="profile-grid">
+
 
           <!-- ข้อมูลส่วนตัว -->
 
           <div class="profile-card">
 
             <div class="profile-card-title">
+
               <span>👤</span>
-              <h2>ข้อมูลนักเรียน</h2>
+
+              <h2>
+                ข้อมูลนักเรียน
+              </h2>
+
             </div>
 
 
             <div class="profile-info">
 
               <div class="info-row">
-                <span>ชื่อ-นามสกุล</span>
-                <strong id="infoName">-</strong>
+
+                <span>
+                  ชื่อ-นามสกุล
+                </span>
+
+                <strong id="infoName">
+                  -
+                </strong>
+
               </div>
 
-              <div class="info-row">
-                <span>รหัสนักเรียน</span>
-                <strong id="infoStudentId">-</strong>
-              </div>
 
               <div class="info-row">
-                <span>ชั้นเรียน</span>
-                <strong id="infoClass">-</strong>
+
+                <span>
+                  รหัสนักเรียน
+                </span>
+
+                <strong id="infoStudentId">
+                  -
+                </strong>
+
               </div>
 
+
               <div class="info-row">
-                <span>อีเมล</span>
-                <strong id="infoEmail">-</strong>
+
+                <span>
+                  ชั้นเรียน
+                </span>
+
+                <strong id="infoClass">
+                  -
+                </strong>
+
+              </div>
+
+
+              <div class="info-row">
+
+                <span>
+                  อีเมล
+                </span>
+
+                <strong id="infoEmail">
+                  -
+                </strong>
+
               </div>
 
             </div>
@@ -113,37 +156,79 @@
           <div class="profile-card">
 
             <div class="profile-card-title">
+
               <span>📚</span>
-              <h2>เมนูของฉัน</h2>
+
+              <h2>
+                เมนูของฉัน
+              </h2>
+
             </div>
 
 
             <div class="profile-menu">
 
-              <a href="post.html" class="profile-menu-item">
+
+              <a
+                href="post.html"
+                class="profile-menu-item">
+
                 <span>＋</span>
+
                 <div>
-                  <strong>ลงประกาศ</strong>
-                  <small>เพิ่มหนังสือหรือชีทสรุป</small>
+
+                  <strong>
+                    ลงประกาศ
+                  </strong>
+
+                  <small>
+                    เพิ่มหนังสือหรือชีทสรุป
+                  </small>
+
                 </div>
+
               </a>
 
 
-              <a href="books.html" class="profile-menu-item">
+              <a
+                href="books.html"
+                class="profile-menu-item">
+
                 <span>📚</span>
+
                 <div>
-                  <strong>หนังสือของฉัน</strong>
-                  <small>ดูรายการหนังสือที่ลงประกาศ</small>
+
+                  <strong>
+                    หนังสือทั้งหมด
+                  </strong>
+
+                  <small>
+                    ดูหนังสือที่นักเรียนลงประกาศ
+                  </small>
+
                 </div>
+
               </a>
 
 
-              <a href="notes.html" class="profile-menu-item">
+              <a
+                href="notes.html"
+                class="profile-menu-item">
+
                 <span>📝</span>
+
                 <div>
-                  <strong>ชีทสรุปของฉัน</strong>
-                  <small>ดูชีทสรุปที่แบ่งปัน</small>
+
+                  <strong>
+                    ชีทสรุปทั้งหมด
+                  </strong>
+
+                  <small>
+                    ดูชีทสรุปที่แบ่งปัน
+                  </small>
+
                 </div>
+
               </a>
 
             </div>
@@ -153,18 +238,85 @@
         </div>
 
 
-        <!-- ออกจากระบบ -->
+        <!-- =====================================
+             คำขอจากนักเรียนคนอื่น
+        ====================================== -->
+
+        <div class="profile-requests">
+
+          <div class="profile-card-title">
+
+            <span>🔔</span>
+
+            <h2>
+              คำขอจากนักเรียน
+            </h2>
+
+          </div>
+
+          <p>
+            คำขอซื้อ ขอรับ หรือขอแลกหนังสือของคุณ
+          </p>
+
+
+          <div id="requestList">
+
+            กำลังโหลดคำขอ...
+
+          </div>
+
+        </div>
+
+
+        <!-- =====================================
+             คำขอที่เราเป็นคนส่ง
+        ====================================== -->
+
+        <div class="profile-requests">
+
+          <div class="profile-card-title">
+
+            <span>📤</span>
+
+            <h2>
+              คำขอของฉัน
+            </h2>
+
+          </div>
+
+          <p>
+            รายการหนังสือที่คุณส่งคำขอไป
+          </p>
+
+
+          <div id="myRequestList">
+
+            กำลังโหลด...
+
+          </div>
+
+        </div>
+
+
+        <!-- LOGOUT -->
 
         <div class="logout-area">
 
-          <button id="logoutButton" class="logout-btn">
+          <button
+            id="logoutButton"
+            class="logout-btn">
+
             ออกจากระบบ
+
           </button>
 
         </div>
 
 
-        <p id="profileMessage" class="profile-message"></p>
+        <p
+          id="profileMessage"
+          class="profile-message">
+        </p>
 
       </div>
 
@@ -198,100 +350,161 @@
   </footer>
 
 
-  <!-- FIREBASE SCRIPT -->
+  <!-- FIREBASE -->
 
   <script type="module">
 
     import {
+
       auth,
+
       db,
+
       onAuthStateChanged,
+
       doc,
+
       getDoc,
+
+      collection,
+
+      query,
+
+      where,
+
+      getDocs,
+
+      updateDoc,
+
       signOut
+
     } from "./firebase.js";
 
 
-    // ตรวจสอบการเข้าสู่ระบบ
+    let currentUser = null;
 
-    onAuthStateChanged(auth, async (user) => {
 
-      if (!user) {
+    /* =====================================
+       ตรวจสอบผู้ใช้
+    ===================================== */
 
-        window.location.href = "login.html";
+    onAuthStateChanged(
+      auth,
+      async (user) => {
 
-        return;
+        if (!user) {
+
+          window.location.href =
+            "login.html";
+
+          return;
+
+        }
+
+
+        currentUser = user;
+
+
+        await loadProfile();
+
+        await loadRequests();
+
+        await loadMyRequests();
+
       }
+    );
 
+
+    /* =====================================
+       โหลดข้อมูลโปรไฟล์
+    ===================================== */
+
+    async function loadProfile() {
 
       try {
 
         const userRef =
-          doc(db, "users", user.uid);
+          doc(
+            db,
+            "users",
+            currentUser.uid
+          );
+
 
         const userSnap =
           await getDoc(userRef);
 
 
-        if (userSnap.exists()) {
+        if (!userSnap.exists()) {
 
-          const data =
-            userSnap.data();
-
-
-          // ชื่อ
-
-          document.querySelector("#profileName")
-            .textContent =
-            data.name || "ไม่ระบุชื่อ";
-
-
-          document.querySelector("#infoName")
-            .textContent =
-            data.name || "-";
-
-
-          // รหัสนักเรียน
-
-          document.querySelector("#infoStudentId")
-            .textContent =
-            data.studentId || "-";
-
-
-          // ห้อง
-
-          document.querySelector("#infoClass")
-            .textContent =
-            data.className || "-";
-
-
-          // Email
-
-          document.querySelector("#profileEmail")
-            .textContent =
-            data.email || user.email || "-";
-
-
-          document.querySelector("#infoEmail")
-            .textContent =
-            data.email || user.email || "-";
-
-
-          // ตัวอักษรแรกของชื่อ
-
-          if (data.name) {
-
-            document.querySelector("#profileAvatar")
-              .textContent =
-              data.name.charAt(0);
-
-          }
-
-        } else {
-
-          document.querySelector("#profileName")
-            .textContent =
+          document.querySelector(
+            "#profileName"
+          ).textContent =
             "ไม่พบข้อมูลนักเรียน";
+
+          return;
+
+        }
+
+
+        const data =
+          userSnap.data();
+
+
+        const name =
+          data.name || "ไม่ระบุชื่อ";
+
+
+        const email =
+          data.email ||
+          currentUser.email ||
+          "-";
+
+
+        document.querySelector(
+          "#profileName"
+        ).textContent =
+          name;
+
+
+        document.querySelector(
+          "#infoName"
+        ).textContent =
+          name;
+
+
+        document.querySelector(
+          "#infoStudentId"
+        ).textContent =
+          data.studentId || "-";
+
+
+        document.querySelector(
+          "#infoClass"
+        ).textContent =
+          data.className || "-";
+
+
+        document.querySelector(
+          "#profileEmail"
+        ).textContent =
+          email;
+
+
+        document.querySelector(
+          "#infoEmail"
+        ).textContent =
+          email;
+
+
+        /* ตัวอักษรแรกของชื่อ */
+
+        if (name) {
+
+          document.querySelector(
+            "#profileAvatar"
+          ).textContent =
+            name.charAt(0);
 
         }
 
@@ -300,44 +513,840 @@
 
         console.error(error);
 
-        document.querySelector("#profileName")
-          .textContent =
+
+        document.querySelector(
+          "#profileName"
+        ).textContent =
           "เกิดข้อผิดพลาด";
 
-        document.querySelector("#profileMessage")
-          .textContent =
+
+        document.querySelector(
+          "#profileMessage"
+        ).textContent =
           "ไม่สามารถโหลดข้อมูลโปรไฟล์ได้";
 
       }
 
-    });
+    }
 
 
-    // ออกจากระบบ
+    /* =====================================
+       คำขอที่คนอื่นส่งมาให้เรา
+    ===================================== */
 
-    document.querySelector("#logoutButton")
-      .addEventListener("click", async () => {
+    async function loadRequests() {
+
+      const requestList =
+        document.querySelector(
+          "#requestList"
+        );
+
+
+      try {
+
+        const q =
+          query(
+            collection(
+              db,
+              "requests"
+            ),
+
+            where(
+              "ownerId",
+              "==",
+              currentUser.uid
+            )
+          );
+
+
+        const snapshot =
+          await getDocs(q);
+
+
+        const requests = [];
+
+
+        snapshot.forEach(
+          item => {
+
+            requests.push({
+
+              id: item.id,
+
+              ...item.data()
+
+            });
+
+          }
+        );
+
+
+        /* เรียงรายการใหม่สุดก่อน */
+
+        requests.sort(
+          (a, b) => {
+
+            const aTime =
+              a.createdAt?.seconds || 0;
+
+            const bTime =
+              b.createdAt?.seconds || 0;
+
+            return bTime - aTime;
+
+          }
+        );
+
+
+        if (
+          requests.length === 0
+        ) {
+
+          requestList.innerHTML = `
+
+            <div class="request-empty">
+
+              📭
+
+              <h3>
+                ยังไม่มีคำขอ
+              </h3>
+
+              <p>
+                เมื่อมีนักเรียนสนใจหนังสือ
+                คำขอจะแสดงที่นี่
+              </p>
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+        requestList.innerHTML =
+          requests
+            .map(
+              request =>
+                renderOwnerRequest(
+                  request
+                )
+            )
+            .join("");
+
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        requestList.innerHTML = `
+
+          <div class="request-empty">
+
+            ❌ ไม่สามารถโหลดคำขอได้
+
+          </div>
+
+        `;
+
+      }
+
+    }
+
+
+    /* =====================================
+       แสดงคำขอที่เข้ามา
+    ===================================== */
+
+    function renderOwnerRequest(
+      request
+    ) {
+
+      let typeText =
+        request.typeText;
+
+
+      if (!typeText) {
+
+        if (
+          request.type === "buy"
+        ) {
+
+          typeText =
+            "🛒 ขอซื้อ";
+
+        } else if (
+          request.type === "free"
+        ) {
+
+          typeText =
+            "🎁 ขอรับ";
+
+        } else {
+
+          typeText =
+            "🔄 ขอแลก";
+
+        }
+
+      }
+
+
+      let statusText = "";
+
+
+      if (
+        request.status ===
+        "pending"
+      ) {
+
+        statusText =
+          "⏳ รอการตอบรับ";
+
+      } else if (
+        request.status ===
+        "accepted"
+      ) {
+
+        statusText =
+          "✅ ยอมรับแล้ว";
+
+      } else {
+
+        statusText =
+          "❌ ปฏิเสธแล้ว";
+
+      }
+
+
+      return `
+
+        <div class="request-card">
+
+          <div class="request-top">
+
+            <span class="request-type">
+
+              ${typeText}
+
+            </span>
+
+            <span
+              class="request-status-label">
+
+              ${statusText}
+
+            </span>
+
+          </div>
+
+
+          <h3>
+
+            ${request.postTitle || "-"}
+
+          </h3>
+
+
+          <div class="request-person">
+
+            👤 ผู้ขอ:
+
+            <strong>
+              ${request.requesterName || "-"}
+            </strong>
+
+          </div>
+
+
+          <div class="request-person">
+
+            🆔 รหัส:
+
+            ${request.requesterStudentId || "-"}
+
+          </div>
+
+
+          <div class="request-person">
+
+            🏫 ห้อง:
+
+            ${request.requesterClass || "-"}
+
+          </div>
+
+
+          <div class="request-message">
+
+            💬
+
+            ${request.message || "ไม่ได้ระบุข้อความ"}
+
+          </div>
+
+
+          ${
+            request.status === "pending"
+
+            ? `
+
+              <div class="request-actions">
+
+                <button
+                  class="btn btn-primary"
+                  onclick="updateRequest(
+                    '${request.id}',
+                    'accepted'
+                  )">
+
+                  ✓ ยอมรับ
+
+                </button>
+
+
+                <button
+                  class="btn btn-danger"
+                  onclick="updateRequest(
+                    '${request.id}',
+                    'rejected'
+                  )">
+
+                  ✕ ปฏิเสธ
+
+                </button>
+
+              </div>
+
+            `
+
+            : ""
+
+          }
+
+        </div>
+
+      `;
+
+    }
+
+
+    /* =====================================
+       ยอมรับ / ปฏิเสธคำขอ
+    ===================================== */
+
+    window.updateRequest =
+      async function (
+        requestId,
+        status
+      ) {
 
         try {
 
-          await signOut(auth);
+          const requestRef =
+            doc(
+              db,
+              "requests",
+              requestId
+            );
 
-          window.location.href =
-            "index.html";
+
+          const requestSnap =
+            await getDoc(
+              requestRef
+            );
+
+
+          if (
+            !requestSnap.exists()
+          ) {
+
+            alert(
+              "ไม่พบคำขอนี้"
+            );
+
+            return;
+
+          }
+
+
+          const requestData =
+            requestSnap.data();
+
+
+          /* ตรวจสอบว่าเป็นเจ้าของจริง */
+
+          if (
+            requestData.ownerId !==
+            currentUser.uid
+          ) {
+
+            alert(
+              "คุณไม่มีสิทธิ์ดำเนินการ"
+            );
+
+            return;
+
+          }
+
+
+          /* เปลี่ยนสถานะคำขอ */
+
+          await updateDoc(
+            requestRef,
+            {
+              status: status
+            }
+          );
+
+
+          /* ถ้ายอมรับ */
+
+          if (
+            status === "accepted"
+          ) {
+
+            const postRef =
+              doc(
+                db,
+                "posts",
+                requestData.postId
+              );
+
+
+            await updateDoc(
+              postRef,
+              {
+
+                status:
+                  "reserved",
+
+                reservedBy:
+                  requestData.requesterId
+
+              }
+            );
+
+
+            /*
+             ปฏิเสธคำขออื่น
+             ของหนังสือเล่มเดียวกัน
+            */
+
+            try {
+
+              const otherQuery =
+                query(
+                  collection(
+                    db,
+                    "requests"
+                  ),
+
+                  where(
+                    "postId",
+                    "==",
+                    requestData.postId
+                  )
+                );
+
+
+              const otherSnapshot =
+                await getDocs(
+                  otherQuery
+                );
+
+
+              for (
+                const item
+                of otherSnapshot.docs
+              ) {
+
+                if (
+                  item.id !==
+                    requestId
+                  &&
+                  item.data().status ===
+                    "pending"
+                ) {
+
+                  await updateDoc(
+                    doc(
+                      db,
+                      "requests",
+                      item.id
+                    ),
+
+                    {
+                      status:
+                        "rejected"
+                    }
+                  );
+
+                }
+
+              }
+
+            } catch (error) {
+
+              console.log(
+                "ไม่สามารถปิดคำขออื่นได้",
+                error
+              );
+
+            }
+
+          }
+
+
+          alert(
+            status === "accepted"
+              ? "ยอมรับคำขอเรียบร้อยแล้ว 🎉"
+              : "ปฏิเสธคำขอเรียบร้อยแล้ว"
+          );
+
+
+          await loadRequests();
+
+          await loadMyRequests();
+
 
         } catch (error) {
 
           console.error(error);
 
           alert(
-            "ไม่สามารถออกจากระบบได้"
+            "เกิดข้อผิดพลาด: " +
+            error.message
           );
 
         }
 
-      });
+      };
+
+
+    /* =====================================
+       คำขอที่เราเป็นคนส่ง
+    ===================================== */
+
+    async function loadMyRequests() {
+
+      const myRequestList =
+        document.querySelector(
+          "#myRequestList"
+        );
+
+
+      try {
+
+        const q =
+          query(
+            collection(
+              db,
+              "requests"
+            ),
+
+            where(
+              "requesterId",
+              "==",
+              currentUser.uid
+            )
+          );
+
+
+        const snapshot =
+          await getDocs(q);
+
+
+        const requests = [];
+
+
+        snapshot.forEach(
+          item => {
+
+            requests.push({
+
+              id: item.id,
+
+              ...item.data()
+
+            });
+
+          }
+        );
+
+
+        requests.sort(
+          (a, b) => {
+
+            const aTime =
+              a.createdAt?.seconds || 0;
+
+            const bTime =
+              b.createdAt?.seconds || 0;
+
+            return bTime - aTime;
+
+          }
+        );
+
+
+        if (
+          requests.length === 0
+        ) {
+
+          myRequestList.innerHTML = `
+
+            <div class="request-empty">
+
+              📭
+
+              <h3>
+                ยังไม่มีคำขอของคุณ
+              </h3>
+
+              <p>
+                เมื่อคุณกดขอซื้อ ขอรับ
+                หรือขอแลก รายการจะแสดงที่นี่
+              </p>
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+        myRequestList.innerHTML =
+          requests
+            .map(
+              request =>
+                renderMyRequest(
+                  request
+                )
+            )
+            .join("");
+
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        myRequestList.innerHTML = `
+
+          <div class="request-empty">
+
+            ❌ ไม่สามารถโหลดคำขอได้
+
+          </div>
+
+        `;
+
+      }
+
+    }
+
+
+    /* =====================================
+       แสดงคำขอของเรา
+    ===================================== */
+
+    function renderMyRequest(
+      request
+    ) {
+
+      let typeText =
+        request.typeText;
+
+
+      if (!typeText) {
+
+        if (
+          request.type === "buy"
+        ) {
+
+          typeText =
+            "🛒 ขอซื้อ";
+
+        } else if (
+          request.type === "free"
+        ) {
+
+          typeText =
+            "🎁 ขอรับ";
+
+        } else {
+
+          typeText =
+            "🔄 ขอแลก";
+
+        }
+
+      }
+
+
+      let statusText = "";
+
+      let statusClass = "";
+
+
+      if (
+        request.status ===
+        "pending"
+      ) {
+
+        statusText =
+          "⏳ รอเจ้าของตอบ";
+
+        statusClass =
+          "pending";
+
+      } else if (
+        request.status ===
+        "accepted"
+      ) {
+
+        statusText =
+          "✅ เจ้าของยอมรับแล้ว";
+
+        statusClass =
+          "accepted";
+
+      } else {
+
+        statusText =
+          "❌ เจ้าของปฏิเสธ";
+
+        statusClass =
+          "rejected";
+
+      }
+
+
+      return `
+
+        <div class="request-card">
+
+          <div class="request-top">
+
+            <span class="request-type">
+
+              ${typeText}
+
+            </span>
+
+            <span
+              class="request-status-label ${statusClass}">
+
+              ${statusText}
+
+            </span>
+
+          </div>
+
+
+          <h3>
+
+            ${request.postTitle || "-"}
+
+          </h3>
+
+
+          <div class="request-person">
+
+            👤 เจ้าของ:
+
+            <strong>
+              ${request.ownerName || "-"}
+            </strong>
+
+          </div>
+
+
+          ${
+            request.message
+              ? `
+
+                <div class="request-message">
+
+                  💬
+                  ${request.message}
+
+                </div>
+
+              `
+              : ""
+          }
+
+
+          ${
+            request.status ===
+            "accepted"
+
+              ? `
+
+                <div class="request-status">
+
+                  🎉 คำขอของคุณได้รับการยอมรับแล้ว
+
+                  <br>
+
+                  กรุณาติดต่อเจ้าของหนังสือ
+                  เพื่อดำเนินการต่อ
+
+                </div>
+
+              `
+
+              : ""
+
+          }
+
+        </div>
+
+      `;
+
+    }
+
+
+    /* =====================================
+       LOGOUT
+    ===================================== */
+
+    document
+      .querySelector(
+        "#logoutButton"
+      )
+      .addEventListener(
+        "click",
+        async () => {
+
+          try {
+
+            await signOut(auth);
+
+            window.location.href =
+              "index.html";
+
+          } catch (error) {
+
+            console.error(error);
+
+            alert(
+              "ไม่สามารถออกจากระบบได้"
+            );
+
+          }
+
+        }
+      );
 
   </script>
 
 </body>
-        </html>
+  </html>
