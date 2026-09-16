@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ชีทสรุป | StudyShare</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+  <div class="container nav-inner">
+
+    <a href="index.html" class="logo">
+      📚 StudyShare
+    </a>
+
+    <nav class="nav-links">
+      <a href="index.html">หน้าแรก</a>
+      <a href="books.html">หนังสือ</a>
+      <a href="notes.html">ชีทสรุป</a>
+      <a href="announcements.html">ประกาศ</a>
+      <a href="about.html">เกี่ยวกับระบบ</a>
+    </nav>
+
+    <a href="profile.html" class="login-btn">
+      โปรไฟล์
+    </a>
+
+  </div>
+
+</header>
+
+
+<main>
+
+<section class="section">
+
+  <div class="container">
+
+    <div class="post-header">
+
+      <span class="hero-badge">
+        📝 STUDY NOTES
+      </span>
+
+      <h1>
+        ชีทสรุป
+      </h1>
+
+      <p>
+        แบ่งปันสรุปบทเรียนและเนื้อหาสำหรับการเรียน
+      </p>
+
+    </div>
+
+
+    <div class="search-box">
+
+      <input
+        type="text"
+        id="searchNote"
+        placeholder="🔎 ค้นหาชีท วิชา หรือผู้ลงประกาศ...">
+
+    </div>
+
+
+    <div class="category-buttons">
+
+      <button
+        class="category-btn active"
+        data-category="ทั้งหมด">
+        ทั้งหมด
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="คณิตศาสตร์">
+        คณิตศาสตร์
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="วิทยาศาสตร์">
+        วิทยาศาสตร์
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="ภาษาอังกฤษ">
+        ภาษาอังกฤษ
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="ภาษาไทย">
+        ภาษาไทย
+      </button>
+
+    </div>
+
+
+    <div
+      id="noteCount"
+      class="result-count">
+
+      กำลังโหลด...
+
+    </div>
+
+
+    <div
+      id="noteGrid"
+      class="book-grid">
+
+      กำลังโหลด...
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+  <div class="container">
+
+    <div class="footer-logo">
+      📚 StudyShare
+    </div>
+
+    <p>
+      Student Book & Note Sharing System
+    </p>
+
+  </div>
+
+</footer>
+
+
+<script type="module">
+
+import {
+  db,
+  collection,
+  getDocs,
+  query,
+  orderBy
+} from "./firebase.js";
+
+
+const grid =
+  document.querySelector("#noteGrid");
+
+const search =
+  document.querySelector("#searchNote");
+
+const count =
+  document.querySelector("#noteCount");
+
+const buttons =
+  document.querySelectorAll(
+    ".category-btn"
+  );
+
+
+let notes = [];
+
+let category =
+  "ทั้งหมด";
+
+
+async function loadNotes() {
+
+  try {
+
+    const q =
+      query(
+        collection(db, "posts"),
+        orderBy(
+          "createdAt",
+          "desc"
+        )
+      );
+
+
+    const snapshot =
+      await getDocs(q);
+
+
+    notes = [];
+
+
+    snapshot.forEach(item => {
+
+      const data =
+        item.data();
+
+
+      if (
+        data.type === "note"
+      ) {
+
+        notes.push({
+          id: item.id,
+          ...data
+        });
+
+      }
+
+    });
+
+
+    render();
+
+  } catch (error) {
+
+    console.error(error);
+
+    grid.innerHTML =
+      `<div class="loading-card">
+        ❌ โหลดชีทไม่ได้
+      </div>`;
+
+  }
+
+}
+
+
+function render() {
+
+  const keyword =
+    search.value
+      .trim()
+      .toLowerCase();
+
+
+  const filtered =
+    notes.filter(note => {
+
+      const categoryOK =
+        category === "ทั้งหมด" ||
+        note.subject === category;
+
+
+      const text =
+        `
+        ${note.title || ""}
+        ${note.subject || ""}
+        ${note.ownerName || ""}
+        ${note.description || ""}
+        `
+        .toLowerCase();
+
+
+      return (
+        categoryOK &&
+        (
+          !keyword ||
+          text.includes(keyword)
+        )
+      );
+
+    });
+
+
+  count.textContent =
+    `พบชีทสรุป ${filtered.length} รายการ`;
+
+
+  if (
+    filtered.length === 0
+  ) {
+
+    grid.innerHTML = `
+      <div class="loading-card">
+        📭
+        <h3>ยังไม่มีชีทสรุป</h3>
+        <p>ลองเปลี่ยนคำค้นหาดูครับ</p>
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  grid.innerHTML =
+    filtered.map(note => `
+
+      <article class="book-card">
+
+        <div class="book-cover">
+
+          <div class="book-cover-empty">
+            📝
+          </div>
+
+        </div>
+
+
+        <div class="book-content">
+
+          <span class="book-subject">
+            ${note.subject || "ไม่ระบุวิชา"}
+          </span>
+
+
+          <h3>
+            ${note.title || "ไม่มีชื่อ"}
+          </h3>
+
+
+          <p>
+            ${note.description || ""}
+          </p>
+
+
+          <div class="book-meta">
+
+            <span>
+              👤 ${note.ownerName || "นักเรียน"}
+            </span>
+
+          </div>
+
+
+          <a
+            href="post.html?id=${note.id}"
+            class="btn btn-primary">
+
+            ดูรายละเอียด
+
+          </a>
+
+        </div>
+
+      </article>
+
+    `).join("");
+
+}
+
+
+search.addEventListener(
+  "input",
+  render
+);
+
+
+buttons.forEach(button => {
+
+  button.addEventListener(
+    "click",
+    () => {
+
+      buttons.forEach(
+        b =>
+          b.classList.remove(
+            "active"
+          )
+      );
+
+
+      button.classList.add(
+        "active"
+      );
+
+
+      category =
+        button.dataset.category;
+
+
+      render();
+
+    }
+  );
+
+});
+
+
+loadNotes();
+
+</script>
+
+</body>
+</html>
