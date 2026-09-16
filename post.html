@@ -46,13 +46,10 @@
         ✨ CREATE POST
       </span>
 
-      <h1>
-        ลงประกาศหนังสือ
-      </h1>
+      <h1>ลงประกาศ</h1>
 
       <p>
-        ส่งต่อหนังสือที่ไม่ได้ใช้แล้ว
-        ให้เพื่อนนักเรียน
+        แบ่งปันหนังสือและสื่อการเรียนให้เพื่อนนักเรียน
       </p>
 
     </div>
@@ -62,13 +59,41 @@
 
       <form id="postForm">
 
-        <!-- ประเภท -->
+        <!-- รูปภาพ -->
 
         <div class="form-group">
 
           <label>
-            ประเภทสื่อ
+            📷 รูปหนังสือ
           </label>
+
+          <div class="image-upload">
+
+            <input
+              type="file"
+              id="imageInput"
+              accept="image/*"
+            >
+
+            <div id="imagePreview" class="image-preview">
+              <span>📚</span>
+              <p>กดเพื่อเลือกรูปหนังสือ</p>
+            </div>
+
+          </div>
+
+          <small class="upload-hint">
+            แนะนำให้ใช้รูปที่ชัดเจน 1 รูป ระบบจะย่อรูปให้อัตโนมัติ
+          </small>
+
+        </div>
+
+
+        <!-- ประเภท -->
+
+        <div class="form-group">
+
+          <label>ประเภทสื่อ</label>
 
           <select id="postType" required>
 
@@ -89,9 +114,7 @@
 
         <div class="form-group">
 
-          <label>
-            ชื่อหนังสือ / ชื่อชีท
-          </label>
+          <label>ชื่อหนังสือ / ชื่อชีท</label>
 
           <input
             type="text"
@@ -107,9 +130,7 @@
 
         <div class="form-group">
 
-          <label>
-            วิชา
-          </label>
+          <label>วิชา</label>
 
           <select id="subject" required>
 
@@ -117,33 +138,13 @@
               -- เลือกวิชา --
             </option>
 
-            <option value="คณิตศาสตร์">
-              คณิตศาสตร์
-            </option>
-
-            <option value="วิทยาศาสตร์">
-              วิทยาศาสตร์
-            </option>
-
-            <option value="ภาษาอังกฤษ">
-              ภาษาอังกฤษ
-            </option>
-
-            <option value="ภาษาไทย">
-              ภาษาไทย
-            </option>
-
-            <option value="สังคมศึกษา">
-              สังคมศึกษา
-            </option>
-
-            <option value="ภาษาจีน">
-              ภาษาจีน
-            </option>
-
-            <option value="อื่น ๆ">
-              อื่น ๆ
-            </option>
+            <option value="คณิตศาสตร์">คณิตศาสตร์</option>
+            <option value="วิทยาศาสตร์">วิทยาศาสตร์</option>
+            <option value="ภาษาอังกฤษ">ภาษาอังกฤษ</option>
+            <option value="ภาษาไทย">ภาษาไทย</option>
+            <option value="สังคมศึกษา">สังคมศึกษา</option>
+            <option value="ภาษาจีน">ภาษาจีน</option>
+            <option value="อื่น ๆ">อื่น ๆ</option>
 
           </select>
 
@@ -156,23 +157,13 @@
           class="form-group"
           id="conditionGroup">
 
-          <label>
-            สภาพหนังสือ
-          </label>
+          <label>สภาพหนังสือ</label>
 
           <select id="condition">
 
-            <option value="ดีมาก">
-              ⭐ ดีมาก
-            </option>
-
-            <option value="ดี">
-              👍 ดี
-            </option>
-
-            <option value="พอใช้">
-              🙂 พอใช้
-            </option>
+            <option value="ดีมาก">⭐ ดีมาก</option>
+            <option value="ดี">👍 ดี</option>
+            <option value="พอใช้">🙂 พอใช้</option>
 
           </select>
 
@@ -183,9 +174,7 @@
 
         <div class="form-group">
 
-          <label>
-            ต้องการแบ่งปันแบบไหน?
-          </label>
+          <label>ต้องการแบ่งปันแบบไหน?</label>
 
           <select id="shareType" required>
 
@@ -213,9 +202,7 @@
           id="priceGroup"
           style="display:none;">
 
-          <label>
-            ราคา (บาท)
-          </label>
+          <label>ราคา (บาท)</label>
 
           <input
             type="number"
@@ -231,27 +218,23 @@
 
         <div class="form-group">
 
-          <label>
-            รายละเอียด
-          </label>
+          <label>รายละเอียด</label>
 
           <textarea
             id="description"
             rows="5"
-            placeholder="เช่น หนังสือมีรอยขีดเขียนเล็กน้อย แต่เนื้อหาครบ..."
+            placeholder="รายละเอียดหนังสือ..."
             required
           ></textarea>
 
         </div>
 
 
-        <!-- ช่องทางติดต่อ -->
+        <!-- ติดต่อ -->
 
         <div class="form-group">
 
-          <label>
-            ช่องทางติดต่อ
-          </label>
+          <label>ช่องทางติดต่อ</label>
 
           <input
             type="text"
@@ -331,6 +314,12 @@ const form =
 const message =
   document.querySelector("#postMessage");
 
+const imageInput =
+  document.querySelector("#imageInput");
+
+const imagePreview =
+  document.querySelector("#imagePreview");
+
 const shareType =
   document.querySelector("#shareType");
 
@@ -346,22 +335,21 @@ const postType =
 
 let currentUser = null;
 let currentUserData = null;
+let imageData = "";
 
 
 // ============================
-// ตรวจสอบ Login
+// ตรวจสอบผู้ใช้
 // ============================
 
 onAuthStateChanged(auth, async (user) => {
 
   if (!user) {
 
-    window.location.href =
-      "login.html";
+    window.location.href = "login.html";
 
     return;
   }
-
 
   currentUser = user;
 
@@ -392,22 +380,162 @@ onAuthStateChanged(auth, async (user) => {
 
 
 // ============================
-// แสดงช่องราคา
+// บีบอัดรูป
 // ============================
 
-shareType.addEventListener(
+function compressImage(file) {
+
+  return new Promise((resolve, reject) => {
+
+    const reader = new FileReader();
+
+
+    reader.onload = (event) => {
+
+      const img = new Image();
+
+
+      img.onload = () => {
+
+        const maxSize = 700;
+
+        let width = img.width;
+        let height = img.height;
+
+
+        if (width > height) {
+
+          if (width > maxSize) {
+
+            height =
+              height * maxSize / width;
+
+            width = maxSize;
+
+          }
+
+        } else {
+
+          if (height > maxSize) {
+
+            width =
+              width * maxSize / height;
+
+            height = maxSize;
+
+          }
+
+        }
+
+
+        const canvas =
+          document.createElement("canvas");
+
+        canvas.width = width;
+        canvas.height = height;
+
+
+        const ctx =
+          canvas.getContext("2d");
+
+
+        ctx.drawImage(
+          img,
+          0,
+          0,
+          width,
+          height
+        );
+
+
+        const result =
+          canvas.toDataURL(
+            "image/jpeg",
+            0.65
+          );
+
+
+        resolve(result);
+
+      };
+
+
+      img.onerror =
+        reject;
+
+      img.src =
+        event.target.result;
+
+    };
+
+
+    reader.onerror =
+      reject;
+
+    reader.readAsDataURL(file);
+
+  });
+
+}
+
+
+// ============================
+// เลือกรูป
+// ============================
+
+imageInput.addEventListener(
   "change",
-  () => {
+  async () => {
 
-    if (shareType.value === "sell") {
+    const file =
+      imageInput.files[0];
 
-      priceGroup.style.display =
-        "block";
 
-    } else {
+    if (!file) {
 
-      priceGroup.style.display =
-        "none";
+      imageData = "";
+
+      return;
+    }
+
+
+    if (!file.type.startsWith("image/")) {
+
+      alert("กรุณาเลือกไฟล์รูปภาพ");
+
+      imageInput.value = "";
+
+      return;
+    }
+
+
+    imagePreview.innerHTML =
+      "<p>กำลังเตรียมรูป...</p>";
+
+
+    try {
+
+      imageData =
+        await compressImage(file);
+
+
+      imagePreview.innerHTML = `
+        <img
+          src="${imageData}"
+          alt="ตัวอย่างรูปหนังสือ"
+        >
+      `;
+
+    } catch (error) {
+
+      console.error(error);
+
+      imageData = "";
+
+      imagePreview.innerHTML = `
+        <span>❌</span>
+        <p>ไม่สามารถโหลดรูปได้</p>
+      `;
 
     }
 
@@ -416,24 +544,34 @@ shareType.addEventListener(
 
 
 // ============================
-// ถ้าเลือกชีท
+// แสดงช่องราคา
+// ============================
+
+shareType.addEventListener(
+  "change",
+  () => {
+
+    priceGroup.style.display =
+      shareType.value === "sell"
+        ? "block"
+        : "none";
+
+  }
+);
+
+
+// ============================
+// หนังสือ / ชีท
 // ============================
 
 postType.addEventListener(
   "change",
   () => {
 
-    if (postType.value === "note") {
-
-      conditionGroup.style.display =
-        "none";
-
-    } else {
-
-      conditionGroup.style.display =
-        "block";
-
-    }
+    conditionGroup.style.display =
+      postType.value === "book"
+        ? "block"
+        : "none";
 
   }
 );
@@ -467,36 +605,30 @@ form.addEventListener(
       postType.value;
 
     const title =
-      document
-        .querySelector("#title")
+      document.querySelector("#title")
         .value.trim();
 
     const subject =
-      document
-        .querySelector("#subject")
+      document.querySelector("#subject")
         .value;
 
     const condition =
-      document
-        .querySelector("#condition")
+      document.querySelector("#condition")
         .value;
 
     const share =
       shareType.value;
 
     const price =
-      document
-        .querySelector("#price")
+      document.querySelector("#price")
         .value;
 
     const description =
-      document
-        .querySelector("#description")
+      document.querySelector("#description")
         .value.trim();
 
     const contact =
-      document
-        .querySelector("#contact")
+      document.querySelector("#contact")
         .value.trim();
 
 
@@ -530,6 +662,9 @@ form.addEventListener(
           contact:
             contact,
 
+          image:
+            imageData || "",
+
           ownerId:
             currentUser.uid,
 
@@ -556,9 +691,6 @@ form.addEventListener(
         "✅ ลงประกาศสำเร็จ!";
 
 
-      form.reset();
-
-
       setTimeout(() => {
 
         window.location.href =
@@ -574,7 +706,7 @@ form.addEventListener(
       console.error(error);
 
       message.textContent =
-        "❌ ไม่สามารถบันทึกประกาศได้: " +
+        "❌ ไม่สามารถบันทึกได้: " +
         error.message;
 
     }
@@ -585,4 +717,4 @@ form.addEventListener(
 </script>
 
 </body>
-            </html>
+</html>
