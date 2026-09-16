@@ -58,7 +58,6 @@
             required
           >
 
-
           <label>รหัสผ่าน</label>
 
           <input
@@ -67,7 +66,6 @@
             placeholder="กรอกรหัสผ่าน"
             required
           >
-
 
           <button type="submit" class="btn btn-primary">
             เข้าสู่ระบบ
@@ -81,68 +79,12 @@
         </div>
 
 
-        <!-- ================= REGISTER ================= -->
-
-        <form id="registerForm">
-
-          <h2>สมัครสมาชิก</h2>
-
-          <label>ชื่อ-นามสกุล</label>
-
-          <input
-            type="text"
-            id="registerName"
-            placeholder="เช่น เด็กหญิงสมหญิง ใจดี"
-            required
-          >
-
-
-          <label>รหัสนักเรียน</label>
-
-          <input
-            type="text"
-            id="registerStudentId"
-            placeholder="กรอกรหัสนักเรียน"
-            required
-          >
-
-
-          <label>ชั้น / ห้อง</label>
-
-          <input
-            type="text"
-            id="registerClass"
-            placeholder="เช่น ม.3/1"
-            required
-          >
-
-
-          <label>อีเมล</label>
-
-          <input
-            type="email"
-            id="registerEmail"
-            placeholder="กรอกอีเมล"
-            required
-          >
-
-
-          <label>รหัสผ่าน</label>
-
-          <input
-            type="password"
-            id="registerPassword"
-            placeholder="อย่างน้อย 6 ตัวอักษร"
-            minlength="6"
-            required
-          >
-
-
-          <button type="submit" class="btn btn-primary">
+        <p style="text-align:center;">
+          ยังไม่มีบัญชี?
+          <a href="register.html">
             สมัครสมาชิก
-          </button>
-
-        </form>
+          </a>
+        </p>
 
 
         <p id="message"></p>
@@ -158,149 +100,13 @@
 
     import {
       auth,
-      db,
-      createUserWithEmailAndPassword,
-      signInWithEmailAndPassword,
-      doc,
-      setDoc,
-      serverTimestamp
+      signInWithEmailAndPassword
     } from "./firebase.js";
 
 
     const message =
       document.querySelector("#message");
 
-
-    // =========================
-    // สมัครสมาชิก
-    // =========================
-
-    document
-      .querySelector("#registerForm")
-      .addEventListener("submit", async (event) => {
-
-        event.preventDefault();
-
-        message.textContent =
-          "กำลังสมัครสมาชิก...";
-
-
-        const name =
-          document.querySelector("#registerName")
-            .value.trim();
-
-        const studentId =
-          document.querySelector("#registerStudentId")
-            .value.trim();
-
-        const className =
-          document.querySelector("#registerClass")
-            .value.trim();
-
-        const email =
-          document.querySelector("#registerEmail")
-            .value.trim();
-
-        const password =
-          document.querySelector("#registerPassword")
-            .value;
-
-
-        try {
-
-          // สร้างบัญชี Firebase Authentication
-
-          const result =
-            await createUserWithEmailAndPassword(
-              auth,
-              email,
-              password
-            );
-
-
-          const user =
-            result.user;
-
-
-          // บันทึกข้อมูลนักเรียนลง Firestore
-
-          await setDoc(
-            doc(db, "users", user.uid),
-            {
-              uid: user.uid,
-              name: name,
-              studentId: studentId,
-              className: className,
-              email: email,
-              createdAt: serverTimestamp()
-            }
-          );
-
-
-          message.textContent =
-            "สมัครสมาชิกสำเร็จ กำลังเข้าสู่ระบบ...";
-
-
-          setTimeout(() => {
-
-            window.location.href =
-              "index.html";
-
-          }, 800);
-
-
-        } catch (error) {
-
-          console.error(error);
-
-          if (
-            error.code ===
-            "auth/email-already-in-use"
-          ) {
-
-            message.textContent =
-              "อีเมลนี้ถูกสมัครไว้แล้ว";
-
-          } else if (
-            error.code ===
-            "auth/weak-password"
-          ) {
-
-            message.textContent =
-              "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร";
-
-          } else if (
-            error.code ===
-            "auth/invalid-email"
-          ) {
-
-            message.textContent =
-              "รูปแบบอีเมลไม่ถูกต้อง";
-
-          } else if (
-            error.code ===
-            "permission-denied"
-          ) {
-
-            message.textContent =
-              "Firebase ไม่อนุญาตให้บันทึกข้อมูล";
-
-          } else {
-
-            message.textContent =
-              "สมัครสมาชิกไม่สำเร็จ: " +
-              error.message;
-
-          }
-
-        }
-
-      });
-
-
-    // =========================
-    // เข้าสู่ระบบ
-    // =========================
 
     document
       .querySelector("#loginForm")
