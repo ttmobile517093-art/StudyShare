@@ -6,81 +6,86 @@ import {
   getDoc
 } from "./firebase.js";
 
+console.log("StudyShare script loaded");
 
-// ================================
-// ตรวจสอบผู้ใช้ที่เข้าสู่ระบบ
-// ================================
 
 onAuthStateChanged(auth, async (user) => {
 
-  const loginButton = document.querySelector(".login-btn");
+  console.log("Firebase user:", user);
 
+  const loginButton =
+    document.querySelector(".login-btn");
+
+  if (!loginButton) {
+    console.log("ไม่พบ .login-btn ในหน้าเว็บ");
+    return;
+  }
+
+
+  // ยังไม่ได้เข้าสู่ระบบ
   if (!user) {
-    if (loginButton) {
-      loginButton.textContent = "เข้าสู่ระบบ";
-      loginButton.href = "login.html";
-    }
+
+    loginButton.textContent = "เข้าสู่ระบบ";
+    loginButton.href = "login.html";
 
     return;
   }
 
 
-  // ผู้ใช้เข้าสู่ระบบแล้ว
-  if (loginButton) {
-    loginButton.textContent = "กำลังโหลด...";
-  }
+  // เข้าสู่ระบบแล้ว
+  loginButton.textContent = "กำลังโหลด...";
 
 
   try {
 
-    const userRef = doc(db, "users", user.uid);
-    const userSnap = await getDoc(userRef);
+    const userRef =
+      doc(db, "users", user.uid);
+
+    const userSnap =
+      await getDoc(userRef);
 
 
     if (userSnap.exists()) {
 
-      const userData = userSnap.data();
+      const data = userSnap.data();
 
-      console.log("ข้อมูลผู้ใช้:", userData);
+      console.log("ข้อมูลผู้ใช้:", data);
 
-      if (loginButton) {
-        loginButton.textContent =
-          userData.name || "โปรไฟล์";
-
-        loginButton.href = "profile.html";
-      }
+      loginButton.textContent =
+        data.name || "โปรไฟล์";
 
     } else {
 
-      console.log("ไม่พบข้อมูลผู้ใช้ใน Firestore");
+      console.log(
+        "พบ Firebase Account แต่ไม่พบข้อมูลใน Firestore"
+      );
 
-      if (loginButton) {
-        loginButton.textContent = "โปรไฟล์";
-        loginButton.href = "profile.html";
-      }
-
+      loginButton.textContent = "โปรไฟล์";
     }
+
+
+    loginButton.href = "profile.html";
+
 
   } catch (error) {
 
-    console.error("โหลดข้อมูลผู้ใช้ไม่สำเร็จ:", error);
+    console.error(
+      "เกิดข้อผิดพลาดในการโหลดข้อมูล:",
+      error
+    );
 
-    if (loginButton) {
-      loginButton.textContent = "โปรไฟล์";
-      loginButton.href = "profile.html";
-    }
-
+    loginButton.textContent = "โปรไฟล์";
+    loginButton.href = "profile.html";
   }
 
 });
 
 
-// ================================
 // ปีปัจจุบัน
-// ================================
+const year =
+  document.querySelector("#year");
 
-const yearElement = document.querySelector("#year");
-
-if (yearElement) {
-  yearElement.textContent = new Date().getFullYear();
+if (year) {
+  year.textContent =
+    new Date().getFullYear();
 }
