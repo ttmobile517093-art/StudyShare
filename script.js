@@ -37,7 +37,9 @@ onAuthStateChanged(auth, async (user) => {
 
     if (userSnap.exists()) {
       const data = userSnap.data();
+
       console.log("ข้อมูลผู้ใช้:", data);
+
       loginButton.textContent = data.name || "โปรไฟล์";
     } else {
       loginButton.textContent = "โปรไฟล์";
@@ -46,7 +48,8 @@ onAuthStateChanged(auth, async (user) => {
     loginButton.href = "profile.html";
 
   } catch (error) {
-    console.error("เกิดข้อผิดพลาดในการโหลดข้อมูล:", error);
+    console.error("เกิดข้อผิดพลาดในการโหลดข้อมูลผู้ใช้:", error);
+
     loginButton.textContent = "โปรไฟล์";
     loginButton.href = "profile.html";
   }
@@ -57,17 +60,32 @@ onAuthStateChanged(auth, async (user) => {
 // โหลดจำนวนสถิติหน้าแรก
 // ===============================
 async function loadStats() {
-  try {
-    console.log("กำลังโหลดสถิติ...");
 
-    // โหลดข้อมูล Posts ทั้งหมด
-    const postsSnapshot = await getDocs(collection(db, "posts"));
+  console.log("เริ่มโหลดสถิติ...");
+
+  try {
+
+    // -------------------------------
+    // โหลด Posts
+    // -------------------------------
+
+    const postsSnapshot = await getDocs(
+      collection(db, "posts")
+    );
+
+    console.log(
+      "จำนวนเอกสารใน posts:",
+      postsSnapshot.size
+    );
 
     let bookCount = 0;
     let noteCount = 0;
 
     postsSnapshot.forEach((docSnap) => {
+
       const data = docSnap.data();
+
+      console.log("Post:", data);
 
       if (data.type === "book") {
         bookCount++;
@@ -76,16 +94,44 @@ async function loadStats() {
       if (data.type === "note") {
         noteCount++;
       }
+
     });
 
-    // โหลดจำนวนสมาชิก
-    const usersSnapshot = await getDocs(collection(db, "users"));
-    const userCount = usersSnapshot.size;
 
-    // แสดงผลบนหน้าเว็บ
-    const bookElement = document.querySelector("#bookCount");
-    const noteElement = document.querySelector("#noteCount");
-    const userElement = document.querySelector("#userCount");
+    // -------------------------------
+    // โหลด Users
+    // -------------------------------
+
+    const usersSnapshot = await getDocs(
+      collection(db, "users")
+    );
+
+    console.log(
+      "จำนวนเอกสารใน users:",
+      usersSnapshot.size
+    );
+
+    let userCount = usersSnapshot.size;
+
+
+    // -------------------------------
+    // แสดงตัวเลขบนหน้าแรก
+    // -------------------------------
+
+    const bookElement =
+      document.querySelector("#bookCount");
+
+    const noteElement =
+      document.querySelector("#noteCount");
+
+    const userElement =
+      document.querySelector("#userCount");
+
+
+    console.log("bookElement:", bookElement);
+    console.log("noteElement:", noteElement);
+    console.log("userElement:", userElement);
+
 
     if (bookElement) {
       bookElement.textContent = bookCount;
@@ -99,25 +145,40 @@ async function loadStats() {
       userElement.textContent = userCount;
     }
 
-    console.log("จำนวนหนังสือ:", bookCount);
-    console.log("จำนวนชีท:", noteCount);
-    console.log("จำนวนสมาชิก:", userCount);
+
+    // -------------------------------
+    // แสดงผลใน Console
+    // -------------------------------
+
+    console.log("================================");
+    console.log("📚 จำนวนหนังสือ:", bookCount);
+    console.log("📝 จำนวนชีท:", noteCount);
+    console.log("👤 จำนวนสมาชิก:", userCount);
+    console.log("================================");
+
 
   } catch (error) {
-    console.error("โหลดสถิติไม่สำเร็จ:", error);
+
+    console.error(
+      "❌ โหลดสถิติไม่สำเร็จ:",
+      error
+    );
+
   }
 }
 
 
 // ===============================
-// เรียกใช้สถิติ
+// เรียกโหลดสถิติ
 // ===============================
+
 loadStats();
 
 
 // ===============================
-// ปีปัจจุบันใน Footer
+// ปีปัจจุบัน
 // ===============================
+
 const year = document.querySelector("#year");
 
 if (year) {
