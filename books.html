@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
   <title>หนังสือ | StudyShare</title>
 
   <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
+
 <header class="navbar">
+
   <div class="container nav-inner">
 
     <a href="index.html" class="logo">
@@ -19,22 +26,44 @@
     </a>
 
     <nav class="nav-links">
-      <a href="index.html">หน้าแรก</a>
-      <a href="books.html">หนังสือ</a>
-      <a href="notes.html">ชีทสรุป</a>
-      <a href="announcements.html">ประกาศ</a>
-      <a href="about.html">เกี่ยวกับระบบ</a>
+
+      <a href="index.html">
+        หน้าแรก
+      </a>
+
+      <a href="books.html">
+        หนังสือ
+      </a>
+
+      <a href="notes.html">
+        ชีทสรุป
+      </a>
+
+      <a href="announcements.html">
+        ประกาศ
+      </a>
+
+      <a href="about.html">
+        เกี่ยวกับระบบ
+      </a>
+
     </nav>
 
-    <a href="profile.html" class="login-btn">
+    <a
+      href="profile.html"
+      class="login-btn">
+
       โปรไฟล์
+
     </a>
 
   </div>
+
 </header>
 
 
 <main>
+
 
 <section class="page-hero">
 
@@ -59,97 +88,80 @@
 
 <section class="section">
 
-<div class="container">
-
-  <!-- SEARCH -->
-
-  <div class="book-search">
-
-    <input
-      type="text"
-      id="searchBook"
-      placeholder="🔎 ค้นหาชื่อหนังสือหรือวิชา..."
-    >
-
-  </div>
-
-
-  <!-- FILTER -->
-
-  <div class="category-buttons">
-
-    <button
-      class="category-btn active"
-      data-category="ทั้งหมด">
-      ทั้งหมด
-    </button>
-
-    <button
-      class="category-btn"
-      data-category="คณิตศาสตร์">
-      คณิตศาสตร์
-    </button>
-
-    <button
-      class="category-btn"
-      data-category="วิทยาศาสตร์">
-      วิทยาศาสตร์
-    </button>
-
-    <button
-      class="category-btn"
-      data-category="ภาษาอังกฤษ">
-      ภาษาอังกฤษ
-    </button>
-
-    <button
-      class="category-btn"
-      data-category="ภาษาไทย">
-      ภาษาไทย
-    </button>
-
-  </div>
-
-
-  <!-- BOOK LIST -->
-
-  <div id="bookList" class="book-grid">
-
-    <div class="loading-card">
-      กำลังโหลดหนังสือ...
-    </div>
-
-  </div>
-
-</div>
-
-</section>
-
-
-<section class="cta-section">
-
   <div class="container">
 
-    <div class="cta-box">
 
-      <h2>
-        มีหนังสือที่ไม่ได้ใช้แล้ว?
-      </h2>
+    <div class="book-search">
 
-      <p>
-        แบ่งปันให้เพื่อนนักเรียน
-        และช่วยส่งต่อโอกาสทางการเรียน
-      </p>
-
-      <a href="post.html" class="btn btn-white">
-        ＋ ลงประกาศหนังสือ
-      </a>
+      <input
+        type="text"
+        id="searchBook"
+        placeholder="🔎 ค้นหาชื่อหนังสือหรือวิชา..."
+      >
 
     </div>
+
+
+    <div class="category-buttons">
+
+      <button
+        class="category-btn active"
+        data-category="ทั้งหมด">
+
+        ทั้งหมด
+
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="คณิตศาสตร์">
+
+        คณิตศาสตร์
+
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="วิทยาศาสตร์">
+
+        วิทยาศาสตร์
+
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="ภาษาอังกฤษ">
+
+        ภาษาอังกฤษ
+
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="ภาษาไทย">
+
+        ภาษาไทย
+
+      </button>
+
+    </div>
+
+
+    <div
+      id="bookList"
+      class="book-grid">
+
+      <div class="loading-card">
+        กำลังโหลดหนังสือ...
+      </div>
+
+    </div>
+
 
   </div>
 
 </section>
+
 
 </main>
 
@@ -194,9 +206,11 @@ const bookList =
 const searchBook =
   document.querySelector("#searchBook");
 
+
 let books = [];
 
-let currentCategory = "ทั้งหมด";
+let currentCategory =
+  "ทั้งหมด";
 
 
 // ============================
@@ -212,14 +226,19 @@ async function loadBooks() {
       orderBy("createdAt", "desc")
     );
 
+
     const snapshot =
       await getDocs(q);
 
+
     books = [];
+
 
     snapshot.forEach((item) => {
 
-      const data = item.data();
+      const data =
+        item.data();
+
 
       if (data.type === "book") {
 
@@ -232,11 +251,14 @@ async function loadBooks() {
 
     });
 
+
     renderBooks();
+
 
   } catch (error) {
 
     console.error(error);
+
 
     bookList.innerHTML = `
       <div class="loading-card">
@@ -264,11 +286,15 @@ function renderBooks() {
   const filtered =
     books.filter((book) => {
 
+
       const title =
-        (book.title || "").toLowerCase();
+        (book.title || "")
+          .toLowerCase();
+
 
       const subject =
-        (book.subject || "").toLowerCase();
+        (book.subject || "")
+          .toLowerCase();
 
 
       const matchSearch =
@@ -283,7 +309,10 @@ function renderBooks() {
         );
 
 
-      return matchSearch && matchCategory;
+      return (
+        matchSearch &&
+        matchCategory
+      );
 
     });
 
@@ -292,11 +321,14 @@ function renderBooks() {
 
     bookList.innerHTML = `
       <div class="loading-card">
+
         📚 ยังไม่มีหนังสือที่ตรงกับการค้นหา
+
       </div>
     `;
 
     return;
+
   }
 
 
@@ -305,47 +337,91 @@ function renderBooks() {
 
       <div class="book-card">
 
+
         <div class="book-cover">
-          📚
+
+          ${
+            book.image
+              ? `
+                <img
+                  src="${book.image}"
+                  alt="${book.title || "หนังสือ"}"
+                >
+              `
+              : `
+                <span>📚</span>
+              `
+          }
+
         </div>
+
 
         <div class="book-content">
 
+
           <span class="book-subject">
+
             ${book.subject || "ไม่ระบุวิชา"}
+
           </span>
 
+
           <h3>
+
             ${book.title || "ไม่มีชื่อหนังสือ"}
+
           </h3>
 
+
           <p>
-            ${book.description || "ไม่มีรายละเอียด"}
+
+            ${
+              book.description ||
+              "ไม่มีรายละเอียด"
+            }
+
           </p>
 
+
           <div class="book-owner">
-            👤 ${book.ownerName || "นักเรียน"}
+
+            👤
+            ${book.ownerName || "นักเรียน"}
+
           </div>
+
 
           <div class="book-bottom">
 
+
             <strong>
+
               ${
                 book.shareType === "free"
                   ? "🎁 ให้ฟรี"
                   : book.shareType === "exchange"
                   ? "🔄 แลกเปลี่ยน"
-                  : "💰 " + (book.price || "สอบถาม")
+                  : "💰 " +
+                    (
+                      book.price || 
+                      "สอบถาม"
+                    )
               }
+
             </strong>
+
 
             <button
               class="view-book"
               data-id="${book.id}">
+
               ดูรายละเอียด
+
             </button>
 
+
           </div>
+
 
         </div>
 
@@ -358,15 +434,15 @@ function renderBooks() {
     .querySelectorAll(".view-book")
     .forEach((button) => {
 
-      button.addEventListener("click", () => {
+      button.addEventListener(
+        "click",
+        () => {
 
-        const id =
-          button.dataset.id;
+          window.location.href =
+            `post.html?id=${button.dataset.id}`;
 
-        window.location.href =
-          `post.html?id=${id}`;
-
-      });
+        }
+      );
 
     });
 
@@ -391,22 +467,32 @@ document
   .querySelectorAll(".category-btn")
   .forEach((button) => {
 
-    button.addEventListener("click", () => {
+    button.addEventListener(
+      "click",
+      () => {
 
-      document
-        .querySelectorAll(".category-btn")
-        .forEach((item) =>
-          item.classList.remove("active")
+        document
+          .querySelectorAll(".category-btn")
+          .forEach((item) =>
+            item.classList.remove(
+              "active"
+            )
+          );
+
+
+        button.classList.add(
+          "active"
         );
 
-      button.classList.add("active");
 
-      currentCategory =
-        button.dataset.category;
+        currentCategory =
+          button.dataset.category;
 
-      renderBooks();
 
-    });
+        renderBooks();
+
+      }
+    );
 
   });
 
@@ -415,5 +501,6 @@ loadBooks();
 
 </script>
 
+
 </body>
-  </html>
+</html>
