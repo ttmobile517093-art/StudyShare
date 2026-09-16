@@ -7,600 +7,353 @@
   <title>เข้าสู่ระบบ | StudyShare</title>
 
   <link rel="stylesheet" href="style.css">
-
-  <style>
-    .auth-page {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 30px 20px;
-      background: linear-gradient(135deg, #faf8ff, #eee5ff);
-    }
-
-    .auth-box {
-      width: 100%;
-      max-width: 480px;
-      background: #fff;
-      border: 1px solid #e6def2;
-      border-radius: 24px;
-      padding: 35px;
-      box-shadow: 0 20px 60px rgba(67,32,128,.12);
-    }
-
-    .auth-logo {
-      text-align: center;
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-
-    .auth-box h1 {
-      text-align: center;
-      color: #432080;
-      margin: 0;
-    }
-
-    .auth-subtitle {
-      text-align: center;
-      color: #77717f;
-      font-size: 14px;
-      margin: 8px 0 28px;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 6px;
-      color: #432080;
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #ddd4eb;
-      border-radius: 10px;
-      font-size: 14px;
-      outline: none;
-      background: white;
-    }
-
-    .form-group input:focus {
-      border-color: #6c3fc5;
-      box-shadow: 0 0 0 3px #f2edff;
-    }
-
-    .submit-btn {
-      width: 100%;
-      border: 0;
-      border-radius: 11px;
-      padding: 14px;
-      background: #6c3fc5;
-      color: white;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 8px;
-    }
-
-    .submit-btn:hover {
-      background: #432080;
-    }
-
-    .submit-btn:disabled {
-      opacity: .6;
-      cursor: wait;
-    }
-
-    .switch-area {
-      text-align: center;
-      margin-top: 20px;
-      color: #77717f;
-      font-size: 13px;
-    }
-
-    .switch-btn {
-      border: 0;
-      background: none;
-      color: #6c3fc5;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .message {
-      display: none;
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 10px;
-      text-align: center;
-      font-size: 13px;
-      background: #f2edff;
-      color: #432080;
-    }
-
-    .message.error {
-      background: #fff0f0;
-      color: #a02020;
-    }
-
-    .hidden {
-      display: none;
-    }
-  </style>
 </head>
 
 <body>
 
-<main class="auth-page">
+  <header class="navbar">
+    <div class="container nav-inner">
 
-  <div class="auth-box">
+      <a href="index.html" class="logo">
+        📚 StudyShare
+      </a>
 
-    <div class="auth-logo">📚</div>
-
-    <h1 id="title">เข้าสู่ระบบ</h1>
-
-    <p class="auth-subtitle" id="subtitle">
-      เข้าสู่ StudyShare เพื่อใช้งานระบบ
-    </p>
-
-
-    <!-- LOGIN -->
-
-    <form id="loginForm">
-
-      <div class="form-group">
-        <label>อีเมล</label>
-
-        <input
-          id="loginEmail"
-          type="email"
-          placeholder="example@email.com"
-          required
-        >
-      </div>
-
-
-      <div class="form-group">
-        <label>รหัสผ่าน</label>
-
-        <input
-          id="loginPassword"
-          type="password"
-          placeholder="รหัสผ่าน"
-          required
-        >
-      </div>
-
-
-      <button
-        id="loginButton"
-        class="submit-btn"
-        type="submit"
-      >
-        เข้าสู่ระบบ
-      </button>
-
-    </form>
-
-
-    <!-- REGISTER -->
-
-    <form id="registerForm" class="hidden">
-
-      <div class="form-group">
-        <label>ชื่อ - นามสกุล</label>
-
-        <input
-          id="registerName"
-          type="text"
-          placeholder="เช่น เด็กหญิง..."
-          required
-        >
-      </div>
-
-
-      <div class="form-group">
-        <label>รหัสนักเรียน</label>
-
-        <input
-          id="studentId"
-          type="text"
-          placeholder="เช่น 12345"
-          required
-        >
-      </div>
-
-
-      <div class="form-group">
-        <label>ชั้น / ห้อง</label>
-
-        <input
-          id="className"
-          type="text"
-          placeholder="เช่น ม.4/1"
-          required
-        >
-      </div>
-
-
-      <div class="form-group">
-        <label>อีเมล</label>
-
-        <input
-          id="registerEmail"
-          type="email"
-          placeholder="example@email.com"
-          required
-        >
-      </div>
-
-
-      <div class="form-group">
-        <label>รหัสผ่าน</label>
-
-        <input
-          id="registerPassword"
-          type="password"
-          minlength="6"
-          placeholder="อย่างน้อย 6 ตัวอักษร"
-          required
-        >
-      </div>
-
-
-      <button
-        id="registerButton"
-        class="submit-btn"
-        type="submit"
-      >
-        สมัครสมาชิก
-      </button>
-
-    </form>
-
-
-    <div id="message" class="message"></div>
-
-
-    <div class="switch-area">
-
-      <span id="switchText">
-        ยังไม่มีบัญชี?
-      </span>
-
-      <button
-        id="switchButton"
-        class="switch-btn"
-        type="button"
-      >
-        สมัครสมาชิก
-      </button>
+      <a href="index.html" class="login-btn">
+        หน้าแรก
+      </a>
 
     </div>
+  </header>
 
-  </div>
 
-</main>
+  <main>
 
+    <section class="login-section">
 
-<script type="module">
+      <div class="login-card">
 
-import {
-  auth,
-  db
-} from "./firebase.js";
+        <div class="login-header">
+          <div class="login-logo">📚</div>
 
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
-} from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+          <h1>StudyShare</h1>
 
-import {
-  doc,
-  setDoc,
-  serverTimestamp
-} from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+          <p>
+            ระบบแลกเปลี่ยนหนังสือและชีทสรุป
+          </p>
+        </div>
 
 
-const loginForm =
-  document.getElementById("loginForm");
+        <!-- ================= LOGIN ================= -->
 
-const registerForm =
-  document.getElementById("registerForm");
+        <form id="loginForm">
 
-const switchButton =
-  document.getElementById("switchButton");
+          <h2>เข้าสู่ระบบ</h2>
 
-const switchText =
-  document.getElementById("switchText");
+          <label>อีเมล</label>
 
-const title =
-  document.getElementById("title");
+          <input
+            type="email"
+            id="loginEmail"
+            placeholder="กรอกอีเมล"
+            required
+          >
 
-const subtitle =
-  document.getElementById("subtitle");
 
-const message =
-  document.getElementById("message");
+          <label>รหัสผ่าน</label>
 
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="กรอกรหัสผ่าน"
+            required
+          >
 
-let registerMode = false;
 
+          <button type="submit" class="btn btn-primary">
+            เข้าสู่ระบบ
+          </button>
 
-/* =========================
-   MESSAGE
-========================= */
+        </form>
 
-function showMessage(text, error = false) {
 
-  message.textContent = text;
+        <div class="form-divider">
+          หรือ
+        </div>
 
-  message.style.display = "block";
 
-  if (error) {
-    message.classList.add("error");
-  } else {
-    message.classList.remove("error");
-  }
+        <!-- ================= REGISTER ================= -->
 
-}
+        <form id="registerForm">
 
+          <h2>สมัครสมาชิก</h2>
 
-/* =========================
-   SWITCH
-========================= */
+          <label>ชื่อ-นามสกุล</label>
 
-switchButton.addEventListener("click", () => {
+          <input
+            type="text"
+            id="registerName"
+            placeholder="เช่น เด็กหญิงสมหญิง ใจดี"
+            required
+          >
 
-  registerMode = !registerMode;
 
-  message.style.display = "none";
+          <label>รหัสนักเรียน</label>
 
+          <input
+            type="text"
+            id="registerStudentId"
+            placeholder="กรอกรหัสนักเรียน"
+            required
+          >
 
-  if (registerMode) {
 
-    loginForm.classList.add("hidden");
+          <label>ชั้น / ห้อง</label>
 
-    registerForm.classList.remove("hidden");
+          <input
+            type="text"
+            id="registerClass"
+            placeholder="เช่น ม.3/1"
+            required
+          >
 
-    title.textContent =
-      "สมัครสมาชิก";
 
-    subtitle.textContent =
-      "สร้างบัญชีเพื่อใช้งาน StudyShare";
+          <label>อีเมล</label>
 
-    switchText.textContent =
-      "มีบัญชีอยู่แล้ว?";
+          <input
+            type="email"
+            id="registerEmail"
+            placeholder="กรอกอีเมล"
+            required
+          >
 
-    switchButton.textContent =
-      "เข้าสู่ระบบ";
 
-  } else {
+          <label>รหัสผ่าน</label>
 
-    registerForm.classList.add("hidden");
+          <input
+            type="password"
+            id="registerPassword"
+            placeholder="อย่างน้อย 6 ตัวอักษร"
+            minlength="6"
+            required
+          >
 
-    loginForm.classList.remove("hidden");
 
-    title.textContent =
-      "เข้าสู่ระบบ";
+          <button type="submit" class="btn btn-primary">
+            สมัครสมาชิก
+          </button>
 
-    subtitle.textContent =
-      "เข้าสู่ StudyShare เพื่อใช้งานระบบ";
+        </form>
 
-    switchText.textContent =
-      "ยังไม่มีบัญชี?";
 
-    switchButton.textContent =
-      "สมัครสมาชิก";
+        <p id="message"></p>
 
-  }
+      </div>
 
-});
+    </section>
 
+  </main>
 
-/* =========================
-   REGISTER
-========================= */
 
-registerForm.addEventListener("submit", async (event) => {
+  <script type="module">
 
-  event.preventDefault();
-
-  const button =
-    document.getElementById("registerButton");
-
-  button.disabled = true;
-
-  button.textContent =
-    "กำลังสมัครสมาชิก...";
-
-
-  const name =
-    document.getElementById("registerName").value.trim();
-
-  const studentId =
-    document.getElementById("studentId").value.trim();
-
-  const className =
-    document.getElementById("className").value.trim();
-
-  const email =
-    document.getElementById("registerEmail").value.trim();
-
-  const password =
-    document.getElementById("registerPassword").value;
-
-
-  try {
-
-    const result =
-      await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-
-    await setDoc(
-      doc(db, "users", result.user.uid),
-      {
-        uid: result.user.uid,
-        name: name,
-        studentId: studentId,
-        className: className,
-        email: email,
-        createdAt: serverTimestamp()
-      }
-    );
-
-
-    showMessage(
-      "สมัครสมาชิกสำเร็จ! กำลังเข้าสู่ระบบ..."
-    );
-
-
-    setTimeout(() => {
-
-      window.location.href =
-        "index.html";
-
-    }, 1000);
-
-
-  } catch (error) {
-
-    console.error(error);
-
-    let text =
-      "สมัครสมาชิกไม่สำเร็จ";
-
-
-    if (
-      error.code ===
-      "auth/email-already-in-use"
-    ) {
-
-      text =
-        "อีเมลนี้ถูกใช้งานแล้ว";
-
-    } else if (
-      error.code ===
-      "auth/invalid-email"
-    ) {
-
-      text =
-        "รูปแบบอีเมลไม่ถูกต้อง";
-
-    } else if (
-      error.code ===
-      "auth/weak-password"
-    ) {
-
-      text =
-        "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร";
-
-    } else if (
-      error.code ===
-      "auth/operation-not-allowed"
-    ) {
-
-      text =
-        "Firebase ยังไม่ได้เปิดการสมัครด้วย Email/Password";
-
-    } else if (
-      error.code ===
-      "permission-denied"
-    ) {
-
-      text =
-        "Firestore ไม่อนุญาตให้บันทึกข้อมูล";
-
-    }
-
-
-    showMessage(text, true);
-
-    button.disabled = false;
-
-    button.textContent =
-      "สมัครสมาชิก";
-
-  }
-
-});
-
-
-/* =========================
-   LOGIN
-========================= */
-
-loginForm.addEventListener("submit", async (event) => {
-
-  event.preventDefault();
-
-  const button =
-    document.getElementById("loginButton");
-
-  button.disabled = true;
-
-  button.textContent =
-    "กำลังเข้าสู่ระบบ...";
-
-
-  const email =
-    document.getElementById("loginEmail").value.trim();
-
-  const password =
-    document.getElementById("loginPassword").value;
-
-
-  try {
-
-    await signInWithEmailAndPassword(
+    import {
       auth,
-      email,
-      password
-    );
+      db,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      doc,
+      setDoc,
+      serverTimestamp
+    } from "./firebase.js";
 
 
-    showMessage(
-      "เข้าสู่ระบบสำเร็จ!"
-    );
+    const message =
+      document.querySelector("#message");
 
 
-    setTimeout(() => {
+    // =========================
+    // สมัครสมาชิก
+    // =========================
 
-      window.location.href =
-        "index.html";
+    document
+      .querySelector("#registerForm")
+      .addEventListener("submit", async (event) => {
 
-    }, 700);
+        event.preventDefault();
+
+        message.textContent =
+          "กำลังสมัครสมาชิก...";
 
 
-  } catch (error) {
+        const name =
+          document.querySelector("#registerName")
+            .value.trim();
 
-    console.error(error);
+        const studentId =
+          document.querySelector("#registerStudentId")
+            .value.trim();
 
-    showMessage(
-      "อีเมลหรือรหัสผ่านไม่ถูกต้อง",
-      true
-    );
+        const className =
+          document.querySelector("#registerClass")
+            .value.trim();
 
-    button.disabled = false;
+        const email =
+          document.querySelector("#registerEmail")
+            .value.trim();
 
-    button.textContent =
-      "เข้าสู่ระบบ";
+        const password =
+          document.querySelector("#registerPassword")
+            .value;
 
-  }
 
-});
+        try {
 
-</script>
+          // สร้างบัญชี Firebase Authentication
+
+          const result =
+            await createUserWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+
+
+          const user =
+            result.user;
+
+
+          // บันทึกข้อมูลนักเรียนลง Firestore
+
+          await setDoc(
+            doc(db, "users", user.uid),
+            {
+              uid: user.uid,
+              name: name,
+              studentId: studentId,
+              className: className,
+              email: email,
+              createdAt: serverTimestamp()
+            }
+          );
+
+
+          message.textContent =
+            "สมัครสมาชิกสำเร็จ กำลังเข้าสู่ระบบ...";
+
+
+          setTimeout(() => {
+
+            window.location.href =
+              "index.html";
+
+          }, 800);
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          if (
+            error.code ===
+            "auth/email-already-in-use"
+          ) {
+
+            message.textContent =
+              "อีเมลนี้ถูกสมัครไว้แล้ว";
+
+          } else if (
+            error.code ===
+            "auth/weak-password"
+          ) {
+
+            message.textContent =
+              "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร";
+
+          } else if (
+            error.code ===
+            "auth/invalid-email"
+          ) {
+
+            message.textContent =
+              "รูปแบบอีเมลไม่ถูกต้อง";
+
+          } else if (
+            error.code ===
+            "permission-denied"
+          ) {
+
+            message.textContent =
+              "Firebase ไม่อนุญาตให้บันทึกข้อมูล";
+
+          } else {
+
+            message.textContent =
+              "สมัครสมาชิกไม่สำเร็จ: " +
+              error.message;
+
+          }
+
+        }
+
+      });
+
+
+    // =========================
+    // เข้าสู่ระบบ
+    // =========================
+
+    document
+      .querySelector("#loginForm")
+      .addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+
+        message.textContent =
+          "กำลังเข้าสู่ระบบ...";
+
+
+        const email =
+          document.querySelector("#loginEmail")
+            .value.trim();
+
+        const password =
+          document.querySelector("#loginPassword")
+            .value;
+
+
+        try {
+
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+
+          message.textContent =
+            "เข้าสู่ระบบสำเร็จ";
+
+
+          setTimeout(() => {
+
+            window.location.href =
+              "index.html";
+
+          }, 500);
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          message.textContent =
+            "อีเมลหรือรหัสผ่านไม่ถูกต้อง";
+
+        }
+
+      });
+
+  </script>
 
 </body>
 </html>
