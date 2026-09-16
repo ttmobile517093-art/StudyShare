@@ -1,10 +1,4 @@
-// ================================
-// StudyShare - Firebase Configuration
-// ================================
-
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
   getAuth,
@@ -31,12 +25,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-// ================================
-// Firebase Configuration
-// ================================
-
 const firebaseConfig = {
-  apiKey: "AIzaSyAysQGKQEM0VpwcvBxQAzf6fgUVNSAYR9I",
+  apiKey: "AIzaSyAysQGKQEM0VpwcvBxQAzf6fgVUNsAYR9I",
   authDomain: "studyshare-web.firebaseapp.com",
   projectId: "studyshare-web",
   storageBucket: "studyshare-web.firebasestorage.app",
@@ -46,30 +36,12 @@ const firebaseConfig = {
 };
 
 
-// ================================
-// Initialize Firebase
-// ================================
-
 const app = initializeApp(firebaseConfig);
-
-
-// ================================
-// Authentication
-// ================================
 
 const auth = getAuth(app);
 
-
-// ================================
-// Firestore Database
-// ================================
-
 const db = getFirestore(app);
 
-
-// ================================
-// Export
-// ================================
 
 export {
   app,
@@ -77,6 +49,7 @@ export {
   db,
 
   onAuthStateChanged,
+
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
@@ -89,8 +62,10 @@ export {
   updateDoc,
   deleteDoc,
   doc,
+
   query,
   orderBy,
   where,
+
   serverTimestamp
 };
