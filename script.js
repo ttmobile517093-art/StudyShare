@@ -1,235 +1,280 @@
 import {
-  auth,
-  db,
-  onAuthStateChanged,
-  doc,
-  getDoc,
-  collection,
-  getDocs
+
+auth,
+
+db,
+
+onAuthStateChanged,
+
+doc,
+
+getDoc,
+
+collection,
+
+getDocs
+
 } from "./firebase.js";
+
 
 console.log("StudyShare script loaded");
 
 
 // ===============================
+
 // เปลี่ยนปุ่ม Login เป็น Profile
+
 // ===============================
+
 
 onAuthStateChanged(auth, async (user) => {
 
-  const loginButton =
-    document.querySelector(".login-btn");
 
-  if (!loginButton) return;
+const loginButton =
 
-
-  if (!user) {
-
-    loginButton.textContent =
-      "เข้าสู่ระบบ";
-
-    loginButton.href =
-      "login.html";
-
-    return;
-
-  }
+document.querySelector(".login-btn");
 
 
-  try {
-
-    const userRef =
-      doc(db, "users", user.uid);
-
-    const userSnap =
-      await getDoc(userRef);
+if (!loginButton) return;
 
 
-    if (userSnap.exists()) {
-
-      const data =
-        userSnap.data();
-
-      loginButton.textContent =
-        data.name || "โปรไฟล์";
-
-    } else {
-
-      loginButton.textContent =
-        "โปรไฟล์";
-
-    }
+if (!user) {
 
 
-    loginButton.href =
-      "profile.html";
+loginButton.textContent =  
+  "เข้าสู่ระบบ";  
+
+loginButton.href =  
+  "login.html";  
+
+return;  
 
 
-  } catch (error) {
 
-    console.error(
-      "โหลดข้อมูลผู้ใช้ไม่ได้:",
-      error
-    );
+}
 
-    loginButton.textContent =
-      "โปรไฟล์";
 
-    loginButton.href =
-      "profile.html";
+try {
 
-  }
+
+const userRef =  
+  doc(db, "users", user.uid);  
+
+const userSnap =  
+  await getDoc(userRef);  
+
+
+if (userSnap.exists()) {  
+
+  const data =  
+    userSnap.data();  
+
+  loginButton.textContent =  
+    data.name || "โปรไฟล์";  
+
+} else {  
+
+  loginButton.textContent =  
+    "โปรไฟล์";  
+
+}  
+
+
+loginButton.href =  
+  "profile.html";  
+
+
+
+} catch (error) {
+
+
+console.error(  
+  "โหลดข้อมูลผู้ใช้ไม่ได้:",  
+  error  
+);  
+
+loginButton.textContent =  
+  "โปรไฟล์";  
+
+loginButton.href =  
+  "profile.html";  
+
+
+
+}
+
 
 });
 
 
 // ===============================
+
 // โหลดสถิติ
+
 // ===============================
+
 
 async function loadStats() {
 
-  try {
 
-    console.log(
-      "กำลังโหลดสถิติ StudyShare..."
-    );
+try {
 
 
-    // ===============================
-    // นับหนังสือ + ชีท
-    // ===============================
-
-    const postsSnapshot =
-      await getDocs(
-        collection(db, "posts")
-      );
+console.log(  
+  "กำลังโหลดสถิติ StudyShare..."  
+);  
 
 
-    let bookCount = 0;
-    let noteCount = 0;
+// ===============================  
+// นับหนังสือ + ชีท  
+// ===============================  
+
+const postsSnapshot =  
+  await getDocs(  
+    collection(db, "posts")  
+  );  
 
 
-    postsSnapshot.forEach((post) => {
-
-      const data =
-        post.data();
+let bookCount = 0;  
+let noteCount = 0;  
 
 
-      if (data.type === "book") {
+postsSnapshot.forEach((post) => {  
 
-        bookCount++;
-
-      }
-
-
-      if (data.type === "note") {
-
-        noteCount++;
-
-      }
-
-    });
+  const data =  
+    post.data();  
 
 
-    // ===============================
-    // นับสมาชิกจาก publicUsers
-    // ===============================
+  if (data.type === "book") {  
 
-    const publicUsersSnapshot =
-      await getDocs(
-        collection(db, "publicUsers")
-      );
+    bookCount++;  
+
+  }  
 
 
-    const userCount =
-      publicUsersSnapshot.size;
+  if (data.type === "note") {  
+
+    noteCount++;  
+
+  }  
+
+});  
 
 
-    // ===============================
-    // แสดงผลบนหน้าเว็บ
-    // ===============================
+// ===============================  
+// นับสมาชิกจาก publicUsers  
+// ===============================  
 
-    const bookElement =
-      document.getElementById("bookCount");
-
-    const noteElement =
-      document.getElementById("noteCount");
-
-    const userElement =
-      document.getElementById("userCount");
+const publicUsersSnapshot =  
+  await getDocs(  
+    collection(db, "publicUsers")  
+  );  
 
 
-    if (bookElement) {
-
-      bookElement.textContent =
-        bookCount;
-
-    }
+const userCount =  
+  publicUsersSnapshot.size;  
 
 
-    if (noteElement) {
+// ===============================  
+// แสดงผลบนหน้าเว็บ  
+// ===============================  
 
-      noteElement.textContent =
-        noteCount;
+const bookElement =  
+  document.getElementById("bookCount");  
 
-    }
+const noteElement =  
+  document.getElementById("noteCount");  
 
-
-    if (userElement) {
-
-      userElement.textContent =
-        userCount;
-
-    }
+const userElement =  
+  document.getElementById("userCount");  
 
 
-    console.log(
-      "📚 หนังสือ:",
-      bookCount
-    );
+if (bookElement) {  
 
-    console.log(
-      "📝 ชีท:",
-      noteCount
-    );
+  bookElement.textContent =  
+    bookCount;  
 
-    console.log(
-      "👤 สมาชิก:",
-      userCount
-    );
+}  
 
 
-  } catch (error) {
+if (noteElement) {  
 
-    console.error(
-      "❌ โหลดสถิติไม่สำเร็จ:",
-      error
-    );
+  noteElement.textContent =  
+    noteCount;  
 
-  }
+}  
+
+
+if (userElement) {  
+
+  userElement.textContent =  
+    userCount;  
+
+}  
+
+
+console.log(  
+  "📚 หนังสือ:",  
+  bookCount  
+);  
+
+console.log(  
+  "📝 ชีท:",  
+  noteCount  
+);  
+
+console.log(  
+  "👤 สมาชิก:",  
+  userCount  
+);  
+
+
+
+} catch (error) {
+
+
+console.error(  
+  "❌ โหลดสถิติไม่สำเร็จ:",  
+  error  
+);  
+
+
+
+}
+
 
 }
 
 
 // ===============================
+
 // เริ่มโหลดสถิติ
+
 // ===============================
+
 
 loadStats();
 
 
 // ===============================
+
 // ปี Footer
+
 // ===============================
 
+
 const year =
-  document.getElementById("year");
+
+document.getElementById("year");
 
 
 if (year) {
 
-  year.textContent =
-    new Date().getFullYear();
+
+year.textContent =
+
+new Date().getFullYear();
+
 
 }
+
