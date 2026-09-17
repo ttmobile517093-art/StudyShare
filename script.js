@@ -14,44 +14,69 @@ console.log("StudyShare script loaded");
 // ===============================
 // เปลี่ยนปุ่ม Login เป็น Profile
 // ===============================
+
 onAuthStateChanged(auth, async (user) => {
 
-  const loginButton = document.querySelector(".login-btn");
+  const loginButton =
+    document.querySelector(".login-btn");
 
   if (!loginButton) return;
 
+
   if (!user) {
-    loginButton.textContent = "เข้าสู่ระบบ";
-    loginButton.href = "login.html";
+
+    loginButton.textContent =
+      "เข้าสู่ระบบ";
+
+    loginButton.href =
+      "login.html";
+
     return;
+
   }
+
 
   try {
 
-    const userRef = doc(db, "users", user.uid);
-    const userSnap = await getDoc(userRef);
+    const userRef =
+      doc(db, "users", user.uid);
+
+    const userSnap =
+      await getDoc(userRef);
+
 
     if (userSnap.exists()) {
 
-      const data = userSnap.data();
+      const data =
+        userSnap.data();
 
       loginButton.textContent =
         data.name || "โปรไฟล์";
 
     } else {
 
-      loginButton.textContent = "โปรไฟล์";
+      loginButton.textContent =
+        "โปรไฟล์";
 
     }
 
-    loginButton.href = "profile.html";
+
+    loginButton.href =
+      "profile.html";
+
 
   } catch (error) {
 
-    console.error("โหลดข้อมูลผู้ใช้ไม่ได้:", error);
+    console.error(
+      "โหลดข้อมูลผู้ใช้ไม่ได้:",
+      error
+    );
 
-    loginButton.textContent = "โปรไฟล์";
-    loginButton.href = "profile.html";
+    loginButton.textContent =
+      "โปรไฟล์";
+
+    loginButton.href =
+      "profile.html";
 
   }
 
@@ -61,51 +86,68 @@ onAuthStateChanged(auth, async (user) => {
 // ===============================
 // โหลดสถิติ
 // ===============================
+
 async function loadStats() {
 
   try {
 
-    console.log("กำลังโหลดสถิติ StudyShare...");
+    console.log(
+      "กำลังโหลดสถิติ StudyShare..."
+    );
 
 
     // ===============================
-    // หนังสือ + ชีท
+    // นับหนังสือ + ชีท
     // ===============================
 
     const postsSnapshot =
-      await getDocs(collection(db, "posts"));
+      await getDocs(
+        collection(db, "posts")
+      );
+
 
     let bookCount = 0;
     let noteCount = 0;
 
+
     postsSnapshot.forEach((post) => {
 
-      const data = post.data();
+      const data =
+        post.data();
+
 
       if (data.type === "book") {
+
         bookCount++;
+
       }
 
+
       if (data.type === "note") {
+
         noteCount++;
+
       }
 
     });
 
 
     // ===============================
-    // สมาชิก
+    // นับสมาชิกจาก publicUsers
     // ===============================
 
-    const usersSnapshot =
-      await getDocs(collection(db, "users"));
+    const publicUsersSnapshot =
+      await getDocs(
+        collection(db, "publicUsers")
+      );
+
 
     const userCount =
-      usersSnapshot.size;
+      publicUsersSnapshot.size;
 
 
     // ===============================
-    // แสดงผล
+    // แสดงผลบนหน้าเว็บ
     // ===============================
 
     const bookElement =
@@ -119,21 +161,43 @@ async function loadStats() {
 
 
     if (bookElement) {
-      bookElement.textContent = bookCount;
+
+      bookElement.textContent =
+        bookCount;
+
     }
+
 
     if (noteElement) {
-      noteElement.textContent = noteCount;
+
+      noteElement.textContent =
+        noteCount;
+
     }
+
 
     if (userElement) {
-      userElement.textContent = userCount;
+
+      userElement.textContent =
+        userCount;
+
     }
 
 
-    console.log("📚 หนังสือ:", bookCount);
-    console.log("📝 ชีท:", noteCount);
-    console.log("👤 สมาชิก:", userCount);
+    console.log(
+      "📚 หนังสือ:",
+      bookCount
+    );
+
+    console.log(
+      "📝 ชีท:",
+      noteCount
+    );
+
+    console.log(
+      "👤 สมาชิก:",
+      userCount
+    );
 
 
   } catch (error) {
@@ -162,7 +226,10 @@ loadStats();
 const year =
   document.getElementById("year");
 
+
 if (year) {
+
   year.textContent =
     new Date().getFullYear();
-  }
+
+}
