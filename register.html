@@ -43,8 +43,6 @@
         </div>
 
 
-        <!-- ================= REGISTER ================= -->
-
         <form id="registerForm">
 
           <h2>สมัครสมาชิก</h2>
@@ -173,7 +171,9 @@
 
         try {
 
+          // ===============================
           // สร้างบัญชี Firebase Authentication
+          // ===============================
 
           const result =
             await createUserWithEmailAndPassword(
@@ -187,7 +187,9 @@
             result.user;
 
 
-          // บันทึกข้อมูลนักเรียนลง Firestore
+          // ===============================
+          // บันทึกข้อมูลส่วนตัว
+          // ===============================
 
           await setDoc(
             doc(db, "users", user.uid),
@@ -197,6 +199,20 @@
               studentId: studentId,
               className: className,
               email: email,
+              createdAt: serverTimestamp()
+            }
+          );
+
+
+          // ===============================
+          // บันทึกข้อมูลสำหรับนับสมาชิก
+          // ไม่มีข้อมูลส่วนตัว
+          // ===============================
+
+          await setDoc(
+            doc(db, "publicUsers", user.uid),
+            {
+              uid: user.uid,
               createdAt: serverTimestamp()
             }
           );
@@ -266,4 +282,4 @@
   </script>
 
 </body>
-</html>
+  </html>
