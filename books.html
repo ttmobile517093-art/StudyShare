@@ -1,516 +1,190 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
+  
+  
+  
+    
 
-  <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
 
-  <title>หนังสือ | StudyShare</title>
+    
+    
+  
+  
+  
+  
+  
 
-  <link rel="stylesheet" href="style.css">
+<a href="index.html" class="logo">  
+  📚 StudyShare  
+</a>  
 
-</head>
+<nav class="nav-links">  
 
-<body>
+  <a href="index.html">  
+    หน้าแรก  
+  </a>  
 
+  <a href="books.html">  
+    หนังสือ  
+  </a>  
 
-<header class="navbar">
+  <a href="notes.html">  
+    ชีทสรุป  
+  </a>  
 
-  <div class="container nav-inner">
+  <a href="announcements.html">  
+    ประกาศ  
+  </a>  
 
-    <a href="index.html" class="logo">
-      📚 StudyShare
-    </a>
+  <a href="about.html">  
+    เกี่ยวกับระบบ  
+  </a>  
 
-    <nav class="nav-links">
+</nav>  
 
-      <a href="index.html">
-        หน้าแรก
-      </a>
+<a  
+  href="profile.html"  
+  class="login-btn">  
 
-      <a href="books.html">
-        หนังสือ
-      </a>
+  โปรไฟล์  
 
-      <a href="notes.html">
-        ชีทสรุป
-      </a>
+</a>  
 
-      <a href="announcements.html">
-        ประกาศ
-      </a>
 
-      <a href="about.html">
-        เกี่ยวกับระบบ
-      </a>
+  
+  
+  
+  
 
-    </nav>
+  
+  
+  
 
-    <a
-      href="profile.html"
-      class="login-btn">
+<span class="hero-badge">  
+  📚 BOOKS  
+</span>  
 
-      โปรไฟล์
+<h1>  
+  หนังสือเรียนและหนังสือเตรียมสอบ  
+</h1>  
 
-    </a>
+<p>  
+  ค้นหาหนังสือที่เพื่อนนักเรียนนำมาแบ่งปัน  
+</p>  
 
-  </div>
 
-</header>
+  
+  
 
+  
 
-<main>
+  
+  
+  
 
+<!-- ปุ่มกลับหน้าแรก -->  
+<div class="back-area">  
 
-<section class="page-hero">
+  <a href="index.html">  
+    ← กลับหน้าแรก  
+  </a>  
 
-  <div class="container">
+</div>  
 
-    <span class="hero-badge">
-      📚 BOOKS
-    </span>
 
-    <h1>
-      หนังสือเรียนและหนังสือเตรียมสอบ
-    </h1>
+<div class="book-search">  
 
-    <p>
-      ค้นหาหนังสือที่เพื่อนนักเรียนนำมาแบ่งปัน
-    </p>
+  <input  
+    type="text"  
+    id="searchBook"  
+    placeholder="🔎 ค้นหาชื่อหนังสือหรือวิชา..."  
+  >  
 
-  </div>
+</div>  
 
-</section>
 
+<div class="category-buttons">  
 
-<section class="section">
+  <button  
+    class="category-btn active"  
+    data-category="ทั้งหมด">  
 
-  <div class="container">
+    ทั้งหมด  
 
+  </button>  
 
-    <!-- ปุ่มกลับหน้าแรก -->
-    <div class="back-area">
+  <button  
+    class="category-btn"  
+    data-category="คณิตศาสตร์">  
 
-      <a href="index.html">
-        ← กลับหน้าแรก
-      </a>
+    คณิตศาสตร์  
 
-    </div>
+  </button>  
 
+  <button  
+    class="category-btn"  
+    data-category="วิทยาศาสตร์">  
 
-    <div class="book-search">
+    วิทยาศาสตร์  
 
-      <input
-        type="text"
-        id="searchBook"
-        placeholder="🔎 ค้นหาชื่อหนังสือหรือวิชา..."
-      >
+  </button>  
 
-    </div>
+  <button  
+    class="category-btn"  
+    data-category="ภาษาอังกฤษ">  
 
+    ภาษาอังกฤษ  
 
-    <div class="category-buttons">
+  </button>  
 
-      <button
-        class="category-btn active"
-        data-category="ทั้งหมด">
+  <button  
+    class="category-btn"  
+    data-category="ภาษาไทย">  
 
-        ทั้งหมด
+    ภาษาไทย  
 
-      </button>
+  </button>  
 
-      <button
-        class="category-btn"
-        data-category="คณิตศาสตร์">
+</div>  
 
-        คณิตศาสตร์
 
-      </button>
+<div  
+  id="bookList"  
+  class="book-grid">  
 
-      <button
-        class="category-btn"
-        data-category="วิทยาศาสตร์">
+  <div class="loading-card">  
+    กำลังโหลดหนังสือ...  
+  </div>  
 
-        วิทยาศาสตร์
+</div>  
 
-      </button>
 
-      <button
-        class="category-btn"
-        data-category="ภาษาอังกฤษ">
+  
+  
 
-        ภาษาอังกฤษ
+  
+  
+  
+  
+  
 
-      </button>
+<div class="footer-logo">  
+  📚 StudyShare  
+</div>  
 
-      <button
-        class="category-btn"
-        data-category="ภาษาไทย">
+<p>  
+  Student Book & Note Sharing System  
+</p>  
 
-        ภาษาไทย
+<div class="footer-line"></div>  
 
-      </button>
+<small>  
+  © 2026 StudyShare — ระบบแลกเปลี่ยนสื่อการเรียน  
+</small>  
 
-    </div>
 
-
-    <div
-      id="bookList"
-      class="book-grid">
-
-      <div class="loading-card">
-        กำลังโหลดหนังสือ...
-      </div>
-
-    </div>
-
-
-  </div>
-
-</section>
-
-
-</main>
-
-
-<footer class="footer">
-
-  <div class="container">
-
-    <div class="footer-logo">
-      📚 StudyShare
-    </div>
-
-    <p>
-      Student Book & Note Sharing System
-    </p>
-
-    <div class="footer-line"></div>
-
-    <small>
-      © 2026 StudyShare — ระบบแลกเปลี่ยนสื่อการเรียน
-    </small>
-
-  </div>
-
-</footer>
-
-
-<script type="module">
-
-import {
-  db,
-  collection,
-  getDocs,
-  query,
-  orderBy
-} from "./firebase.js";
-
-
-const bookList =
-  document.querySelector("#bookList");
-
-const searchBook =
-  document.querySelector("#searchBook");
-
-
-let books = [];
-
-let currentCategory =
-  "ทั้งหมด";
-
-
-// ============================
-// โหลดหนังสือ
-// ============================
-
-async function loadBooks() {
-
-  try {
-
-    const q = query(
-      collection(db, "posts"),
-      orderBy("createdAt", "desc")
-    );
-
-
-    const snapshot =
-      await getDocs(q);
-
-
-    books = [];
-
-
-    snapshot.forEach((item) => {
-
-      const data =
-        item.data();
-
-
-      if (data.type === "book") {
-
-        books.push({
-          id: item.id,
-          ...data
-        });
-
-      }
-
-    });
-
-
-    renderBooks();
-
-
-  } catch (error) {
-
-    console.error(error);
-
-
-    bookList.innerHTML = `
-      <div class="loading-card">
-        ไม่สามารถโหลดข้อมูลหนังสือได้
-      </div>
-    `;
-
-  }
-
-}
-
-
-// ============================
-// แสดงหนังสือ
-// ============================
-
-function renderBooks() {
-
-  const keyword =
-    searchBook.value
-      .trim()
-      .toLowerCase();
-
-
-  const filtered =
-    books.filter((book) => {
-
-
-      const title =
-        (book.title || "")
-          .toLowerCase();
-
-
-      const subject =
-        (book.subject || "")
-          .toLowerCase();
-
-
-      const matchSearch =
-        title.includes(keyword) ||
-        subject.includes(keyword);
-
-
-      const matchCategory =
-        currentCategory === "ทั้งหมด" ||
-        subject.includes(
-          currentCategory.toLowerCase()
-        );
-
-
-      return (
-        matchSearch &&
-        matchCategory
-      );
-
-    });
-
-
-  if (filtered.length === 0) {
-
-    bookList.innerHTML = `
-      <div class="loading-card">
-
-        📚 ยังไม่มีหนังสือที่ตรงกับการค้นหา
-
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  bookList.innerHTML =
-    filtered.map((book) => `
-
-      <div class="book-card">
-
-
-        <div class="book-cover">
-
-          ${
-            book.image
-              ? `
-                <img
-                  src="${book.image}"
-                  alt="${book.title || "หนังสือ"}"
-                >
-              `
-              : `
-                <span>📚</span>
-              `
-          }
-
-        </div>
-
-
-        <div class="book-content">
-
-
-          <span class="book-subject">
-
-            ${book.subject || "ไม่ระบุวิชา"}
-
-          </span>
-
-
-          <h3>
-
-            ${book.title || "ไม่มีชื่อหนังสือ"}
-
-          </h3>
-
-
-          <p>
-
-            ${
-              book.description ||
-              "ไม่มีรายละเอียด"
-            }
-
-          </p>
-
-
-          <div class="book-owner">
-
-            👤
-            ${book.ownerName || "นักเรียน"}
-
-          </div>
-
-
-          <div class="book-bottom">
-
-
-            <strong>
-
-              ${
-                book.shareType === "free"
-                  ? "🎁 ให้ฟรี"
-                  : book.shareType === "exchange"
-                  ? "🔄 แลกเปลี่ยน"
-                  : "💰 " +
-                    (
-                      book.price ||
-                      "สอบถาม"
-                    )
-              }
-
-            </strong>
-
-
-            <button
-              class="view-book"
-              data-id="${book.id}">
-
-              ดูรายละเอียด
-
-            </button>
-
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-    `).join("");
-
-
-  document
-    .querySelectorAll(".view-book")
-    .forEach((button) => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          window.location.href =
-            `post.html?id=${button.dataset.id}`;
-
-        }
-      );
-
-    });
-
-}
-
-
-// ============================
-// ค้นหา
-// ============================
-
-searchBook.addEventListener(
-  "input",
-  renderBooks
-);
-
-
-// ============================
-// หมวดหมู่
-// ============================
-
-document
-  .querySelectorAll(".category-btn")
-  .forEach((button) => {
-
-    button.addEventListener(
-      "click",
-      () => {
-
-        document
-          .querySelectorAll(".category-btn")
-          .forEach((item) =>
-            item.classList.remove(
-              "active"
-            )
-          );
-
-
-        button.classList.add(
-          "active"
-        );
-
-
-        currentCategory =
-          button.dataset.category;
-
-
-        renderBooks();
-
-      }
-    );
-
-  });
-
-
-loadBooks();
-
-</script>
-
-
-</body>
-  </html>
+  
+  
+  
+  
+  
+    
