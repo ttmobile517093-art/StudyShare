@@ -1,138 +1,451 @@
-async function createRequest(requestType) {
+  
+  
+  
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
 
-  if (!currentUser) {
-    alert("กรุณาเข้าสู่ระบบก่อนครับ");
-    window.location.href = "login.html";
-    return;
-  }
+<a href="index.html" class="logo">  
+  📚 StudyShare  
+</a>  
 
-  if (!currentPost) {
-    alert("ไม่พบข้อมูลโพสต์ครับ");
-    return;
-  }
+<nav class="nav-links">  
 
-  if (currentUser.uid === currentPost.ownerId) {
-    alert("เจ้าของโพสต์ไม่สามารถขอหนังสือของตัวเองได้ครับ");
-    return;
-  }
+  <a href="index.html">  
+    หน้าแรก  
+  </a>  
 
-  if (currentPost.status === "reserved") {
-    alert("รายการนี้ถูกจองแล้วครับ");
-    return;
-  }
+  <a href="books.html">  
+    หนังสือ  
+  </a>  
 
-  let typeText = "";
+  <a href="notes.html">  
+    ชีทสรุป  
+  </a>  
 
-  if (requestType === "buy") {
-    typeText = "🛒 ขอซื้อ";
-  } else if (requestType === "free") {
-    typeText = "🎁 ขอรับ";
-  } else {
-    typeText = "🔄 ขอแลก";
-  }
+  <a href="announcements.html">  
+    ประกาศ  
+  </a>  
 
-  const message = prompt(
-    typeText + "\n\nฝากข้อความถึงเจ้าของหนังสือได้เลยครับ"
-  );
+  <a href="about.html">  
+    เกี่ยวกับระบบ  
+  </a>  
 
-  if (message === null) {
-    return;
-  }
+</nav>  
 
-  if (!message.trim()) {
-    alert("กรุณาใส่ข้อความก่อนส่งคำขอครับ");
-    return;
-  }
+<a href="profile.html" class="login-btn">  
+  โปรไฟล์  
+</a>  
 
-  try {
 
-    const userRef = doc(
-      db,
-      "users",
-      currentUser.uid
-    );
+  
+  
+  
+  
 
-    const userSnap = await getDoc(userRef);
+  
 
-    let userData = {};
+  
+  
+  
 
-    if (userSnap.exists()) {
-      userData = userSnap.data();
-    }
+<a href="books.html" id="backLink">  
+  ← กลับ  
+</a>  
 
-    const requestId =
-      currentPost.id + "_" + currentUser.uid;
 
-    const requestRef = doc(
-      db,
-      "requests",
-      requestId
-    );
+  
+  
+    
+  
+  
 
-    const requestSnap =
-      await getDoc(requestRef);
+<!-- รูป -->  
 
-    if (requestSnap.exists()) {
+<div class="detail-photo">  
 
-      const oldRequest =
-        requestSnap.data();
+  <div id="detailImage" class="detail-image">  
+    📚  
+  </div>  
 
-      if (oldRequest.status === "pending") {
-        alert(
-          "คุณส่งคำขอรายการนี้ไปแล้ว และกำลังรอเจ้าของตอบครับ"
-        );
-        return;
-      }
-    }
+</div>  
 
-    await setDoc(
-      requestRef,
-      {
-        postId: currentPost.id,
 
-        postTitle: currentPost.title || "",
+<!-- ข้อมูล -->  
 
-        postType: currentPost.type || "book",
+<div class="detail-info">  
 
-        ownerId: currentPost.ownerId || "",
+  <span id="detailSubject" class="book-subject">  
+    -  
+  </span>  
 
-        ownerName: currentPost.ownerName || "",
+  <h1 id="detailTitle">  
+    กำลังโหลด...  
+  </h1>  
 
-        requesterId: currentUser.uid,
+  <div id="detailPrice" class="detail-price">  
+  </div>  
 
-        requesterName:
-          userData.name ||
-          currentUser.displayName ||
-          "นักเรียน",
+  <p id="detailDescription" class="detail-description">  
+  </p>  
 
-        requesterStudentId:
-          userData.studentId || "",
 
-        requesterClass:
-          userData.className || "",
+  <div id="detailCondition" class="owner-box">  
+  </div>  
 
-        type: requestType,
 
-        typeText: typeText,
+  <!-- เจ้าของ -->  
 
-        message: message.trim(),
+  <div class="owner-box">  
 
-        status: "pending",
+    <strong>  
+      👤 เจ้าของโพสต์  
+    </strong>  
 
-        createdAt: serverTimestamp()
-      }
-    );
+    <p id="ownerName">  
+      -  
+    </p>  
 
-    alert("ส่งคำขอเรียบร้อยแล้ว 🎉");
+    <p id="ownerStudent">  
+      -  
+    </p>  
 
-  } catch (error) {
+    <p id="ownerClass">  
+      -  
+    </p>  
 
-    console.error("ส่งคำขอไม่สำเร็จ:", error);
+  </div>  
 
-    alert(
-      "ส่งคำขอไม่สำเร็จครับ\n" +
-      error.message
-    );
 
-  }
-}
+  <!-- ติดต่อ -->  
+
+  <div class="contact-box">  
+
+    <strong>  
+      📞 ช่องทางติดต่อ  
+    </strong>  
+
+    <p id="ownerContact">  
+      -  
+    </p>  
+
+    <button  
+      id="contactButton"  
+      type="button"  
+      class="btn btn-secondary">  
+
+      💬 ติดต่อเจ้าของ  
+
+    </button>  
+
+  </div>  
+
+
+  <!-- สถานะ -->  
+
+  <div  
+    id="reservedArea"  
+    style="display:none;"  
+    class="coming-soon">  
+
+    🔒 รายการนี้ถูกจองแล้ว  
+
+    <br>  
+
+    เจ้าของกำลังดำเนินการกับผู้ขอ  
+
+  </div>  
+
+
+  <!-- ปุ่มคนซื้อ -->  
+
+  <div  
+    id="buyerActions"  
+    class="buyer-actions">  
+
+    <button  
+      id="buyButton"  
+      class="btn btn-primary">  
+
+      🛒 ขอซื้อ  
+
+    </button>  
+
+    <button  
+      id="freeButton"  
+      class="btn btn-secondary">  
+
+      🎁 ขอรับ  
+
+    </button>  
+
+    <button  
+      id="exchangeButton"  
+      class="btn btn-secondary">  
+
+      🔄 ขอแลก  
+
+    </button>  
+
+  </div>  
+
+
+  <!-- ปุ่มเจ้าของ -->  
+
+  <div  
+    id="ownerActions"  
+    class="owner-actions"  
+    style="display:none;">  
+
+    <button  
+      id="editButton"  
+      class="btn btn-primary">  
+
+      ✏️ แก้ไขโพสต์  
+
+    </button>  
+
+    <button  
+      id="deleteButton"  
+      class="btn btn-danger">  
+
+      🗑️ ลบโพสต์  
+
+    </button>  
+
+  </div>  
+
+</div>  
+
+
+  
+  
+    
+  
+  
+
+<div class="profile-card">  
+
+  <h2 id="formTitle">  
+    ลงประกาศ  
+  </h2>  
+
+  <form id="postForm">  
+
+    <label>  
+      ประเภท  
+    </label>  
+
+    <select id="postType" required>  
+
+      <option value="book">  
+        📚 หนังสือ  
+      </option>  
+
+      <option value="note">  
+        📝 ชีทสรุป  
+      </option>  
+
+    </select>  
+
+
+    <label>  
+      ชื่อเรื่อง  
+    </label>  
+
+    <input  
+      type="text"  
+      id="title"  
+      required  
+      placeholder="เช่น หนังสือคณิต ม.3">  
+
+
+    <label>  
+      วิชา  
+    </label>  
+
+    <select id="subject" required>  
+
+      <option value="">  
+        เลือกวิชา  
+      </option>  
+
+      <option value="คณิตศาสตร์">  
+        คณิตศาสตร์  
+      </option>  
+
+      <option value="วิทยาศาสตร์">  
+        วิทยาศาสตร์  
+      </option>  
+
+      <option value="ภาษาอังกฤษ">  
+        ภาษาอังกฤษ  
+      </option>  
+
+      <option value="ภาษาไทย">  
+        ภาษาไทย  
+      </option>  
+
+      <option value="สังคมศึกษา">  
+        สังคมศึกษา  
+      </option>  
+
+      <option value="ภาษาจีน">  
+        ภาษาจีน  
+      </option>  
+
+    </select>  
+
+
+    <label>  
+      สภาพ  
+    </label>  
+
+    <select id="condition">  
+
+      <option value="ดีมาก">  
+        ดีมาก  
+      </option>  
+
+      <option value="ดี">  
+        ดี  
+      </option>  
+
+      <option value="พอใช้">  
+        พอใช้  
+      </option>  
+
+    </select>  
+
+
+    <label>  
+      รูปภาพ  
+    </label>  
+
+    <input  
+      type="file"  
+      id="imageInput"  
+      accept="image/*">  
+
+    <div  
+      id="imagePreview"  
+      class="image-preview">  
+    </div>  
+
+
+    <label>  
+      รูปแบบการแบ่งปัน  
+    </label>  
+
+    <select  
+      id="shareType"  
+      required>  
+
+      <option value="free">  
+        🎁 ให้ฟรี  
+      </option>  
+
+      <option value="sell">  
+        💰 ขาย  
+      </option>  
+
+      <option value="exchange">  
+        🔄 แลกเปลี่ยน  
+      </option>  
+
+    </select>  
+
+
+    <label>  
+      ราคา  
+    </label>  
+
+    <input  
+      type="number"  
+      id="price"  
+      min="0"  
+      placeholder="ถ้าให้ฟรีใส่ 0">  
+
+
+    <label>  
+      รายละเอียด  
+    </label>  
+
+    <textarea  
+      id="description"  
+      rows="5"  
+      placeholder="รายละเอียดหนังสือหรือชีท"></textarea>  
+
+
+    <label>  
+      ช่องทางติดต่อ  
+    </label>  
+
+    <input  
+      type="text"  
+      id="contact"  
+      placeholder="เช่น LINE / ห้องเรียน">  
+
+
+    <button  
+      type="submit"  
+      class="btn btn-primary">  
+
+      💾 บันทึกประกาศ  
+
+    </button>  
+
+
+    <button  
+      type="button"  
+      id="cancelButton"  
+      class="btn btn-secondary">  
+
+      ยกเลิก  
+
+    </button>  
+
+  </form>  
+
+</div>  
+
+
+  
+  
+
+  
+
+  
+  
+  
+  
+  
+
+<div class="footer-logo">  
+  📚 StudyShare  
+</div>  
+
+<p>  
+  Student Book & Note Sharing System  
+</p>  
+
+<div class="footer-line"></div>  
+
+<small>  
+  © 2026 StudyShare  
+</small>  
+
+
+  
+  
+  
+  
+  
+            
