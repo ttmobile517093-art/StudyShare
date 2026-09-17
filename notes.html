@@ -2,39 +2,75 @@
 <html lang="th">
 
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
   <title>ชีทสรุป | StudyShare</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link
+    rel="stylesheet"
+    href="style.css">
+
 </head>
 
+
 <body>
+
 
 <header class="navbar">
 
   <div class="container nav-inner">
 
-    <a href="index.html" class="logo">
+    <a
+      href="index.html"
+      class="logo">
+
       📚 StudyShare
+
     </a>
 
+
     <nav class="nav-links">
-      <a href="index.html">หน้าแรก</a>
-      <a href="books.html">หนังสือ</a>
-      <a href="notes.html">ชีทสรุป</a>
-      <a href="announcements.html">ประกาศ</a>
-      <a href="about.html">เกี่ยวกับระบบ</a>
+
+      <a href="index.html">
+        หน้าแรก
+      </a>
+
+      <a href="books.html">
+        หนังสือ
+      </a>
+
+      <a href="notes.html">
+        ชีทสรุป
+      </a>
+
+      <a href="announcements.html">
+        ประกาศ
+      </a>
+
+      <a href="about.html">
+        เกี่ยวกับระบบ
+      </a>
+
     </nav>
 
-    <a href="profile.html" class="login-btn">
+
+    <a
+      href="profile.html"
+      class="login-btn">
+
       โปรไฟล์
+
     </a>
 
   </div>
 
 </header>
+
 
 
 <main>
@@ -44,7 +80,26 @@
   <div class="container">
 
 
-    <!-- ปุ่มกลับหน้าแรก -->
+    <div class="post-header">
+
+      <span class="hero-badge">
+        📝 STUDY NOTES
+      </span>
+
+
+      <h1>
+        ชีทสรุป
+      </h1>
+
+
+      <p>
+        แบ่งปันสรุปบทเรียนและเนื้อหาสำหรับการเรียน
+      </p>
+
+    </div>
+
+
+
     <div class="back-area">
 
       <a href="index.html">
@@ -53,22 +108,6 @@
 
     </div>
 
-
-    <div class="post-header">
-
-      <span class="hero-badge">
-        📝 STUDY NOTES
-      </span>
-
-      <h1>
-        ชีทสรุป
-      </h1>
-
-      <p>
-        แบ่งปันสรุปบทเรียนและเนื้อหาสำหรับการเรียน
-      </p>
-
-    </div>
 
 
     <div class="search-box">
@@ -81,39 +120,55 @@
     </div>
 
 
+
     <div class="category-buttons">
 
       <button
         class="category-btn active"
         data-category="ทั้งหมด">
+
         ทั้งหมด
+
       </button>
+
 
       <button
         class="category-btn"
         data-category="คณิตศาสตร์">
+
         คณิตศาสตร์
+
       </button>
+
 
       <button
         class="category-btn"
         data-category="วิทยาศาสตร์">
+
         วิทยาศาสตร์
+
       </button>
+
 
       <button
         class="category-btn"
         data-category="ภาษาอังกฤษ">
+
         ภาษาอังกฤษ
+
       </button>
+
 
       <button
         class="category-btn"
         data-category="ภาษาไทย">
+
         ภาษาไทย
+
       </button>
 
     </div>
+
 
 
     <div
@@ -125,19 +180,26 @@
     </div>
 
 
+
     <div
       id="noteGrid"
       class="book-grid">
 
-      กำลังโหลด...
+      <div class="loading-card">
+
+        📝 กำลังโหลดชีทสรุป...
+
+      </div>
 
     </div>
+
 
   </div>
 
 </section>
 
 </main>
+
 
 
 <footer class="footer">
@@ -152,30 +214,42 @@
       Student Book & Note Sharing System
     </p>
 
+    <div class="footer-line"></div>
+
+    <small>
+      © 2026 StudyShare — ระบบแลกเปลี่ยนสื่อการเรียน
+    </small>
+
   </div>
 
 </footer>
 
 
+
 <script type="module">
 
 import {
+
   db,
   collection,
   getDocs,
   query,
   orderBy
+
 } from "./firebase.js";
 
 
 const grid =
   document.querySelector("#noteGrid");
 
+
 const search =
   document.querySelector("#searchNote");
 
+
 const count =
   document.querySelector("#noteCount");
+
 
 const buttons =
   document.querySelectorAll(
@@ -188,6 +262,11 @@ let notes = [];
 let category =
   "ทั้งหมด";
 
+
+
+// =====================================
+// โหลดชีท
+// =====================================
 
 async function loadNotes() {
 
@@ -217,12 +296,16 @@ async function loadNotes() {
 
 
       if (
-        data.type === "note"
+        data.type === "note" ||
+        data.type === "notes"
       ) {
 
         notes.push({
+
           id: item.id,
+
           ...data
+
         });
 
       }
@@ -232,19 +315,80 @@ async function loadNotes() {
 
     render();
 
+
   } catch (error) {
 
     console.error(error);
 
-    grid.innerHTML =
-      `<div class="loading-card">
-        ❌ โหลดชีทไม่ได้
-      </div>`;
+
+    try {
+
+      const snapshot =
+        await getDocs(
+          collection(db, "posts")
+        );
+
+
+      notes = [];
+
+
+      snapshot.forEach(item => {
+
+        const data =
+          item.data();
+
+
+        if (
+          data.type === "note" ||
+          data.type === "notes"
+        ) {
+
+          notes.push({
+
+            id: item.id,
+
+            ...data
+
+          });
+
+        }
+
+      });
+
+
+      render();
+
+
+    } catch (secondError) {
+
+      console.error(secondError);
+
+
+      grid.innerHTML = `
+
+        <div class="loading-card">
+
+          ❌ โหลดชีทไม่ได้
+
+          <p>
+            กรุณาลองรีเฟรชหน้าเว็บอีกครั้ง
+          </p>
+
+        </div>
+
+      `;
+
+    }
 
   }
 
 }
 
+
+
+// =====================================
+// แสดงชีท
+// =====================================
 
 function render() {
 
@@ -262,22 +406,28 @@ function render() {
         note.subject === category;
 
 
-      const text =
-        `
+      const text = `
+
         ${note.title || ""}
+
         ${note.subject || ""}
+
         ${note.ownerName || ""}
+
         ${note.description || ""}
-        `
-        .toLowerCase();
+
+      `.toLowerCase();
 
 
       return (
+
         categoryOK &&
+
         (
           !keyword ||
           text.includes(keyword)
         )
+
       );
 
     });
@@ -292,11 +442,21 @@ function render() {
   ) {
 
     grid.innerHTML = `
+
       <div class="loading-card">
+
         📭
-        <h3>ยังไม่มีชีทสรุป</h3>
-        <p>ลองเปลี่ยนคำค้นหาดูครับ</p>
+
+        <h3>
+          ยังไม่มีชีทสรุป
+        </h3>
+
+        <p>
+          ลองเปลี่ยนคำค้นหาดูครับ
+        </p>
+
       </div>
+
     `;
 
     return;
@@ -304,68 +464,182 @@ function render() {
   }
 
 
+
   grid.innerHTML =
-    filtered.map(note => `
+    filtered.map(note => {
 
-      <article class="book-card">
+      const image =
+        note.image ||
+        note.imageUrl ||
+        note.photoURL ||
+        note.photo ||
+        "";
 
-        <div class="book-cover">
 
-          <div class="book-cover-empty">
-            📝
+      return `
+
+        <article class="book-card">
+
+
+          <div class="book-cover">
+
+            ${
+              image
+
+              ?
+
+              `
+              <img
+                src="${escapeHTML(image)}"
+                alt="${escapeHTML(
+                  note.title ||
+                  "ชีทสรุป"
+                )}">
+              `
+
+              :
+
+              `
+              <div class="book-cover-empty">
+                📝
+              </div>
+              `
+            }
+
           </div>
 
-        </div>
 
 
-        <div class="book-content">
-
-          <span class="book-subject">
-            ${note.subject || "ไม่ระบุวิชา"}
-          </span>
+          <div class="book-content">
 
 
-          <h3>
-            ${note.title || "ไม่มีชื่อ"}
-          </h3>
+            <span class="book-subject">
 
+              ${escapeHTML(
+                note.subject ||
+                "ไม่ระบุวิชา"
+              )}
 
-          <p>
-            ${note.description || ""}
-          </p>
-
-
-          <div class="book-meta">
-
-            <span>
-              👤 ${note.ownerName || "นักเรียน"}
             </span>
 
+
+
+            <h3>
+
+              ${escapeHTML(
+                note.title ||
+                "ไม่มีชื่อชีท"
+              )}
+
+            </h3>
+
+
+
+            <p>
+
+              ${escapeHTML(
+                note.description ||
+                "ไม่มีรายละเอียด"
+              )}
+
+            </p>
+
+
+
+            <div class="book-meta">
+
+              <span>
+
+                👤
+                ${escapeHTML(
+                  note.ownerName ||
+                  note.name ||
+                  "นักเรียน"
+                )}
+
+              </span>
+
+            </div>
+
+
+
+            <div class="book-bottom">
+
+              <a
+                href="post.html?id=${note.id}"
+                class="btn btn-primary">
+
+                ดูรายละเอียด
+
+              </a>
+
+            </div>
+
+
           </div>
 
 
-          <a
-            href="post.html?id=${note.id}"
-            class="btn btn-primary">
+        </article>
 
-            ดูรายละเอียด
+      `;
 
-          </a>
-
-        </div>
-
-      </article>
-
-    `).join("");
+    }).join("");
 
 }
 
+
+
+// =====================================
+// ป้องกัน HTML
+// =====================================
+
+function escapeHTML(value) {
+
+  return String(value)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+
+// =====================================
+// ค้นหา
+// =====================================
 
 search.addEventListener(
   "input",
   render
 );
 
+
+
+// =====================================
+// หมวดหมู่
+// =====================================
 
 buttons.forEach(button => {
 
@@ -374,10 +648,13 @@ buttons.forEach(button => {
     () => {
 
       buttons.forEach(
-        b =>
+        b => {
+
           b.classList.remove(
             "active"
-          )
+          );
+
+        }
       );
 
 
@@ -398,9 +675,14 @@ buttons.forEach(button => {
 });
 
 
+
+// เริ่มโหลด
 loadNotes();
 
 </script>
 
+
 </body>
-  </html>
+</html>
+
+
