@@ -1,110 +1,67 @@
 async function createRequest(requestType) {
 
+  if (!currentUser) {
+    alert("กรุณาเข้าสู่ระบบก่อนครับ");
+    window.location.href = "login.html";
+    return;
+  }
+
+  if (!currentPost) {
+    alert("ไม่พบข้อมูลโพสต์ครับ");
+    return;
+  }
+
+  if (currentUser.uid === currentPost.ownerId) {
+    alert("เจ้าของโพสต์ไม่สามารถขอหนังสือของตัวเองได้ครับ");
+    return;
+  }
+
+  if (currentPost.status === "reserved") {
+    alert("รายการนี้ถูกจองแล้วครับ");
+    return;
+  }
+
+  let typeText = "";
+
+  if (requestType === "buy") {
+    typeText = "🛒 ขอซื้อ";
+  } else if (requestType === "free") {
+    typeText = "🎁 ขอรับ";
+  } else {
+    typeText = "🔄 ขอแลก";
+  }
+
+  const message = prompt(
+    typeText + "\n\nฝากข้อความถึงเจ้าของหนังสือได้เลยครับ"
+  );
+
+  if (message === null) {
+    return;
+  }
+
+  if (!message.trim()) {
+    alert("กรุณาใส่ข้อความก่อนส่งคำขอครับ");
+    return;
+  }
+
   try {
 
-    // ตรวจสอบการเข้าสู่ระบบ
-    if (!currentUser) {
-
-      alert("กรุณาเข้าสู่ระบบก่อนครับ");
-
-      window.location.href = "login.html";
-
-      return;
-    }
-
-
-    // ตรวจสอบข้อมูลโพสต์
-    if (!currentPost) {
-
-      alert("กำลังโหลดข้อมูลหนังสือ กรุณาลองใหม่อีกครั้งครับ");
-
-      return;
-    }
-
-
-    // เจ้าของห้ามขอของตัวเอง
-    if (currentUser.uid === currentPost.ownerId) {
-
-      alert("เจ้าของโพสต์ไม่สามารถขอหนังสือของตัวเองได้ครับ");
-
-      return;
-    }
-
-
-    // ตรวจสอบสถานะ
-    if (currentPost.status === "reserved") {
-
-      alert("รายการนี้ถูกจองแล้วครับ");
-
-      return;
-    }
-
-
-    // แปลงประเภทคำขอ
-    let typeText = "";
-
-    if (requestType === "buy") {
-
-      typeText = "🛒 ขอซื้อ";
-
-    } else if (requestType === "free") {
-
-      typeText = "🎁 ขอรับ";
-
-    } else {
-
-      typeText = "🔄 ขอแลก";
-
-    }
-
-
-    // รับข้อความจากผู้ขอ
-    const message = prompt(
-      `${typeText}\n\nฝากข้อความถึงเจ้าของหนังสือได้เลยครับ`
-    );
-
-
-    // กดยกเลิก
-    if (message === null) {
-
-      return;
-
-    }
-
-
-    // ป้องกันข้อความว่าง
-    if (!message.trim()) {
-
-      alert("กรุณาใส่ข้อความก่อนส่งคำขอครับ");
-
-      return;
-    }
-
-
-    // โหลดข้อมูลผู้ใช้
     const userRef = doc(
       db,
       "users",
       currentUser.uid
     );
 
-
     const userSnap = await getDoc(userRef);
-
 
     let userData = {};
 
     if (userSnap.exists()) {
-
       userData = userSnap.data();
-
     }
 
-
-    // ID คำขอ
     const requestId =
-      `${currentPost.id}_${currentUser.uid}`;
-
+      currentPost.id + "_" + currentUser.uid;
 
     const requestRef = doc(
       db,
@@ -112,53 +69,36 @@ async function createRequest(requestType) {
       requestId
     );
 
-
-    // ตรวจคำขอเดิม
     const requestSnap =
       await getDoc(requestRef);
-
 
     if (requestSnap.exists()) {
 
       const oldRequest =
         requestSnap.data();
 
-
       if (oldRequest.status === "pending") {
-
         alert(
-          "คุณส่งคำขอรายการนี้ไปแล้วครับ 💜"
+          "คุณส่งคำขอรายการนี้ไปแล้ว และกำลังรอเจ้าของตอบครับ"
         );
-
         return;
-
       }
-
     }
 
-
-    // บันทึกคำขอ
     await setDoc(
       requestRef,
       {
+        postId: currentPost.id,
 
-        postId:
-          currentPost.id,
+        postTitle: currentPost.title || "",
 
-        postTitle:
-          currentPost.title || "",
+        postType: currentPost.type || "book",
 
-        postType:
-          currentPost.type || "book",
+        ownerId: currentPost.ownerId || "",
 
-        ownerId:
-          currentPost.ownerId || "",
+        ownerName: currentPost.ownerName || "",
 
-        ownerName:
-          currentPost.ownerName || "",
-
-        requesterId:
-          currentUser.uid,
+        requesterId: currentUser.uid,
 
         requesterName:
           userData.name ||
@@ -171,44 +111,28 @@ async function createRequest(requestType) {
         requesterClass:
           userData.className || "",
 
-        type:
-          requestType,
+        type: requestType,
 
-        typeText:
-          typeText,
+        typeText: typeText,
 
-        message:
-          message.trim(),
+        message: message.trim(),
 
-        status:
-          "pending",
+        status: "pending",
 
-        createdAt:
-          serverTimestamp()
-
+        createdAt: serverTimestamp()
       }
     );
 
-
-    // สำเร็จ
-    alert(
-      "ส่งคำขอเรียบร้อยแล้ว 🎉💜"
-    );
-
+    alert("ส่งคำขอเรียบร้อยแล้ว 🎉");
 
   } catch (error) {
 
-    console.error(
-      "REQUEST ERROR:",
-      error
-    );
-
+    console.error("ส่งคำขอไม่สำเร็จ:", error);
 
     alert(
-      "ส่งคำขอไม่สำเร็จครับ\n\n" +
+      "ส่งคำขอไม่สำเร็จครับ\n" +
       error.message
     );
 
   }
-
 }
