@@ -2,41 +2,23 @@
 <html lang="th">
 
 <head>
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+  <title>รายละเอียด | StudyShare</title>
 
-  <title>
-    รายละเอียด | StudyShare
-  </title>
-
-  <link
-    rel="stylesheet"
-    href="style.css">
-
+  <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-
 <!-- NAVBAR -->
-
 <header class="navbar">
-
   <div class="container nav-inner">
 
-    <a
-      href="index.html"
-      class="logo">
-
+    <a href="index.html" class="logo">
       📚 StudyShare
-
     </a>
-
 
     <nav class="nav-links">
 
@@ -62,449 +44,397 @@
 
     </nav>
 
-
-    <a
-      href="profile.html"
-      class="login-btn">
-
+    <a href="profile.html" class="login-btn">
       โปรไฟล์
-
     </a>
 
   </div>
-
 </header>
-
 
 
 <main>
 
-
 <section class="section">
 
-  <div class="container">
+<div class="container">
 
+  <div class="back-area">
 
-    <div class="back-area">
-
-      <a
-        href="books.html"
-        id="backLink">
-
-        ← กลับ
-
-      </a>
-
-    </div>
-
-
-    <!-- =================================
-         DETAIL
-    ================================== -->
-
-    <div
-      id="detailArea"
-      class="detail-layout">
-
-
-      <!-- รูป -->
-
-      <div class="detail-photo">
-
-        <div
-          id="detailImage"
-          class="detail-image">
-
-          📚
-
-        </div>
-
-      </div>
-
-
-      <!-- ข้อมูล -->
-
-      <div class="detail-info">
-
-
-        <span
-          id="detailSubject"
-          class="book-subject">
-
-          -
-
-        </span>
-
-
-        <h1 id="detailTitle">
-
-          กำลังโหลด...
-
-        </h1>
-
-
-        <div
-          id="detailPrice"
-          class="detail-price">
-
-        </div>
-
-
-        <p
-          id="detailDescription"
-          class="detail-description">
-
-        </p>
-
-
-        <div
-          id="detailCondition"
-          class="owner-box">
-
-        </div>
-
-
-        <!-- เจ้าของ -->
-
-        <div class="owner-box">
-
-          <strong>
-            👤 เจ้าของโพสต์
-          </strong>
-
-          <p id="ownerName">
-            -
-          </p>
-
-          <p id="ownerStudent">
-            -
-          </p>
-
-          <p id="ownerClass">
-            -
-          </p>
-
-        </div>
-
-
-        <!-- ติดต่อ -->
-
-        <div class="contact-box">
-
-          <strong>
-            📞 ช่องทางติดต่อ
-          </strong>
-
-          <p id="ownerContact">
-            -
-          </p>
-
-        </div>
-
-
-        <!-- สถานะ -->
-
-        <div
-          id="reservedArea"
-          style="display:none;"
-          class="coming-soon">
-
-          🔒 รายการนี้ถูกจองแล้ว
-
-          <br>
-
-          เจ้าของกำลังดำเนินการกับผู้ขอ
-
-        </div>
-
-
-        <!-- ปุ่มคนซื้อ -->
-
-        <div
-          id="buyerActions"
-          class="buyer-actions">
-
-
-          <button
-            id="buyButton"
-            class="btn btn-primary">
-
-            🛒 ขอซื้อ
-
-          </button>
-
-
-          <button
-            id="freeButton"
-            class="btn btn-secondary">
-
-            🎁 ขอรับ
-
-          </button>
-
-
-          <button
-            id="exchangeButton"
-            class="btn btn-secondary">
-
-            🔄 ขอแลก
-
-          </button>
-
-
-        </div>
-
-
-        <!-- ปุ่มเจ้าของ -->
-
-        <div
-          id="ownerActions"
-          class="owner-actions"
-          style="display:none;">
-
-
-          <button
-            id="editButton"
-            class="btn btn-primary">
-
-            ✏️ แก้ไขโพสต์
-
-          </button>
-
-
-          <button
-            id="deleteButton"
-            class="btn btn-danger">
-
-            🗑️ ลบโพสต์
-
-          </button>
-
-        </div>
-
-
-      </div>
-
-    </div>
-
-
-
-    <!-- =================================
-         CREATE / EDIT FORM
-    ================================== -->
-
-    <div
-      id="postFormArea"
-      style="display:none;">
-
-
-      <div class="profile-card">
-
-
-        <h2 id="formTitle">
-
-          ลงประกาศ
-
-        </h2>
-
-
-        <form id="postForm">
-
-
-          <label>
-            ประเภท
-          </label>
-
-          <select
-            id="postType"
-            required>
-
-            <option value="book">
-              📚 หนังสือ
-            </option>
-
-            <option value="note">
-              📝 ชีทสรุป
-            </option>
-
-          </select>
-
-
-          <label>
-            ชื่อเรื่อง
-          </label>
-
-          <input
-            type="text"
-            id="title"
-            required
-            placeholder="เช่น หนังสือคณิต ม.3">
-
-
-          <label>
-            วิชา
-          </label>
-
-          <select
-            id="subject"
-            required>
-
-            <option value="">
-              เลือกวิชา
-            </option>
-
-            <option value="คณิตศาสตร์">
-              คณิตศาสตร์
-            </option>
-
-            <option value="วิทยาศาสตร์">
-              วิทยาศาสตร์
-            </option>
-
-            <option value="ภาษาอังกฤษ">
-              ภาษาอังกฤษ
-            </option>
-
-            <option value="ภาษาไทย">
-              ภาษาไทย
-            </option>
-
-            <option value="สังคมศึกษา">
-              สังคมศึกษา
-            </option>
-
-            <option value="ภาษาจีน">
-              ภาษาจีน
-            </option>
-
-          </select>
-
-
-          <label>
-            สภาพ
-          </label>
-
-          <select id="condition">
-
-            <option value="ดีมาก">
-              ดีมาก
-            </option>
-
-            <option value="ดี">
-              ดี
-            </option>
-
-            <option value="พอใช้">
-              พอใช้
-            </option>
-
-          </select>
-
-
-          <label>
-            รูปภาพ
-          </label>
-
-          <input
-            type="file"
-            id="imageInput"
-            accept="image/*">
-
-
-          <div
-            id="imagePreview"
-            class="image-preview">
-
-          </div>
-
-
-          <label>
-            รูปแบบการแบ่งปัน
-          </label>
-
-          <select
-            id="shareType"
-            required>
-
-            <option value="free">
-              🎁 ให้ฟรี
-            </option>
-
-            <option value="sell">
-              💰 ขาย
-            </option>
-
-            <option value="exchange">
-              🔄 แลกเปลี่ยน
-            </option>
-
-          </select>
-
-
-          <label>
-            ราคา
-          </label>
-
-          <input
-            type="number"
-            id="price"
-            min="0"
-            placeholder="ถ้าให้ฟรีใส่ 0">
-
-
-          <label>
-            รายละเอียด
-          </label>
-
-          <textarea
-            id="description"
-            rows="5"
-            placeholder="รายละเอียดหนังสือหรือชีท"></textarea>
-
-
-          <label>
-            ช่องทางติดต่อ
-          </label>
-
-          <input
-            type="text"
-            id="contact"
-            placeholder="เช่น LINE / ห้องเรียน">
-
-
-          <button
-            type="submit"
-            class="btn btn-primary">
-
-            💾 บันทึกประกาศ
-
-          </button>
-
-
-          <button
-            type="button"
-            id="cancelButton"
-            class="btn btn-secondary">
-
-            ยกเลิก
-
-          </button>
-
-
-        </form>
-
-      </div>
-
-    </div>
-
+    <a href="books.html" id="backLink">
+      ← กลับ
+    </a>
 
   </div>
 
+
+  <!-- =================================
+       DETAIL
+  ================================== -->
+
+  <div id="detailArea" class="detail-layout">
+
+
+    <!-- รูป -->
+
+    <div class="detail-photo">
+
+      <div id="detailImage" class="detail-image">
+        📚
+      </div>
+
+    </div>
+
+
+    <!-- ข้อมูล -->
+
+    <div class="detail-info">
+
+      <span id="detailSubject" class="book-subject">
+        -
+      </span>
+
+      <h1 id="detailTitle">
+        กำลังโหลด...
+      </h1>
+
+      <div id="detailPrice" class="detail-price">
+      </div>
+
+      <p id="detailDescription" class="detail-description">
+      </p>
+
+
+      <div id="detailCondition" class="owner-box">
+      </div>
+
+
+      <!-- เจ้าของ -->
+
+      <div class="owner-box">
+
+        <strong>
+          👤 เจ้าของโพสต์
+        </strong>
+
+        <p id="ownerName">
+          -
+        </p>
+
+        <p id="ownerStudent">
+          -
+        </p>
+
+        <p id="ownerClass">
+          -
+        </p>
+
+      </div>
+
+
+      <!-- ติดต่อ -->
+
+      <div class="contact-box">
+
+        <strong>
+          📞 ช่องทางติดต่อ
+        </strong>
+
+        <p id="ownerContact">
+          -
+        </p>
+
+        <button
+          id="contactButton"
+          type="button"
+          class="btn btn-secondary">
+
+          💬 ติดต่อเจ้าของ
+
+        </button>
+
+      </div>
+
+
+      <!-- สถานะ -->
+
+      <div
+        id="reservedArea"
+        style="display:none;"
+        class="coming-soon">
+
+        🔒 รายการนี้ถูกจองแล้ว
+
+        <br>
+
+        เจ้าของกำลังดำเนินการกับผู้ขอ
+
+      </div>
+
+
+      <!-- ปุ่มคนซื้อ -->
+
+      <div
+        id="buyerActions"
+        class="buyer-actions">
+
+        <button
+          id="buyButton"
+          class="btn btn-primary">
+
+          🛒 ขอซื้อ
+
+        </button>
+
+        <button
+          id="freeButton"
+          class="btn btn-secondary">
+
+          🎁 ขอรับ
+
+        </button>
+
+        <button
+          id="exchangeButton"
+          class="btn btn-secondary">
+
+          🔄 ขอแลก
+
+        </button>
+
+      </div>
+
+
+      <!-- ปุ่มเจ้าของ -->
+
+      <div
+        id="ownerActions"
+        class="owner-actions"
+        style="display:none;">
+
+        <button
+          id="editButton"
+          class="btn btn-primary">
+
+          ✏️ แก้ไขโพสต์
+
+        </button>
+
+        <button
+          id="deleteButton"
+          class="btn btn-danger">
+
+          🗑️ ลบโพสต์
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =================================
+       CREATE / EDIT FORM
+  ================================== -->
+
+  <div
+    id="postFormArea"
+    style="display:none;">
+
+    <div class="profile-card">
+
+      <h2 id="formTitle">
+        ลงประกาศ
+      </h2>
+
+      <form id="postForm">
+
+        <label>
+          ประเภท
+        </label>
+
+        <select id="postType" required>
+
+          <option value="book">
+            📚 หนังสือ
+          </option>
+
+          <option value="note">
+            📝 ชีทสรุป
+          </option>
+
+        </select>
+
+
+        <label>
+          ชื่อเรื่อง
+        </label>
+
+        <input
+          type="text"
+          id="title"
+          required
+          placeholder="เช่น หนังสือคณิต ม.3">
+
+
+        <label>
+          วิชา
+        </label>
+
+        <select id="subject" required>
+
+          <option value="">
+            เลือกวิชา
+          </option>
+
+          <option value="คณิตศาสตร์">
+            คณิตศาสตร์
+          </option>
+
+          <option value="วิทยาศาสตร์">
+            วิทยาศาสตร์
+          </option>
+
+          <option value="ภาษาอังกฤษ">
+            ภาษาอังกฤษ
+          </option>
+
+          <option value="ภาษาไทย">
+            ภาษาไทย
+          </option>
+
+          <option value="สังคมศึกษา">
+            สังคมศึกษา
+          </option>
+
+          <option value="ภาษาจีน">
+            ภาษาจีน
+          </option>
+
+        </select>
+
+
+        <label>
+          สภาพ
+        </label>
+
+        <select id="condition">
+
+          <option value="ดีมาก">
+            ดีมาก
+          </option>
+
+          <option value="ดี">
+            ดี
+          </option>
+
+          <option value="พอใช้">
+            พอใช้
+          </option>
+
+        </select>
+
+
+        <label>
+          รูปภาพ
+        </label>
+
+        <input
+          type="file"
+          id="imageInput"
+          accept="image/*">
+
+        <div
+          id="imagePreview"
+          class="image-preview">
+        </div>
+
+
+        <label>
+          รูปแบบการแบ่งปัน
+        </label>
+
+        <select
+          id="shareType"
+          required>
+
+          <option value="free">
+            🎁 ให้ฟรี
+          </option>
+
+          <option value="sell">
+            💰 ขาย
+          </option>
+
+          <option value="exchange">
+            🔄 แลกเปลี่ยน
+          </option>
+
+        </select>
+
+
+        <label>
+          ราคา
+        </label>
+
+        <input
+          type="number"
+          id="price"
+          min="0"
+          placeholder="ถ้าให้ฟรีใส่ 0">
+
+
+        <label>
+          รายละเอียด
+        </label>
+
+        <textarea
+          id="description"
+          rows="5"
+          placeholder="รายละเอียดหนังสือหรือชีท"></textarea>
+
+
+        <label>
+          ช่องทางติดต่อ
+        </label>
+
+        <input
+          type="text"
+          id="contact"
+          placeholder="เช่น LINE / ห้องเรียน">
+
+
+        <button
+          type="submit"
+          class="btn btn-primary">
+
+          💾 บันทึกประกาศ
+
+        </button>
+
+
+        <button
+          type="button"
+          id="cancelButton"
+          class="btn btn-secondary">
+
+          ยกเลิก
+
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
 </section>
 
-
 </main>
-
 
 
 <footer class="footer">
@@ -530,9 +460,7 @@
 </footer>
 
 
-
 <script type="module">
-
 
 import {
 
@@ -546,14 +474,6 @@ import {
 
   addDoc,
 
-  getDocs,
-
-  query,
-
-  where,
-
-  doc,
-
   getDoc,
 
   setDoc,
@@ -562,10 +482,11 @@ import {
 
   deleteDoc,
 
+  doc,
+
   serverTimestamp
 
 } from "./firebase.js";
-
 
 
 let currentUser = null;
@@ -577,7 +498,6 @@ let editing = false;
 let editingId = null;
 
 
-
 const params =
   new URLSearchParams(
     window.location.search
@@ -586,7 +506,6 @@ const params =
 
 const postId =
   params.get("id");
-
 
 
 /* =================================
@@ -614,14 +533,12 @@ onAuthStateChanged(
 
       }
 
-
       showCreateForm();
 
     }
 
   }
 );
-
 
 
 /* =================================
@@ -685,7 +602,6 @@ async function loadPost() {
 }
 
 
-
 /* =================================
    RENDER
 ================================= */
@@ -709,7 +625,8 @@ function renderPost() {
   document.querySelector(
     "#detailSubject"
   ).textContent =
-    post.subject || "ไม่ระบุวิชา";
+    post.subject ||
+    "ไม่ระบุวิชา";
 
 
   document.querySelector(
@@ -746,6 +663,7 @@ function renderPost() {
   document.querySelector(
     "#detailCondition"
   ).innerHTML = `
+
     <strong>
       📖 สภาพ
     </strong>
@@ -753,8 +671,8 @@ function renderPost() {
     <p>
       ${post.condition || "ไม่ระบุ"}
     </p>
-  `;
 
+  `;
 
 
   /* ราคา */
@@ -792,7 +710,6 @@ function renderPost() {
     priceText;
 
 
-
   /* รูป */
 
   const imageArea =
@@ -821,7 +738,6 @@ function renderPost() {
   }
 
 
-
   /* BACK */
 
   const backLink =
@@ -834,7 +750,6 @@ function renderPost() {
     post.type === "note"
       ? "notes.html"
       : "books.html";
-
 
 
   /* เจ้าของหรือไม่ */
@@ -866,6 +781,7 @@ function renderPost() {
         ? "block"
         : "none";
 
+
   } else {
 
     document.querySelector(
@@ -875,12 +791,9 @@ function renderPost() {
 
 
     if (
-      post.status === "reserved"
+      post.status ===
+      "reserved"
     ) {
-
-      /* =================================
-         ถูกจองแล้ว
-      ================================= */
 
       document.querySelector(
         "#buyerActions"
@@ -912,7 +825,6 @@ function renderPost() {
   }
 
 }
-
 
 
 /* =================================
@@ -1018,73 +930,60 @@ async function createRequest(
 
   try {
 
-    /*
-      ดึงคำขอของโพสต์นี้
-      แล้วตรวจสอบใน JS
-      เพื่อลดปัญหา index
-    */
+    /* =================================
+       ป้องกันคำขอซ้ำ
 
-    const requestQuery =
-      query(
-        collection(
-          db,
-          "requests"
-        ),
+       ใช้ ID เดียวต่อ
+       1 คน + 1 โพสต์
+       เพื่อให้ Firestore Rules
+       ตรวจสอบได้ถูกต้อง
+    ================================= */
 
-        where(
-          "postId",
-          "==",
-          currentPost.id
-        )
+    const requestId =
+      `${currentPost.id}_${currentUser.uid}`;
+
+
+    const requestRef =
+      doc(
+        db,
+        "requests",
+        requestId
       );
 
 
-    const requestSnapshot =
-      await getDocs(
-        requestQuery
+    const requestSnap =
+      await getDoc(
+        requestRef
       );
 
 
-    let duplicate =
-      false;
+    if (
+      requestSnap.exists()
+    ) {
+
+      const oldRequest =
+        requestSnap.data();
 
 
-    requestSnapshot.forEach(
-      item => {
+      if (
+        oldRequest.status ===
+        "pending"
+      ) {
 
-        const data =
-          item.data();
+        alert(
+          "คุณส่งคำขอรายการนี้ไปแล้ว และกำลังรอเจ้าของตอบครับ"
+        );
 
-
-        if (
-          data.requesterId ===
-            currentUser.uid
-          &&
-          data.status ===
-            "pending"
-        ) {
-
-          duplicate = true;
-
-        }
+        return;
 
       }
-    );
-
-
-    if (duplicate) {
-
-      alert(
-        "คุณส่งคำขอรายการนี้ไปแล้ว และกำลังรอเจ้าของตอบครับ"
-      );
-
-      return;
 
     }
 
 
-
-    /* โหลดข้อมูลผู้ขอ */
+    /* =================================
+       โหลดข้อมูลผู้ขอ
+    ================================= */
 
     const userRef =
       doc(
@@ -1113,15 +1012,12 @@ async function createRequest(
     }
 
 
+    /* =================================
+       สร้าง REQUEST
+    ================================= */
 
-    /* สร้าง request */
-
-    await addDoc(
-      collection(
-        db,
-        "requests"
-      ),
-
+    await setDoc(
+      requestRef,
       {
 
         postId:
@@ -1131,7 +1027,8 @@ async function createRequest(
           currentPost.title || "",
 
         postType:
-          currentPost.type || "book",
+          currentPost.type ||
+          "book",
 
         ownerId:
           currentPost.ownerId,
@@ -1171,7 +1068,6 @@ async function createRequest(
           serverTimestamp()
 
       }
-
     );
 
 
@@ -1193,6 +1089,44 @@ async function createRequest(
 
 }
 
+
+/* =================================
+   CONTACT OWNER
+================================= */
+
+document.querySelector(
+  "#contactButton"
+).addEventListener(
+  "click",
+  () => {
+
+    if (!currentPost) {
+      return;
+    }
+
+
+    const contact =
+      currentPost.contact;
+
+
+    if (!contact) {
+
+      alert(
+        "เจ้าของโพสต์ยังไม่ได้ระบุช่องทางติดต่อครับ"
+      );
+
+      return;
+
+    }
+
+
+    alert(
+      "📞 ช่องทางติดต่อเจ้าของ\n\n" +
+      contact
+    );
+
+  }
+);
 
 
 /* =================================
@@ -1241,7 +1175,6 @@ document.querySelector(
 );
 
 
-
 /* =================================
    EDIT
 ================================= */
@@ -1275,49 +1208,57 @@ document.querySelector(
     document.querySelector(
       "#postType"
     ).value =
-      currentPost.type || "book";
+      currentPost.type ||
+      "book";
 
 
     document.querySelector(
       "#title"
     ).value =
-      currentPost.title || "";
+      currentPost.title ||
+      "";
 
 
     document.querySelector(
       "#subject"
     ).value =
-      currentPost.subject || "";
+      currentPost.subject ||
+      "";
 
 
     document.querySelector(
       "#condition"
     ).value =
-      currentPost.condition || "ดี";
+      currentPost.condition ||
+      "ดี";
 
 
     document.querySelector(
       "#shareType"
     ).value =
-      currentPost.shareType || "free";
+      currentPost.shareType ||
+      "free";
 
 
     document.querySelector(
       "#price"
     ).value =
-      currentPost.price || 0;
+      currentPost.price ||
+      0;
 
 
     document.querySelector(
       "#description"
     ).value =
-      currentPost.description || "";
+      currentPost.description ||
+      "";
 
 
     document.querySelector(
       "#contact"
     ).value =
-      currentPost.contact || "";
+      currentPost.contact ||
+      "";
 
 
     if (currentPost.image) {
@@ -1336,7 +1277,6 @@ document.querySelector(
 
   }
 );
-
 
 
 /* =================================
@@ -1402,7 +1342,6 @@ document.querySelector(
 );
 
 
-
 /* =================================
    SHOW FORM
 ================================= */
@@ -1421,7 +1360,6 @@ function showCreateForm() {
     "block";
 
 }
-
 
 
 /* =================================
@@ -1495,7 +1433,6 @@ document.querySelector(
 
   }
 );
-
 
 
 /* =================================
@@ -1637,7 +1574,6 @@ function compressImage(
 }
 
 
-
 /* =================================
    SAVE POST
 ================================= */
@@ -1706,10 +1642,7 @@ document.querySelector(
         "";
 
 
-      /*
-        ถ้าแก้ไขและไม่ได้เลือกรูปใหม่
-        ให้ใช้รูปเดิม
-      */
+      /* ถ้าแก้ไขและไม่ได้เลือกรูปใหม่ */
 
       if (
         editing &&
@@ -1718,7 +1651,8 @@ document.querySelector(
       ) {
 
         image =
-          currentPost.image || "";
+          currentPost.image ||
+          "";
 
       }
 
@@ -1774,18 +1708,22 @@ document.querySelector(
           currentUser.uid,
 
         ownerName:
-          userData.name || "",
+          userData.name ||
+          "",
 
         ownerStudentId:
-          userData.studentId || "",
+          userData.studentId ||
+          "",
 
         ownerClass:
-          userData.className || "",
+          userData.className ||
+          "",
 
         status:
           editing &&
           currentPost
-            ? currentPost.status || "available"
+            ? currentPost.status ||
+              "available"
             : "available"
 
       };
@@ -1803,6 +1741,7 @@ document.querySelector(
 
           {
             ...postData,
+
             updatedAt:
               serverTimestamp()
           }
@@ -1863,7 +1802,6 @@ document.querySelector(
 );
 
 
-
 /* =================================
    CANCEL
 ================================= */
@@ -1889,9 +1827,7 @@ document.querySelector(
   }
 );
 
-
 </script>
 
 </body>
-
-  </html>
+          </html>
