@@ -1,15 +1,807 @@
-<div class="buyer-actions">
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <button id="buyButton" class="btn btn-primary">
-    🛒 ขอซื้อ
-  </button>
+  <title>รายละเอียดหนังสือ | StudyShare</title>
 
-  <button id="freeButton" class="btn btn-secondary">
-    🎁 ขอรับ
-  </button>
+  <link rel="stylesheet" href="./style.css">
+</head>
 
-  <button id="exchangeButton" class="btn btn-outline">
-    🔄 ขอแลก
-  </button>
+<body>
 
-</div>
+  <!-- ================= NAVBAR ================= -->
+
+  <header class="navbar">
+
+    <div class="container nav-inner">
+
+      <a href="index.html" class="logo">
+        📚 StudyShare
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">หน้าแรก</a>
+        <a href="books.html">หนังสือ</a>
+        <a href="notes.html">ชีทสรุป</a>
+        <a href="announcements.html">ประกาศ</a>
+        <a href="about.html">เกี่ยวกับระบบ</a>
+      </nav>
+
+      <a href="login.html" class="login-btn">
+        เข้าสู่ระบบ
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- ================= DETAIL ================= -->
+
+  <main class="post-section">
+
+    <div class="container">
+
+      <!-- ปุ่มย้อนกลับ -->
+
+      <div class="back-area">
+        <a href="books.html">
+          ← กลับไปหน้าหนังสือ
+        </a>
+      </div>
+
+
+      <!-- กำลังโหลด -->
+
+      <div id="loading" class="loading-card">
+        กำลังโหลดข้อมูลหนังสือ...
+      </div>
+
+
+      <!-- รายละเอียด -->
+
+      <div id="detailContent" style="display:none;">
+
+        <div class="detail-layout">
+
+
+          <!-- ================= รูป ================= -->
+
+          <div class="detail-photo">
+
+            <div id="imageArea">
+
+              <div class="detail-image-empty">
+                📚
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================= ข้อมูล ================= -->
+
+          <div class="detail-info">
+
+            <span id="subject" class="book-subject">
+              วิชา
+            </span>
+
+            <h1 id="title">
+              ชื่อหนังสือ
+            </h1>
+
+            <div id="price" class="detail-price">
+              -
+            </div>
+
+
+            <div class="detail-description">
+
+              <h3>
+                📝 รายละเอียด
+              </h3>
+
+              <p id="description">
+                -
+              </p>
+
+            </div>
+
+
+            <!-- ================= เจ้าของ ================= -->
+
+            <div class="owner-box">
+
+              <h3>
+                👤 ข้อมูลเจ้าของ
+              </h3>
+
+              <p>
+                ชื่อ:
+                <strong id="ownerName">-</strong>
+              </p>
+
+              <p>
+                ติดต่อ:
+                <strong id="ownerContact">-</strong>
+              </p>
+
+            </div>
+
+
+            <!-- ================= ปุ่ม ================= -->
+
+            <div class="buyer-actions">
+
+              <button
+                id="buyButton"
+                class="btn btn-primary"
+                type="button"
+              >
+                🛒 ขอซื้อ
+              </button>
+
+              <button
+                id="freeButton"
+                class="btn btn-secondary"
+                type="button"
+              >
+                🎁 ขอรับ
+              </button>
+
+              <button
+                id="exchangeButton"
+                class="btn btn-outline"
+                type="button"
+              >
+                🔄 ขอแลก
+              </button>
+
+            </div>
+
+
+            <p class="coming-soon">
+              เมื่อส่งคำขอแล้ว เจ้าของหนังสือจะสามารถตรวจสอบคำขอของคุณได้
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </main>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer class="footer">
+
+    <div class="container">
+
+      <div class="footer-logo">
+        📚 StudyShare
+      </div>
+
+      <p>
+        Student Book & Note Sharing System
+      </p>
+
+      <div class="footer-line"></div>
+
+      <small>
+        © 2026 StudyShare — ระบบแลกเปลี่ยนสื่อการเรียน
+      </small>
+
+    </div>
+
+  </footer>
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script type="module">
+
+    import {
+      auth,
+      db,
+      onAuthStateChanged,
+      collection,
+      addDoc,
+      getDoc,
+      setDoc,
+      updateDoc,
+      deleteDoc,
+      doc,
+      serverTimestamp
+    } from "./firebase.js";
+
+
+    console.log("StudyShare detail page loaded");
+
+
+    // ==========================================
+    // ดึง ID หนังสือจาก URL
+    // ==========================================
+
+    const params = new URLSearchParams(window.location.search);
+
+    const postId = params.get("id");
+
+
+    // ==========================================
+    // ตัวแปร
+    // ==========================================
+
+    let currentPost = null;
+    let currentUser = null;
+
+
+    const loading = document.getElementById("loading");
+    const detailContent = document.getElementById("detailContent");
+
+    const titleElement = document.getElementById("title");
+    const subjectElement = document.getElementById("subject");
+    const priceElement = document.getElementById("price");
+    const descriptionElement = document.getElementById("description");
+
+    const ownerNameElement = document.getElementById("ownerName");
+    const ownerContactElement = document.getElementById("ownerContact");
+
+    const imageArea = document.getElementById("imageArea");
+
+
+    // ==========================================
+    // ถ้าไม่มี ID
+    // ==========================================
+
+    if (!postId) {
+
+      loading.innerHTML = `
+        <h3>ไม่พบข้อมูลหนังสือ</h3>
+        <p>กรุณากลับไปเลือกหนังสืออีกครั้ง</p>
+      `;
+
+    } else {
+
+      loadPost();
+
+    }
+
+
+    // ==========================================
+    // โหลดหนังสือ
+    // ==========================================
+
+    async function loadPost() {
+
+      try {
+
+        const postRef = doc(db, "posts", postId);
+
+        const postSnap = await getDoc(postRef);
+
+
+        if (!postSnap.exists()) {
+
+          loading.innerHTML = `
+            <h3>ไม่พบหนังสือเล่มนี้</h3>
+            <p>หนังสืออาจถูกลบออกจากระบบแล้ว</p>
+          `;
+
+          return;
+
+        }
+
+
+        currentPost = {
+          id: postSnap.id,
+          ...postSnap.data()
+        };
+
+
+        console.log("Current post:", currentPost);
+
+
+        // ======================================
+        // แสดงชื่อ
+        // ======================================
+
+        titleElement.textContent =
+          currentPost.title ||
+          currentPost.name ||
+          "ไม่ระบุชื่อ";
+
+
+        // ======================================
+        // วิชา
+        // ======================================
+
+        subjectElement.textContent =
+          currentPost.subject ||
+          currentPost.category ||
+          "ไม่ระบุวิชา";
+
+
+        // ======================================
+        // ราคา
+        // ======================================
+
+        if (
+          currentPost.price === undefined ||
+          currentPost.price === null ||
+          currentPost.price === ""
+        ) {
+
+          priceElement.textContent = "ติดต่อเจ้าของ";
+
+        } else if (
+          currentPost.price === 0 ||
+          currentPost.price === "0"
+        ) {
+
+          priceElement.textContent = "ฟรี";
+
+        } else {
+
+          priceElement.textContent =
+            Number(currentPost.price).toLocaleString() + " บาท";
+
+        }
+
+
+        // ======================================
+        // รายละเอียด
+        // ======================================
+
+        descriptionElement.textContent =
+          currentPost.description ||
+          currentPost.detail ||
+          "ไม่มีรายละเอียดเพิ่มเติม";
+
+
+        // ======================================
+        // รูป
+        // ======================================
+
+        const imageUrl =
+          currentPost.imageUrl ||
+          currentPost.image ||
+          currentPost.photo ||
+          "";
+
+
+        if (imageUrl) {
+
+          imageArea.innerHTML = `
+            <img
+              src="${imageUrl}"
+              class="detail-image"
+              alt="รูปหนังสือ"
+            >
+          `;
+
+        } else {
+
+          imageArea.innerHTML = `
+            <div class="detail-image-empty">
+              📚
+            </div>
+          `;
+
+        }
+
+
+        // ======================================
+        // เจ้าของ
+        // ======================================
+
+        const ownerId =
+          currentPost.ownerId ||
+          currentPost.userId ||
+          currentPost.uid ||
+          "";
+
+
+        if (ownerId) {
+
+          try {
+
+            const ownerRef = doc(db, "users", ownerId);
+
+            const ownerSnap = await getDoc(ownerRef);
+
+
+            if (ownerSnap.exists()) {
+
+              const owner = ownerSnap.data();
+
+
+              ownerNameElement.textContent =
+                owner.name ||
+                owner.displayName ||
+                owner.username ||
+                "นักเรียน";
+
+
+              ownerContactElement.textContent =
+                owner.contact ||
+                owner.email ||
+                "ติดต่อผ่านระบบ";
+
+            } else {
+
+              ownerNameElement.textContent = "นักเรียน";
+
+              ownerContactElement.textContent =
+                "ติดต่อผ่านระบบ";
+
+            }
+
+          } catch (error) {
+
+            console.log("Owner profile error:", error);
+
+            ownerNameElement.textContent = "นักเรียน";
+
+            ownerContactElement.textContent =
+              "ติดต่อผ่านระบบ";
+
+          }
+
+        } else {
+
+          ownerNameElement.textContent = "นักเรียน";
+
+          ownerContactElement.textContent =
+            "ติดต่อผ่านระบบ";
+
+        }
+
+
+        // ======================================
+        // แสดงหน้า
+        // ======================================
+
+        loading.style.display = "none";
+
+        detailContent.style.display = "block";
+
+
+        // ======================================
+        // ตรวจสอบเจ้าของ
+        // ======================================
+
+        checkOwner();
+
+      } catch (error) {
+
+        console.error(error);
+
+        loading.innerHTML = `
+          <h3>เกิดข้อผิดพลาด</h3>
+          <p>ไม่สามารถโหลดข้อมูลหนังสือได้</p>
+        `;
+
+      }
+
+    }
+
+
+    // ==========================================
+    // ตรวจสอบผู้ใช้
+    // ==========================================
+
+    onAuthStateChanged(auth, (user) => {
+
+      currentUser = user;
+
+      checkOwner();
+
+    });
+
+
+    // ==========================================
+    // ตรวจสอบเจ้าของ
+    // ==========================================
+
+    function checkOwner() {
+
+      if (!currentPost) {
+        return;
+      }
+
+      if (!currentUser) {
+        return;
+      }
+
+
+      const ownerId =
+        currentPost.ownerId ||
+        currentPost.userId ||
+        currentPost.uid ||
+        "";
+
+
+      if (ownerId === currentUser.uid) {
+
+        document.getElementById("buyButton").style.display = "none";
+
+        document.getElementById("freeButton").style.display = "none";
+
+        document.getElementById("exchangeButton").style.display = "none";
+
+      }
+
+    }
+
+
+    // ==========================================
+    // สร้างคำขอ
+    // ==========================================
+
+    async function createRequest(requestType) {
+
+      // -------------------------------
+      // ต้องเข้าสู่ระบบ
+      // -------------------------------
+
+      if (!currentUser) {
+
+        alert("กรุณาเข้าสู่ระบบก่อนส่งคำขอครับ");
+
+        window.location.href = "login.html";
+
+        return;
+
+      }
+
+
+      // -------------------------------
+      // ต้องมีหนังสือ
+      // -------------------------------
+
+      if (!currentPost) {
+
+        alert("ไม่พบข้อมูลหนังสือครับ");
+
+        return;
+
+      }
+
+
+      // -------------------------------
+      // ตรวจเจ้าของ
+      // -------------------------------
+
+      const ownerId =
+        currentPost.ownerId ||
+        currentPost.userId ||
+        currentPost.uid ||
+        "";
+
+
+      if (ownerId === currentUser.uid) {
+
+        alert("ไม่สามารถส่งคำขอให้หนังสือของตัวเองได้ครับ");
+
+        return;
+
+      }
+
+
+      // -------------------------------
+      // ข้อความ
+      // -------------------------------
+
+      let message = prompt(
+        "เขียนข้อความถึงเจ้าของหนังสือได้เลยครับ"
+      );
+
+
+      if (message === null) {
+
+        return;
+
+      }
+
+
+      message = message.trim();
+
+
+      if (!message) {
+
+        message = "สนใจหนังสือเล่มนี้ครับ";
+
+      }
+
+
+      try {
+
+        // --------------------------------
+        // ตรวจคำขอเดิม
+        // --------------------------------
+
+        const requestId =
+          `${currentPost.id}_${currentUser.uid}`;
+
+
+        const requestRef =
+          doc(db, "requests", requestId);
+
+
+        const oldRequest =
+          await getDoc(requestRef);
+
+
+        if (oldRequest.exists()) {
+
+          const oldData = oldRequest.data();
+
+
+          if (oldData.status === "pending") {
+
+            alert("คุณส่งคำขอเล่มนี้ไปแล้วครับ");
+
+            return;
+
+          }
+
+        }
+
+
+        // --------------------------------
+        // ข้อมูลผู้ส่ง
+        // --------------------------------
+
+        let userName = "นักเรียน";
+
+
+        try {
+
+          const userRef =
+            doc(db, "users", currentUser.uid);
+
+
+          const userSnap =
+            await getDoc(userRef);
+
+
+          if (userSnap.exists()) {
+
+            const userData =
+              userSnap.data();
+
+
+            userName =
+              userData.name ||
+              userData.displayName ||
+              userData.username ||
+              "นักเรียน";
+
+          }
+
+        } catch (error) {
+
+          console.log("User profile error:", error);
+
+        }
+
+
+        // --------------------------------
+        // ประเภทคำขอ
+        // --------------------------------
+
+        let typeText = "ขอซื้อ";
+
+
+        if (requestType === "free") {
+
+          typeText = "ขอรับ";
+
+        } else if (requestType === "exchange") {
+
+          typeText = "ขอแลก";
+
+        }
+
+
+        // --------------------------------
+        // บันทึก Firestore
+        // --------------------------------
+
+        await setDoc(requestRef, {
+
+          postId: currentPost.id,
+
+          postTitle:
+            currentPost.title ||
+            currentPost.name ||
+            "",
+
+          ownerId: ownerId,
+
+          requesterId: currentUser.uid,
+
+          requesterName: userName,
+
+          type: requestType,
+
+          typeText: typeText,
+
+          message: message,
+
+          status: "pending",
+
+          createdAt: serverTimestamp()
+
+        });
+
+
+        alert(
+          `ส่งคำขอ${typeText}เรียบร้อยแล้วครับ`
+        );
+
+
+      } catch (error) {
+
+        console.error("Request error:", error);
+
+        alert(
+          "ไม่สามารถส่งคำขอได้ กรุณาลองใหม่อีกครั้งครับ"
+        );
+
+      }
+
+    }
+
+
+    // ==========================================
+    // ปุ่มขอซื้อ
+    // ==========================================
+
+    document
+      .getElementById("buyButton")
+      .addEventListener("click", () => {
+
+        createRequest("buy");
+
+      });
+
+
+    // ==========================================
+    // ปุ่มขอรับ
+    // ==========================================
+
+    document
+      .getElementById("freeButton")
+      .addEventListener("click", () => {
+
+        createRequest("free");
+
+      });
+
+
+    // ==========================================
+    // ปุ่มขอแลก
+    // ==========================================
+
+    document
+      .getElementById("exchangeButton")
+      .addEventListener("click", () => {
+
+        createRequest("exchange");
+
+      });
+
+  </script>
+
+</body>
+  </html>
