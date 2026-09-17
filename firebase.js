@@ -30,7 +30,7 @@ import {
 const firebaseConfig = {
 
   apiKey:
-    "AIzaSyAysQGKQEM0VpwcvBxQAzf6fgVUNSAYR9I",
+    "AIzaSyAysQGKQEM0VpwcvBxQAzf6fgVUNsAYR9I",
 
   authDomain:
     "studyshare-web.firebaseapp.com",
@@ -49,7 +49,6 @@ const firebaseConfig = {
 
   measurementId:
     "G-48LKQMQ9E6"
-
 };
 
 
@@ -68,9 +67,7 @@ const db =
 export {
 
   app,
-
   auth,
-
   db,
 
   onAuthStateChanged,
@@ -82,27 +79,17 @@ export {
   signOut,
 
   collection,
-
   addDoc,
-
   getDocs,
-
   getDoc,
-
   setDoc,
-
   updateDoc,
-
   deleteDoc,
-
   doc,
 
   query,
-
   orderBy,
-
   where,
 
   serverTimestamp
-
 };
